@@ -1,0 +1,20 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module"
+  },
+  "rules": {
+    "comma-dangle": ["warn", "always-multiline"],
+    "no-extra-semi": "warn",
+    "no-undef": "error",
+    "no-unused-vars": [2, {"vars": "all", "args": "after-used"}],
+    "quotes": ["warn", "single"],
+    "semi": "off",
+    "space-before-blocks": ["warn", { "functions": "always", "keywords": "always", "classes": "always" }]
+  }
+}

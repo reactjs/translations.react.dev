@@ -1,0 +1,8 @@
+.DS_Store
+.idea
+.env
+node_modules/
+repo/*
+npm-debug.log
+yarn-error.log
+!.gitkeep
