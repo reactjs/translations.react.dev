@@ -4,9 +4,12 @@ const Repo = require('./lib/repository')
 const Slack = require('./lib/slack')
 const Utility = require('./lib/utility')
 
-let feeder = new RssFeedEmitter()
+let upstreamFeeder = new RssFeedEmitter()
+let headFeeder = new RssFeedEmitter()
 let github = new Github()
 let slack = new Slack({ token: process.env.SLACK_TOKEN })
+
+let startUpTime = new Date().toISOString()
 
 let remote = {
   origin: {
@@ -42,17 +45,18 @@ let repo = new Repo(
 function setup() {
   repo.setup()
   github.authenticate({ type: 'token', token: process.env.GITHUB_ACCESS_TOKEN })
-  setupFeeder()
+  setupUpstreamFeeder()
+  setupHeadFeeder()
 }
 
-function setupFeeder() {
-  feeder.add({
-    url: process.env.FEED_URL,
-    refresh: Number(process.env.FEED_REFRESH),
+function setupHeadFeeder() {
+  headFeeder.add({
+    url: process.env.HEAD_FEED_URL,
+    refresh: Number(process.env.HEAD_FEED_REFRESH),
   })
 
-  feeder.on('new-item', function(item) {
-    Utility.log('I', `New commit: ${item.title}`)
+  headFeeder.on('new-item', function(item) {
+    Utility.log('I', `New commit on head repo: ${item.title}`)
     let hash = Utility.extractBasename(item.link)
     // branch names consisting of 40 hex characters are not allowed
     let shortHash = hash.substr(0, 8)
@@ -76,6 +80,27 @@ function setupFeeder() {
     }
   })
 }
+
+function setupUpstreamFeeder() {
+  upstreamFeeder.add({
+    url: process.env.UPSTREAM_FEED_URL,
+    refresh: Number(process.env.UPSTREAM_FEED_REFRESH),
+  })
+
+  upstreamFeeder.on('new-item', function(item) {
+    if (startUpTime < item.date.toISOString()) {
+      Utility.log('I', `New commit on upstream repo: ${item.title}`)
+      removeHeadFeeder()
+      setupHeadFeeder()
+    }
+  })
+}
+
+function removeHeadFeeder() {
+  headFeeder.off('new-item')
+  headFeeder.destroy()
+}
+
 
 async function after(item, hash, shortHash) {
   const { data: pullRequest } = await github.createPullRequest(remote, { title: item.title, body: `Cherry picked from ${item.link}`, branch: shortHash })
