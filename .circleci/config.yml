@@ -38,6 +38,4 @@ jobs:
       # Test
       - run:
           name: Test
-          command: |
-            touch .env
-            yarn test
+          command: yarn test

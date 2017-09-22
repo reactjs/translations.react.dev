@@ -1,1 +1,1 @@
-worker: touch .env && yarn run watch
+worker: yarn install && yarn run watch
