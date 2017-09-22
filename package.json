@@ -13,14 +13,14 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "colors": "^1.1.2",
-    "env-cmd": "^5.1.0",
+    "env-cmd": "^6.0.0",
     "github": "^11.0.0",
     "request-promise": "^4.2.1",
     "rss-feed-emitter": "^1.0.7",
     "shelljs": "^0.7.8"
   },
   "devDependencies": {
-    "eslint": "^4.6.1",
+    "eslint": "^4.7.2",
     "mocha": "^3.5.3"
   },
   "engines": {
