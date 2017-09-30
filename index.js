@@ -119,4 +119,6 @@ function extractMatchedMessage(message) {
   return message.text !== '' && message.channel.id === process.env.SLACK_CHANNEL && message.username === 'recent commits to vuejs.org:master'
 }
 
+process.on('unhandledRejection', err => { Utility.log('E', err) })
+
 setup()
