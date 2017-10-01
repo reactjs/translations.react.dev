@@ -55,28 +55,31 @@ function setupHeadFeeder() {
     refresh: Number(process.env.HEAD_FEED_REFRESH),
   })
 
-  headFeeder.on('new-item', function(item) {
-    Utility.log('I', `New commit on head repo: ${item.title}`)
-    let hash = Utility.extractBasename(item.link)
-    // branch names consisting of 40 hex characters are not allowed
-    let shortHash = hash.substr(0, 8)
+  headFeeder.on('new-item', async function() {
+    if (headFeeder.list()[0].items.length !== Number(process.env.HEAD_FEED_ITEMS_LENGTH)) return
+    for (const item of headFeeder.list()[0].items) {
+      Utility.log('I', `New commit on head repo: ${item.title}`)
+      let hash = Utility.extractBasename(item.link)
+      // branch names consisting of 40 hex characters are not allowed
+      let shortHash = hash.substr(0, 8)
 
-    if (repo.existsRemoteBranch(shortHash)) {
-      Utility.log('W', `Remote branch already exists: ${shortHash}`)
-      return
-    }
+      if (repo.existsRemoteBranch(shortHash)) {
+        Utility.log('W', `Remote branch already exists: ${shortHash}`)
+        continue
+      }
 
-    repo.fetchAllRemotes()
-    repo.updateLocal()
-    repo.createNewBranch(shortHash)
+      repo.fetchAllRemotes()
+      repo.updateLocal()
+      repo.createNewBranch(shortHash)
 
-    if (repo.hasConflicts('cherry-pick', hash)) {
-      Utility.log('W', 'Conflicts occurred. Please make a pull request by yourself')
-      repo.resetChanges()
-    } else {
-      Utility.log('S', `Fully merged: ${shortHash}`)
-      repo.updateRemote()
-      after(item, hash, shortHash)
+      if (repo.hasConflicts('cherry-pick', hash)) {
+        Utility.log('W', 'Conflicts occurred. Please make a pull request by yourself')
+        repo.resetChanges()
+      } else {
+        Utility.log('S', `Fully merged: ${shortHash}`)
+        repo.updateRemote(shortHash)
+        await after(item, hash, shortHash)
+      }
     }
   })
 }
