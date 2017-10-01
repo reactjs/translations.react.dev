@@ -103,6 +103,7 @@ function removeHeadFeeder() {
 
 async function after(item, hash, shortHash) {
   const { data: pullRequest } = await github.createPullRequest(remote, { title: item.title, body: `Cherry picked from ${item.link}`, branch: shortHash })
+  if (!pullRequest) return
   Utility.log('S', `Created new pull request: ${pullRequest.html_url}`)
   await github.assignReviewers(remote, { number: pullRequest.number, reviewers: ['re-fort', 'kazupon'] })
   Utility.log('S', 'Assigned reviewers')
