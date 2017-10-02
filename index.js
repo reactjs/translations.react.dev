@@ -56,7 +56,7 @@ function setupHeadFeeder() {
   })
 
   headFeeder.on('new-item', async function() {
-    if (headFeeder.list()[0].items.length !== Number(process.env.HEAD_FEED_ITEMS_LENGTH)) return
+    if (headFeeder.list()[0].items.length < Number(process.env.HEAD_FEED_ITEMS_LENGTH)) return
     for (const item of headFeeder.list()[0].items) {
       Utility.log('I', `New commit on head repo: ${item.title}`)
       let hash = Utility.extractBasename(item.link)
