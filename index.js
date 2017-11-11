@@ -69,7 +69,7 @@ function setupHeadFeeder() {
       }
 
       repo.fetchAllRemotes()
-      repo.updateLocal()
+      repo.updateDefaultBranch()
       repo.createNewBranch(shortHash)
 
       if (repo.hasConflicts('cherry-pick', hash)) {
