@@ -62,6 +62,13 @@ function setupHeadFeeder() {
       let hash = Utility.extractBasename(item.link)
       // branch names consisting of 40 hex characters are not allowed
       let shortHash = hash.substr(0, 8)
+      const { data: result } = await github.searchIssue(remote, { hash })
+
+      if (result.total_count === 0) {
+        let body = `本家のドキュメントに更新がありました:page_facing_up:\r\nOriginal:${item.link}`
+        const { data: newIssue } = await github.createIssue(remote, { title: `[Doc]: ${item.title}`, body, labels: ['documentation'] })
+        Utility.log('S', `Issue created: ${newIssue.html_url}`)
+      }
 
       if (repo.existsRemoteBranch(shortHash)) {
         Utility.log('W', `Remote branch already exists: ${shortHash}`)

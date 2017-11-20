@@ -16,6 +16,34 @@ describe('Github', function () {
     },
   }
 
+  describe('issue', function () {
+    let issueNumber
+    let hash = 'c0601c7981c0b6a53373cc70c2a1edb20908da68'
+    let url = `https://github.com/vuejs-jp-bot/test/commit/${hash}`
+
+    describe('createIssue()', function () {
+      it('creates new issue', async function () {
+        const { data: newIssue } = await github.createIssue(remote, { title: 'Test', body: `Test\r\nOriginal:${url}`, labels: ['documentation'] })
+        issueNumber = newIssue.number
+        assert(newIssue.state === 'open')
+      })
+    })
+
+    describe('searchIssue()', function () {
+      it('seaches issue', async function () {
+        const { data: result } = await github.searchIssue(remote, { hash })
+        assert(result.total_count >= 1)
+      })
+    })
+
+    describe('closeIssue()', async function () {
+      it('closes opened issue', async function () {
+        const { data: closedIssue } = await github.closeIssue(remote, { number: issueNumber })
+        assert(closedIssue.state === 'closed')
+      })
+    })
+  })
+
   describe('pullRequest', function () {
     let pullRequestNumber
 
