@@ -64,10 +64,14 @@ function setupHeadFeeder() {
       let shortHash = hash.substr(0, 8)
       const { data: result } = await github.searchIssue(remote, { hash })
 
+      let issueNo = null
       if (result.total_count === 0) {
         let body = `本家のドキュメントに更新がありました:page_facing_up:\r\nOriginal:${item.link}`
         const { data: newIssue } = await github.createIssue(remote, { title: `[Doc]: ${item.title}`, body, labels: ['documentation'] })
+        issueNo = newIssue.number
         Utility.log('S', `Issue created: ${newIssue.html_url}`)
+      } else {
+        issueNo = result.items[0].number
       }
 
       if (repo.existsRemoteBranch(shortHash)) {
@@ -85,7 +89,7 @@ function setupHeadFeeder() {
       } else {
         Utility.log('S', `Fully merged: ${shortHash}`)
         repo.updateRemote(shortHash)
-        await after(item, hash, shortHash)
+        await after(item, shortHash, issueNo)
       }
     }
   })
@@ -111,23 +115,13 @@ function removeHeadFeeder() {
   headFeeder.destroy()
 }
 
-async function after(item, hash, shortHash) {
-  const { data: pullRequest } = await github.createPullRequest(remote, { title: item.title, body: `Cherry picked from ${item.link}`, branch: shortHash })
+async function after(item, shortHash, issueNo = null) {
+  const body = issueNo ? `This PR resolves #${issueNo}\r\nCherry picked from ${item.link}` : `Cherry picked from ${item.link}`
+  const { data: pullRequest } = await github.createPullRequest(remote, { title: item.title, body, branch: shortHash })
   if (!pullRequest) return
   Utility.log('S', `Created new pull request: ${pullRequest.html_url}`)
   await github.assignReviewers(remote, { number: pullRequest.number, reviewers: ['re-fort', 'kazupon'] })
   Utility.log('S', 'Assigned reviewers')
-
-  const { messages } = await slack.searchMessages({ query: hash })
-  if (!messages) return
-  let message = messages.matches.find(extractMatchedMessage)
-  if (!message) return
-  const { ok: result } = await slack.addReactions({ name: 'raising_hand', channel: process.env.SLACK_CHANNEL, timestamp: message.ts })
-  if (result) Utility.log('S', `Add reaction: ${message.permalink}`)
-}
-
-function extractMatchedMessage(message) {
-  return message.text !== '' && message.channel.id === process.env.SLACK_CHANNEL && message.username === 'recent commits to vuejs.org:master'
 }
 
 process.on('unhandledRejection', err => { Utility.log('E', err) })
