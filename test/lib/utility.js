@@ -28,4 +28,12 @@ describe('Utility', function () {
       assert(Utility.extractRepoOwner(git) === repoOwner)
     })
   })
+
+  describe('removeHash()', function () {
+    it(`returns the text with hash removed`, function () {
+      assert(Utility.removeHash('Text which contains hash with space (#110)') === 'Text which contains hash with space')
+      assert(Utility.removeHash('Text which contains hash with no space(#110)') === 'Text which contains hash with no space')
+      assert(Utility.removeHash('Text which does not contain hash') === 'Text which does not contain hash')
+    })
+  })
 })
