@@ -42,14 +42,14 @@ let repo = new Repo(
   }
 )
 
-function setup() {
+const setup = () => {
   repo.setup()
   github.authenticate({ type: 'token', token: process.env.GITHUB_ACCESS_TOKEN })
   setupUpstreamFeeder()
   setupHeadFeeder()
 }
 
-function setupHeadFeeder() {
+const setupHeadFeeder = () => {
   headFeeder.add({
     url: process.env.HEAD_FEED_URL,
     refresh: Number(process.env.HEAD_FEED_REFRESH),
@@ -95,7 +95,7 @@ function setupHeadFeeder() {
   })
 }
 
-function setupUpstreamFeeder() {
+const setupUpstreamFeeder = () => {
   upstreamFeeder.add({
     url: process.env.UPSTREAM_FEED_URL,
     refresh: Number(process.env.UPSTREAM_FEED_REFRESH),
@@ -110,12 +110,12 @@ function setupUpstreamFeeder() {
   })
 }
 
-function removeHeadFeeder() {
+const removeHeadFeeder = () => {
   headFeeder.off('new-item')
   headFeeder.destroy()
 }
 
-async function after(item, shortHash, issueNo = null) {
+const after = async (item, shortHash, issueNo = null) => {
   const body = issueNo ? `This PR resolves #${issueNo}\r\nCherry picked from ${item.link}` : `Cherry picked from ${item.link}`
   const { data: pullRequest } = await github.createPullRequest(remote, { title: Utility.removeHash(item.title), body, branch: shortHash })
   if (!pullRequest) return
