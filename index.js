@@ -10,6 +10,7 @@ let github = new Github()
 // let slack = new Slack({ token: process.env.SLACK_TOKEN })
 
 let startUpTime = new Date().toISOString()
+let timer = null
 
 let remote = {
   origin: {
@@ -105,7 +106,8 @@ const setupUpstreamFeeder = () => {
     if (startUpTime < item.date.toISOString()) {
       Utility.log('I', `New commit on upstream repo: ${item.title}`)
       removeHeadFeeder()
-      setupHeadFeeder()
+      clearTimeout(timer)
+      timer = setTimeout(() => setupHeadFeeder(), 300000)
     }
   })
 }
