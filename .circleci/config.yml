@@ -6,10 +6,6 @@ jobs:
 
     working_directory: ~/tmp
 
-    branches:
-      only:
-        - master
-
     steps:
       - checkout
 
