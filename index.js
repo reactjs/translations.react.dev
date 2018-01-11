@@ -1,4 +1,5 @@
 const RssFeedEmitter = require('rss-feed-emitter')
+const Queue = require('queue')
 const Github = require('./lib/github')
 const Repo = require('./lib/repository')
 // const Slack = require('./lib/slack')
@@ -7,6 +8,7 @@ const Utility = require('./lib/utility')
 let upstreamFeeder = new RssFeedEmitter()
 let headFeeder = new RssFeedEmitter()
 let github = new Github()
+let q = Queue({ autostart: true, concurrency: 1 })
 // let slack = new Slack({ token: process.env.SLACK_TOKEN })
 
 let startUpTime = new Date().toISOString()
@@ -64,7 +66,7 @@ const setupHeadFeeder = () => {
     const shortHash = hash.substr(0, 8)
 
     if (repo.existsRemoteBranch(shortHash)) {
-      Utility.log('W', `Remote branch already exists: ${shortHash}`)
+      Utility.log('W', `${item.title}: Remote branch already exists`)
       return
     }
 
@@ -74,23 +76,37 @@ const setupHeadFeeder = () => {
       let body = `本家のドキュメントに更新がありました:page_facing_up:\r\nOriginal:${item.link}`
       const { data: newIssue } = await github.createIssue(remote, { title: `[Doc]: ${Utility.removeHash(item.title)}`, body, labels: ['documentation'] })
       issueNo = newIssue.number
-      Utility.log('S', `Issue created: ${newIssue.html_url}`)
+      Utility.log('S', `${item.title}: Issue created: ${newIssue.html_url}`)
     } else {
       issueNo = result.items[0].number
     }
 
-    repo.fetchAllRemotes()
-    repo.updateDefaultBranch()
-    repo.createNewBranch(shortHash)
+    q.push(() =>  {
+      return new Promise(async (resolve, reject) => {
+        try {
+          q.stop()
 
-    if (repo.hasConflicts('cherry-pick', hash)) {
-      Utility.log('W', 'Conflicts occurred. Please make a pull request by yourself')
-      repo.resetChanges()
-    } else {
-      Utility.log('S', `Fully merged: ${shortHash}`)
-      repo.updateRemote(shortHash)
-      await after(item, shortHash, issueNo)
-    }
+          repo.fetchAllRemotes()
+          repo.updateDefaultBranch()
+          repo.createNewBranch(shortHash)
+
+          if (repo.hasConflicts('cherry-pick', hash)) {
+            Utility.log('W', `${item.title}: Conflicts occurred. Please make a pull request by yourself`)
+            repo.resetChanges()
+          } else {
+            Utility.log('S', `${item.title}: Fully merged`)
+            repo.updateRemote(shortHash)
+            await after(item, shortHash, issueNo)
+          }
+
+          resolve()
+        } catch(e) {
+          reject()
+        } finally {
+          q.start()
+        }
+      })
+    })
   })
 }
 

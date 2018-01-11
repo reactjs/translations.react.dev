@@ -15,6 +15,7 @@
     "colors": "^1.1.2",
     "env-cmd": "^6.0.0",
     "github": "^11.0.0",
+    "queue": "^4.4.2",
     "request-promise": "^4.2.1",
     "rss-feed-emitter": "^1.0.7",
     "shelljs": "^0.7.8"
