@@ -56,42 +56,40 @@ const setupHeadFeeder = () => {
     refresh: Number(process.env.HEAD_FEED_REFRESH),
   })
 
-  headFeeder.on('new-item', async function() {
-    if (headFeeder.list()[0].items.length < Number(process.env.HEAD_FEED_ITEMS_LENGTH)) return
-    for (const item of headFeeder.list()[0].items) {
-      Utility.log('I', `New commit on head repo: ${item.title}`)
-      let hash = Utility.extractBasename(item.link)
-      // branch names consisting of 40 hex characters are not allowed
-      let shortHash = hash.substr(0, 8)
-      const { data: result } = await github.searchIssue(remote, { hash })
+  headFeeder.on('new-item', async (item) => {
+    Utility.log('I', `New commit on head repo: ${item.title}`)
 
-      let issueNo = null
-      if (result.total_count === 0) {
-        let body = `本家のドキュメントに更新がありました:page_facing_up:\r\nOriginal:${item.link}`
-        const { data: newIssue } = await github.createIssue(remote, { title: `[Doc]: ${Utility.removeHash(item.title)}`, body, labels: ['documentation'] })
-        issueNo = newIssue.number
-        Utility.log('S', `Issue created: ${newIssue.html_url}`)
-      } else {
-        issueNo = result.items[0].number
-      }
+    const hash = Utility.extractBasename(item.link)
+    // branch names consisting of 40 hex characters are not allowed
+    const shortHash = hash.substr(0, 8)
 
-      if (repo.existsRemoteBranch(shortHash)) {
-        Utility.log('W', `Remote branch already exists: ${shortHash}`)
-        continue
-      }
+    if (repo.existsRemoteBranch(shortHash)) {
+      Utility.log('W', `Remote branch already exists: ${shortHash}`)
+      return
+    }
 
-      repo.fetchAllRemotes()
-      repo.updateDefaultBranch()
-      repo.createNewBranch(shortHash)
+    const { data: result } = await github.searchIssue(remote, { hash })
+    let issueNo = null
+    if (result.total_count === 0) {
+      let body = `本家のドキュメントに更新がありました:page_facing_up:\r\nOriginal:${item.link}`
+      const { data: newIssue } = await github.createIssue(remote, { title: `[Doc]: ${Utility.removeHash(item.title)}`, body, labels: ['documentation'] })
+      issueNo = newIssue.number
+      Utility.log('S', `Issue created: ${newIssue.html_url}`)
+    } else {
+      issueNo = result.items[0].number
+    }
 
-      if (repo.hasConflicts('cherry-pick', hash)) {
-        Utility.log('W', 'Conflicts occurred. Please make a pull request by yourself')
-        repo.resetChanges()
-      } else {
-        Utility.log('S', `Fully merged: ${shortHash}`)
-        repo.updateRemote(shortHash)
-        await after(item, shortHash, issueNo)
-      }
+    repo.fetchAllRemotes()
+    repo.updateDefaultBranch()
+    repo.createNewBranch(shortHash)
+
+    if (repo.hasConflicts('cherry-pick', hash)) {
+      Utility.log('W', 'Conflicts occurred. Please make a pull request by yourself')
+      repo.resetChanges()
+    } else {
+      Utility.log('S', `Fully merged: ${shortHash}`)
+      repo.updateRemote(shortHash)
+      await after(item, shortHash, issueNo)
     }
   })
 }
@@ -102,7 +100,7 @@ const setupUpstreamFeeder = () => {
     refresh: Number(process.env.UPSTREAM_FEED_REFRESH),
   })
 
-  upstreamFeeder.on('new-item', function(item) {
+  upstreamFeeder.on('new-item', (item) => {
     if (startUpTime < item.date.toISOString()) {
       Utility.log('I', `New commit on upstream repo: ${item.title}`)
       removeHeadFeeder()
