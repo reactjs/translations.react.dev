@@ -88,6 +88,7 @@ const setupHeadFeeder = () => {
 
           repo.fetchAllRemotes()
           repo.updateDefaultBranch()
+          repo.deleteOldBranch(shortHash)
           repo.createNewBranch(shortHash)
 
           if (repo.hasConflicts('cherry-pick', hash)) {
