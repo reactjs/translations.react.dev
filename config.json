@@ -1,0 +1,10 @@
+{
+  "origin": {
+    "url": "https://github.com/tesseralis/doge.reactjs.org.git",
+    "defaultBranch": "master"
+  },
+  "head": {
+    "url": "https://github.com/reactjs/reactjs.org.git",
+    "defaultBranch": "master"
+  }
+}

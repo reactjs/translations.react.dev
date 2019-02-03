@@ -3,6 +3,7 @@ const Queue = require('queue');
 const Github = require('./lib/github');
 const Repo = require('./lib/repository');
 const Utility = require('./lib/utility');
+const config = require('./config.json');
 
 let headFeeder = new RssFeedEmitter();
 let github = new Github();
@@ -10,21 +11,22 @@ let q = Queue({autostart: true, concurrency: 1});
 
 let remote = {
   origin: {
-    url: process.env.ORIGIN_REPO_URL,
-    owner: Utility.extractRepoOwner(process.env.ORIGIN_REPO_URL),
-    name: Utility.extractRepoName(process.env.ORIGIN_REPO_URL),
-    defaultBranch: process.env.ORIGIN_REPO_DEFAULT_BRANCH,
+    url: config.origin.url,
+    owner: Utility.extractRepoOwner(config.origin.url),
+    name: Utility.extractRepoName(config.origin.url),
+    defaultBranch: config.origin.defaultBranch,
   },
+  // TODO figure out what this is needed for
   upstream: {
-    url: process.env.UPSTREAM_REPO_URL,
-    owner: Utility.extractRepoOwner(process.env.UPSTREAM_REPO_URL),
-    name: Utility.extractRepoName(process.env.UPSTREAM_REPO_URL),
-    defaultBranch: process.env.UPSTREAM_REPO_DEFAULT_BRANCH,
+    url: config.origin.url,
+    owner: Utility.extractRepoOwner(config.origin.url),
+    name: Utility.extractRepoName(config.origin.url),
+    defaultBranch: config.origin.defaultBranch,
   },
   head: {
-    url: process.env.HEAD_REPO_URL,
-    name: Utility.extractRepoName(process.env.HEAD_REPO_URL),
-    defaultBranch: process.env.HEAD_REPO_DEFAULT_BRANCH,
+    url: config.head.url,
+    name: Utility.extractRepoName(config.head.url),
+    defaultBranch: config.head.defaultBranch,
   },
 };
 
@@ -59,17 +61,15 @@ const setupHeadFeeder = () => {
     // branch names consisting of 40 hex characters are not allowed
     const shortHash = hash.substr(0, 8);
 
-    if (repo.existsRemoteBranch(shortHash)) {
-      Utility.log('W', `${item.title}: Remote branch already exists`);
-      return;
-    }
-
     if (repo.existsCommit(shortHash)) {
       Utility.log('W', `${item.title}: Commit already exists in git logs`);
       return;
     }
 
-    // TODO check if the hash exists in the logs
+    if (repo.existsRemoteBranch(shortHash)) {
+      Utility.log('W', `${item.title}: Remote branch already exists`);
+      return;
+    }
 
     const {data: result} = await github.searchIssue(remote, {hash});
     let issueNo = null;
@@ -104,7 +104,7 @@ const setupHeadFeeder = () => {
             );
             repo.resetChanges();
           } else {
-            Utility.log('S', `${item.title}: Fully merged`);
+            Utility.log('S', `${item.title}: Pull request created`);
             repo.updateRemote(shortHash);
             await after(item, shortHash, issueNo);
           }
@@ -131,6 +131,7 @@ const after = async (item, shortHash, issueNo = null) => {
   });
   if (!pullRequest) return;
   Utility.log('S', `Created new pull request: ${pullRequest.html_url}`);
+  // TODO we probably want this back
   // await github.assignReviewers(remote, {
   //   number: pullRequest.number,
   //   reviewers: ["tesseralis"]
