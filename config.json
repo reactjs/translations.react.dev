@@ -1,10 +1,18 @@
 {
-  "origin": {
-    "url": "https://github.com/tesseralis/doge.reactjs.org.git",
-    "defaultBranch": "master"
-  },
   "head": {
-    "url": "https://github.com/reactjs/reactjs.org.git",
-    "defaultBranch": "master"
-  }
+    "url": "https://github.com/tesseralis/testrepo.git",
+    "defaultBranch": "master",
+    "feedUrl": "https://github.com/tesseralis/testrepo/commits/master.atom",
+    "feedRefresh": 10000
+  },
+  "languages": [
+    {
+      "url": "https://github.com/tesseralis/testrepo2.git",
+      "defaultBranch": "master"
+    },
+    {
+      "url": "https://github.com/tesseralis/testrepo3.git",
+      "defaultBranch": "master"
+    }
+  ]
 }
