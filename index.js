@@ -2,13 +2,11 @@ const RssFeedEmitter = require('rss-feed-emitter');
 const Queue = require('queue');
 const Github = require('./lib/github');
 const Repo = require('./lib/repository');
-// const Slack = require('./lib/slack')
 const Utility = require('./lib/utility');
 
 let headFeeder = new RssFeedEmitter();
 let github = new Github();
 let q = Queue({autostart: true, concurrency: 1});
-// let slack = new Slack({ token: process.env.SLACK_TOKEN })
 
 let remote = {
   origin: {
@@ -65,6 +63,13 @@ const setupHeadFeeder = () => {
       Utility.log('W', `${item.title}: Remote branch already exists`);
       return;
     }
+
+    if (repo.existsCommit(shortHash)) {
+      Utility.log('W', `${item.title}: Commit already exists in git logs`);
+      return;
+    }
+
+    // TODO check if the hash exists in the logs
 
     const {data: result} = await github.searchIssue(remote, {hash});
     let issueNo = null;
