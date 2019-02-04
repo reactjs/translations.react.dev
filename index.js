@@ -1,8 +1,6 @@
 const shell = require('shelljs');
-const config = require('./config.json');
+const languages = require('./languages.json');
 
-const {languages} = config;
-
-languages.forEach(({url, defaultBranch}) => {
-  shell.exec(`node ./watch.js ${url} ${defaultBranch}`, {async: true});
+languages.forEach(({code}) => {
+  shell.exec(`node ./watch.js ${code}`, {async: true});
 });

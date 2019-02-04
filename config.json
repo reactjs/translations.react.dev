@@ -1,18 +1,5 @@
 {
-  "head": {
-    "url": "https://github.com/tesseralis/testrepo.git",
-    "defaultBranch": "master",
-    "feedUrl": "https://github.com/tesseralis/testrepo/commits/master.atom",
-    "feedRefresh": 10000
-  },
-  "languages": [
-    {
-      "url": "https://github.com/tesseralis/testrepo2.git",
-      "defaultBranch": "master"
-    },
-    {
-      "url": "https://github.com/tesseralis/testrepo3.git",
-      "defaultBranch": "master"
-    }
-  ]
+  "owner": "tesseralis-fan-club",
+  "repository": "tesseralis.club",
+  "feedRefresh": 10000
 }
