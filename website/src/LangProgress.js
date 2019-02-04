@@ -23,15 +23,16 @@ export default function LangProgress({ name, code, issueNo }) {
       setFinished(finishedItems.length)
     }, 0)
   }, [code, issueNo])
-  const isFinished =
-    total === undefined ? '❓' : finished === total ? '✅' : '🚫'
+  const percentage = finished / total
+  const status = total === undefined ? '❓' : finished === total ? '✅' : '🚫'
   return (
     <p>
       <div>
-        <ExtLink href={issue}>{name}</ExtLink>: {isFinished}
+        <ExtLink href={issue}>{name}</ExtLink>: {status}
       </div>
+      <div>{Math.floor(percentage * 100)}% Complete</div>
       <div>
-        Progress: {finished || '?'}/{total || '?'} pages translated
+        {finished || '?'}/{total || '?'} pages translated
       </div>
     </p>
   )
