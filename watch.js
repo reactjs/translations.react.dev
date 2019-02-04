@@ -1,17 +1,20 @@
+const fs = require('fs');
 const RssFeedEmitter = require('rss-feed-emitter');
 const Queue = require('queue');
 const Github = require('./lib/github');
 const Repo = require('./lib/repository');
 const Utility = require('./lib/utility');
 const config = require('./config.json');
+const languages = require('./languages.json');
 
 let headFeeder = new RssFeedEmitter();
-// let github = new Github();
 let github = null;
 let q = Queue({autostart: true, concurrency: 1});
 
 const {owner, repository, feedRefresh} = config;
 const [langCode] = process.argv.slice(2);
+
+const langName = languages.find(lang => lang.code === langCode).name;
 const repoName = `${langCode}.${repository}`;
 const url = `https://github.com/${owner}/${repoName}.git`;
 const defaultBranch = 'master';
@@ -46,10 +49,46 @@ let repo = new Repo({
   },
 });
 
-const setup = () => {
-  repo.setup();
+const setup = async () => {
   github = new Github(process.env.GITHUB_ACCESS_TOKEN);
-  setupHeadFeeder();
+  await setupRepositoryAndTeam();
+  Utility.log('I', `${repoName} Setting up repo...`);
+  repo.setup();
+  Utility.log('I', `${repoName} Finished setting up`);
+  // setupHeadFeeder();
+};
+
+const setupRepositoryAndTeam = async () => {
+  const {data: result} = await github.searchRepo(remote);
+  if (result.total_count > 0) return;
+
+  console.log(`${repoName} creating new repo in GitHub...`);
+  try {
+    // FIXME why does this work???
+    await github.createRepo(remote, {
+      // TODO generalize this (maybe get from the head repo?)
+      description: `(Work in progress) React documentation website in ${langName}`,
+    });
+    console.log('Repo succeeded');
+  } catch (e) {
+    console.log(e);
+  } finally {
+    console.log('Repo happened I guess');
+  }
+
+  Utility.log('I', `${repoName} Setting up mirror repo...`);
+  repo.setupMirror();
+  Utility.log('I', `${repoName} Finished setting up mirror repo`);
+
+  const body = fs.readFileSync('./PROGRESS.template.md');
+  await github.createIssue(remote, {
+    title: `${langName} Translation Progress`,
+    body,
+  });
+  /**
+   * * create team
+   * * add maintainers
+   */
 };
 
 const setupHeadFeeder = () => {
@@ -158,4 +197,4 @@ process.on('unhandledRejection', err => {
   Utility.log('E', err);
 });
 
-setup();
+setTimeout(setup);
