@@ -11,18 +11,18 @@
     "watch": "env-cmd ./.env node index.js"
   },
   "dependencies": {
+    "@octokit/rest": "^16.15.0",
     "bluebird": "^3.5.0",
     "colors": "^1.1.2",
     "env-cmd": "^6.0.0",
-    "github": "^11.0.0",
     "queue": "^4.4.2",
-    "request-promise": "^4.2.1",
-    "rss-feed-emitter": "^1.0.7",
+    "request-promise": "^4.2.2",
+    "rss-feed-emitter": "^2.0.1",
     "shelljs": "^0.7.8"
   },
   "devDependencies": {
-    "eslint": "^4.7.2",
-    "mocha": "^3.5.3"
+    "eslint": "^5.13.0",
+    "mocha": "^5.2.0"
   },
   "engines": {
     "node": "8.9.3"

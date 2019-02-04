@@ -6,7 +6,8 @@ const Utility = require('./lib/utility');
 const config = require('./config.json');
 
 let headFeeder = new RssFeedEmitter();
-let github = new Github();
+// let github = new Github();
+let github = null;
 let q = Queue({autostart: true, concurrency: 1});
 
 const {owner, repository, feedRefresh} = config;
@@ -47,10 +48,7 @@ let repo = new Repo({
 
 const setup = () => {
   repo.setup();
-  github.authenticate({
-    type: 'token',
-    token: process.env.GITHUB_ACCESS_TOKEN,
-  });
+  github = new Github(process.env.GITHUB_ACCESS_TOKEN);
   setupHeadFeeder();
 };
 
