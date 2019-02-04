@@ -9,27 +9,30 @@ let headFeeder = new RssFeedEmitter();
 let github = new Github();
 let q = Queue({autostart: true, concurrency: 1});
 
-const [url, defaultBranch] = process.argv.slice(2);
-const repoName = Utility.extractRepoName(url);
+const {owner, repository, feedRefresh} = config;
+const [langCode] = process.argv.slice(2);
+const repoName = `${langCode}.${repository}`;
+const url = `https://github.com/${owner}/${repoName}.git`;
+const defaultBranch = 'master';
 
 let remote = {
   origin: {
-    url: url,
-    owner: Utility.extractRepoOwner(url),
+    url,
+    owner,
     name: repoName,
-    defaultBranch: defaultBranch,
+    defaultBranch,
   },
   // TODO figure out what this is needed for
   upstream: {
     url: url,
-    owner: Utility.extractRepoOwner(url),
+    owner,
     name: repoName,
-    defaultBranch: defaultBranch,
+    defaultBranch,
   },
   head: {
-    url: config.head.url,
-    name: Utility.extractRepoName(config.head.url),
-    defaultBranch: config.head.defaultBranch,
+    url: `https://github.com/${owner}/${repository}.git`,
+    name: repository,
+    defaultBranch,
   },
 };
 
@@ -53,8 +56,8 @@ const setup = () => {
 
 const setupHeadFeeder = () => {
   headFeeder.add({
-    url: config.head.feedUrl,
-    refresh: Number(config.head.feedRefresh),
+    url: `https://github.com/${owner}/${repository}/commits/${defaultBranch}.atom`,
+    refresh: feedRefresh,
   });
 
   headFeeder.on('new-item', handleNewItem);
