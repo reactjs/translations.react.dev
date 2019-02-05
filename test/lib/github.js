@@ -2,20 +2,15 @@ const assert = require('assert');
 const GitHub = require('../../lib/github');
 
 describe('Github', function() {
-  const github = new GitHub();
-  github.authenticate({
-    type: 'token',
-    token: process.env.GITHUB_TEST_ACCESS_TOKEN,
-  });
+  const github = new GitHub(process.env.GITHUB_TEST_ACCESS_TOKEN);
 
   let remote = {
     origin: {
-      owner: 'tesseralis',
+      owner: 'tesseralis-fan-club',
     },
     upstream: {
-      owner: 'tesseralis',
-      name: 'test',
-      defaultBranch: 'master',
+      owner: 'tesseralis-fan-club',
+      name: 'doge.tesseralis.club',
     },
   };
 

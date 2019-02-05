@@ -13,22 +13,6 @@ describe('Utility', function() {
     });
   });
 
-  describe('extractRepoName()', function() {
-    it(`returns repo's name`, function() {
-      let repoName = 'jp.vuejs.org';
-      assert(Utility.extractRepoName(https) === repoName);
-      assert(Utility.extractRepoName(git) === repoName);
-    });
-  });
-
-  describe('extractRepoOwner()', function() {
-    it(`returns repo's owner`, function() {
-      let repoOwner = 'vuejs';
-      assert(Utility.extractRepoOwner(https) === repoOwner);
-      assert(Utility.extractRepoOwner(git) === repoOwner);
-    });
-  });
-
   describe('removeHash()', function() {
     it(`returns the text with hash removed`, function() {
       assert(

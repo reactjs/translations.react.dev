@@ -4,10 +4,8 @@ const Repo = require('../../lib/repository');
 
 describe('Repository', function() {
   let origin = {
-    url: 'git@github.com:re-fort/che-tsumi.git',
-    owner: 're-fort',
-    name: 'che-tsumi',
-    defaultBranch: 'master',
+    owner: 'teseralis-fan-club',
+    name: 'doge.tesseralis.club',
   };
 
   const repo = new Repo({
@@ -18,8 +16,8 @@ describe('Repository', function() {
       head: Object.assign({}, origin, {name: 'head'}),
     },
     user: {
-      name: 'test_user',
-      email: 'test@example.com',
+      name: process.env.USER_NAME,
+      email: process.env.EMAIL,
     },
   });
 
