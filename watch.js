@@ -11,10 +11,12 @@ let headFeeder = new RssFeedEmitter();
 let github = null;
 let q = Queue({autostart: true, concurrency: 1});
 
-const {owner, repository, feedRefresh} = config;
+const {owner, repository, teamSlug, feedRefresh} = config;
 const [langCode] = process.argv.slice(2);
 
-const langName = languages.find(lang => lang.code === langCode).name;
+const {name: langName, maintainers} = languages.find(
+  lang => lang.code === langCode,
+);
 const repoName = `${langCode}.${repository}`;
 const url = `https://github.com/${owner}/${repoName}.git`;
 const defaultBranch = 'master';
@@ -55,40 +57,52 @@ const setup = async () => {
   Utility.log('I', `${repoName} Setting up repo...`);
   repo.setup();
   Utility.log('I', `${repoName} Finished setting up`);
-  // setupHeadFeeder();
+  setupHeadFeeder();
 };
 
 const setupRepositoryAndTeam = async () => {
-  const {data: result} = await github.searchRepo(remote);
-  if (result.total_count > 0) return;
+  const {
+    data: {total_count},
+  } = await github.searchRepo(remote);
+  if (total_count > 0) return;
 
+  /**
+   * * figure out how to make team admin of repo
+   * * invite people to org if not in
+   */
   console.log(`${repoName} creating new repo in GitHub...`);
-  try {
-    // FIXME why does this work???
-    await github.createRepo(remote, {
-      // TODO generalize this (maybe get from the head repo?)
-      description: `(Work in progress) React documentation website in ${langName}`,
-    });
-    console.log('Repo succeeded');
-  } catch (e) {
-    console.log(e);
-  } finally {
-    console.log('Repo happened I guess');
-  }
+  await github.createRepo(remote, {
+    // TODO generalize this (maybe get from the head repo?)
+    description: `(Work in progress) React documentation website in ${langName}`,
+  });
 
-  Utility.log('I', `${repoName} Setting up mirror repo...`);
-  repo.setupMirror();
-  Utility.log('I', `${repoName} Finished setting up mirror repo`);
-
-  const body = fs.readFileSync('./PROGRESS.template.md');
+  const body = fs.readFileSync('./PROGRESS.template.md', 'utf8');
   await github.createIssue(remote, {
     title: `${langName} Translation Progress`,
     body,
   });
-  /**
-   * * create team
-   * * add maintainers
-   */
+
+  const parent_team_id = await github.getTeamId(remote, teamSlug);
+  const team_id = await github.createTeam(remote, {
+    name: `${repository} ${langName} translation`,
+    description: `Discuss the translation of ${repository} into ${langName}.`,
+    privacy: 'closed',
+    parent_team_id,
+  });
+  // TODO can probably do these in parallel
+  await github.addRepoToTeam({
+    team_id,
+    owner,
+    repo: repoName,
+    permission: 'admin',
+  });
+  await github.addTeamMembers(team_id, maintainers, 'maintainer');
+
+  console.log(`${repoName} Submitted issue for translation progress`);
+
+  Utility.log('I', `${repoName} Setting up mirror repo...`);
+  repo.setupMirror();
+  Utility.log('I', `${repoName} Finished setting up mirror repo`);
 };
 
 const setupHeadFeeder = () => {

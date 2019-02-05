@@ -1,14 +1,27 @@
 [
   {
     "name": "Igpay Atinlay",
-    "code": "igpay"
+    "code": "igpay",
+    "maintainers": ["tesseralis"]
   },
   {
     "name": "Doge",
-    "code": "doge"
+    "code": "doge",
+    "maintainers": ["tesseralis"]
   },
   {
     "name": "L33tsp31k",
-    "code": "leet"
+    "code": "leet",
+    "maintainers": ["tesseralis"]
+  },
+  {
+    "name": "Pirate",
+    "code": "arr",
+    "maintainers": ["tesseralis"]
+  },
+  {
+    "name": "Swedish Chef",
+    "code": "bork",
+    "maintainers": ["tesseralis", "gaearon"]
   }
 ]
