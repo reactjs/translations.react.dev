@@ -8,10 +8,6 @@ describe('Github', function() {
     origin: {
       owner: 'tesseralis-fan-club',
     },
-    upstream: {
-      owner: 'tesseralis-fan-club',
-      name: 'doge.tesseralis.club',
-    },
   };
 
   describe('issue', function() {

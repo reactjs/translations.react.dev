@@ -28,13 +28,6 @@ let remote = {
     name: repoName,
     defaultBranch,
   },
-  // TODO figure out what this is needed for
-  upstream: {
-    url: url,
-    owner,
-    name: repoName,
-    defaultBranch,
-  },
   head: {
     url: `https://github.com/${owner}/${repository}.git`,
     name: repository,

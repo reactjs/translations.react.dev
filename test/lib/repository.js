@@ -12,7 +12,6 @@ describe('Repository', function() {
     path: 'repo_test',
     remote: {
       origin: origin,
-      upstream: Object.assign({}, origin, {name: 'upstream'}),
       head: Object.assign({}, origin, {name: 'head'}),
     },
     user: {
@@ -36,10 +35,10 @@ describe('Repository', function() {
         shell
           .exec(
             `git remote show -n ${
-              repo.remote.upstream.name
+              repo.remote.origin.name
             } | grep '^*' | cut -b 10-`,
           )
-          .stdout.replace('\n', '') === repo.remote.upstream.name,
+          .stdout.replace('\n', '') === repo.remote.origin.name,
       );
       assert(
         shell

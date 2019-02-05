@@ -1,9 +1,8 @@
 {
-  "name": "che-tsumi",
+  "name": "reactjs.org-translations",
   "version": "0.0.1",
-  "description": "Watch RSS feed & reflect commits by cherry-picking",
+  "description": "Scripts and files useful for reactjs.org translators",
   "private": true,
-  "author": "re-fort",
   "license": "MIT",
   "scripts": {
     "lint": "eslint **/*.js",
