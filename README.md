@@ -1,3 +1,5 @@
+# Translating reactjs.org
+
 ## First Steps
 
 To start a new translation project, submit a PR to add your language to [languages.json](./languages.json) with the following information:
@@ -54,8 +56,7 @@ If you have a question that isn't addressed here, go to the global [ReactJS loca
 2. ask {TBD} to add {lang-code}.reactjs.org as a subdomain
 3. submit a PR to [reactjs/reactjs.org](https://github.com/reactjs/reactjs.org) adding the language in the dropdown
 4. celebrate!
-  
-## Other things to consider
 
-* Turn on CircleCI
-* See if there is a textlint plugin in your language
+## Acknowledgements
+
+This repo, and the bot that makes all this possible, is based off of and iterated upon [che-tsumi](https://github.com/vuejs-jp/che-tsumi/tree/master/lib) by the [Vue.js Japan User Group](https://github.com/vuejs-jp)
