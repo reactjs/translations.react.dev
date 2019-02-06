@@ -5,9 +5,9 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "lint": "eslint **/*.js",
-    "watch": "env-cmd ./.env node index.js watch",
-    "create": "env-cmd ./.env node  index.js create"
+    "watch": "env-cmd ./.env node scripts/watch.js",
+    "watch-all": "env-cmd ./.env node scripts/watchAll.js",
+    "create": "env-cmd ./.env node scripts/create.js"
   },
   "dependencies": {
     "@octokit/rest": "^16.15.0",

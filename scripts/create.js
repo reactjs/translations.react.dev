@@ -1,27 +1,67 @@
 /**
- * Create a new language translation of the original repo for the given language code
- * given the configuration in languages.json
+ * Create a new translation of the original repo in [source config] with the info in [trans config].
  *
  * ```
- * node scripts/createTranslation en
+ * node scripts/create.js [source config] [trans config]
  * ```
+ *
+ * Given the following files:
+ *
+ * `config.json`
+ * ```
+ * {
+ *   "owner": "reactjs",
+ *   "repository": "reactjs.org",
+ *   "teamSlug": "reactjs-localization"
+ * }
+ * ```
+ *
+ * `arr.json`
+ * ```
+ * {
+ *   "name": "Japanese",
+ *   "code": "ja",
+ *   "maintainers": ["smikitky", "potato4d"]
+ * }
+ * ```
+ *
+ * Running this script:
+ *
+ * ```
+ * node scripts/create.js config.json ja.json
+ * ```
+ *
+ * will have the following effects:
+ *
+ * * Create a new repository reactjs/ja.reactjs.org with the current contents of reactjs.org
+ * * Create a new issue in this repo "Japanese Translation Progress" with a list
+ *   of pages to translate
+ * * Create a team "reactjs.org Japanese Translation" and invite all people listed in `maintainers`
+ *   to the reactjs organization and give them access to the repository
  */
 const fs = require('fs');
 const shell = require('shelljs');
 const Octokit = require('@octokit/rest');
-
-const {owner, repository, teamSlug} = require('../config.json');
-const languages = require('../languages.json');
-
 shell.config.silent = true;
+
+const [srcConfigFile, langConfigFile] = process.argv.slice(2);
+if (!srcConfigFile) {
+  throw new Error('Source config file not provided');
+}
+if (!langConfigFile) {
+  throw new Error('Language config file not provided');
+}
+
+function getJSON(file) {
+  // Get content from file
+  return JSON.parse(fs.readFileSync(file));
+}
+
+const {owner, repository, teamSlug} = getJSON(srcConfigFile);
+const {code: langCode, name: langName, maintainers} = getJSON(langConfigFile);
 
 const originalUrl = `https://github.com/${owner}/${repository}.git`;
 
-const [langCode] = process.argv.slice(2);
-
-const {name: langName, maintainers} = languages.find(
-  lang => lang.code === langCode,
-);
 const newRepoName = `${langCode}.${repository}`;
 const newRepoUrl = `https://github.com/${owner}/${newRepoName}.git`;
 const defaultBranch = 'master';

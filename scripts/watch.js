@@ -3,19 +3,27 @@
  *
  * https://github.com/vuejs-jp/che-tsumi
  */
+const fs = require('fs');
 const RssFeedEmitter = require('rss-feed-emitter');
 const Queue = require('queue');
 const Github = require('../lib/github');
 const Repo = require('../lib/repository');
 const Utility = require('../lib/utility');
-const config = require('../config.json');
+
+function getJSON(file) {
+  // Get content from file
+  return JSON.parse(fs.readFileSync(file));
+}
 
 let headFeeder = new RssFeedEmitter();
 let github = null;
 let q = Queue({autostart: true, concurrency: 1});
 
-const {owner, repository, feedRefresh} = config;
-const [langCode] = process.argv.slice(2);
+const [configFile, langCode] = process.argv.slice(2);
+if (!configFile) {
+  throw new Error('Config file not provided');
+}
+const {owner, repository, feedRefresh} = getJSON(configFile);
 
 const repoName = `${langCode}.${repository}`;
 const url = `https://github.com/${owner}/${repoName}.git`;
