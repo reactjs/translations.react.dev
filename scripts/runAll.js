@@ -1,5 +1,5 @@
 /**
- * Run [command] on the given [configFile] and [langDir]
+ * Run [command] on the given [configFile] on all languages in the given [langDir]
  *
  * ```
  * runAll [command] [configfile] [langDir]
