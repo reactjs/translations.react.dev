@@ -1,4 +1,8 @@
-const fs = require('fs');
+/**
+ * Watch script initially inspired by che-tsumi:
+ *
+ * https://github.com/vuejs-jp/che-tsumi
+ */
 const RssFeedEmitter = require('rss-feed-emitter');
 const Queue = require('queue');
 const Github = require('../lib/github');
