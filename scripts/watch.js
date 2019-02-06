@@ -19,11 +19,12 @@ let headFeeder = new RssFeedEmitter();
 let github = null;
 let q = Queue({autostart: true, concurrency: 1});
 
-const [configFile, langCode] = process.argv.slice(2);
+const [configFile, langFile] = process.argv.slice(2);
 if (!configFile) {
   throw new Error('Config file not provided');
 }
 const {owner, repository, feedRefresh} = getJSON(configFile);
+const {code: langCode} = getJSON(langFile);
 
 const repoName = `${langCode}.${repository}`;
 const url = `https://github.com/${owner}/${repoName}.git`;

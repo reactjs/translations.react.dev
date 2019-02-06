@@ -6,8 +6,9 @@
   "license": "MIT",
   "scripts": {
     "watch": "env-cmd ./.env node scripts/watch.js",
-    "watch-all": "env-cmd ./.env node scripts/watchAll.js",
-    "create": "env-cmd ./.env node scripts/create.js"
+    "watch-all": "env-cmd ./.env node scripts/runAll.js watch",
+    "create": "env-cmd ./.env node scripts/create.js",
+    "create-all": "env-cmd ./.env node scripts/runAll.js create"
   },
   "dependencies": {
     "@octokit/rest": "^16.15.0",
