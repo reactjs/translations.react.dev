@@ -1,22 +1,29 @@
+/**
+ * Create a new language translation of the original repo for the given language code
+ * given the configuration in languages.json
+ *
+ * ```
+ * node scripts/createTranslation en
+ * ```
+ */
 const fs = require('fs');
 const shell = require('shelljs');
 const Octokit = require('@octokit/rest');
 
-const config = require('../config.json');
+const {owner, repository, teamSlug} = require('../config.json');
 const languages = require('../languages.json');
 
 shell.config.silent = true;
 
 const originalUrl = `https://github.com/${owner}/${repository}.git`;
 
-const {owner, repository, teamSlug} = config;
 const [langCode] = process.argv.slice(2);
 
 const {name: langName, maintainers} = languages.find(
   lang => lang.code === langCode,
 );
 const newRepoName = `${langCode}.${repository}`;
-const url = `https://github.com/${owner}/${newRepoName}.git`;
+const newRepoUrl = `https://github.com/${owner}/${newRepoName}.git`;
 const defaultBranch = 'master';
 
 const token = process.env.GITHUB_ACCESS_TOKEN;
@@ -97,7 +104,7 @@ function pushOriginalContents() {
   shell.exec(`git clone ${originalUrl} ${newRepoName}`);
   shell.cd(newRepoName);
   // Set the remote to the newly created repo
-  shell.exec(`git remote set-url origin ${url}`);
+  shell.exec(`git remote set-url origin ${newRepoUrl}`);
   shell.exec(`git push -u origin ${defaultBranch}`);
   console.log(`${newRepoName} Finished copying contents`);
 }
@@ -106,7 +113,7 @@ function pushOriginalContents() {
 // but I'm too scared not to do it manually rn
 async function setupRepositoryAndTeam() {
   if (await doesRepoExist()) {
-    console.log(`${url} exists already.`);
+    console.log(`${newRepoUrl} exists already.`);
     return;
   }
 

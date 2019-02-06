@@ -1,10 +1,5 @@
 [
   {
-    "name": "Igpay Atinlay",
-    "code": "igpay",
-    "maintainers": ["tesseralis"]
-  },
-  {
     "name": "Doge",
     "code": "doge",
     "maintainers": ["tesseralis"]
@@ -18,21 +13,5 @@
     "name": "Pirate",
     "code": "arr",
     "maintainers": ["tesseralis"]
-  },
-  {
-    "name": "Swedish Chef",
-    "code": "bork",
-    "maintainers": ["tesseralis", "gaearon"]
-  },
-  {
-    "name": "Simlish",
-    "code": "sims",
-    "maintainers": ["tesseralis"]
-  },
-  {
-    "name": "Furbish",
-    "code": "furby",
-    "maintainers": ["tesseralis"]
   }
-
 ]
