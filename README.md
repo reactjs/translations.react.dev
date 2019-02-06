@@ -2,7 +2,8 @@
 
 ## First Steps
 
-To start a new translation project, submit a PR to add your language to [languages.json](./languages.json) with the following information:
+To start a new translation project, submit a PR adding a new file `{lang-code}.json`
+to the `langs` folder with the following information:
 
 * Language name
 * [Language code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)

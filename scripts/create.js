@@ -1,6 +1,9 @@
 /**
  * Create a new translation of the original repo in [source config] with the info in [trans config].
  *
+ * YOU MUST HAVE ADMIN ACCESS TO THE ORGANIZATION FOR THIS TO WORK.
+ * BEHAVIOR IF YOU ARE NOT AN OWNER IS UNDEFINED.
+ *
  * ```
  * node scripts/create.js [source config] [trans config]
  * ```
