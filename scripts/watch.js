@@ -23,7 +23,7 @@ const [configFile, langFile] = process.argv.slice(2);
 if (!configFile) {
   throw new Error('Config file not provided');
 }
-const {owner, repository, feedRefresh} = getJSON(configFile);
+const {owner, repository} = getJSON(configFile);
 const {code: langCode} = getJSON(langFile);
 
 const repoName = `${langCode}.${repository}`;
@@ -64,7 +64,7 @@ const setup = async () => {
 const setupHeadFeeder = () => {
   headFeeder.add({
     url: `https://github.com/${owner}/${repository}/commits/${defaultBranch}.atom`,
-    refresh: feedRefresh,
+    refresh: 10000,
   });
 
   headFeeder.on('new-item', handleNewItem);
