@@ -7,7 +7,8 @@
   "scripts": {
     "lint": "eslint **/*.js",
     "test": "env-cmd ./.env mocha -R spec -t 10000 test/**/*.js",
-    "watch": "env-cmd ./.env node index.js"
+    "watch": "env-cmd ./.env node index.js watch",
+    "create": "env-cmd ./.env node  index.js create"
   },
   "dependencies": {
     "@octokit/rest": "^16.15.0",

@@ -23,5 +23,16 @@
     "name": "Swedish Chef",
     "code": "bork",
     "maintainers": ["tesseralis", "gaearon"]
+  },
+  {
+    "name": "Simlish",
+    "code": "sims",
+    "maintainers": ["tesseralis"]
+  },
+  {
+    "name": "Furbish",
+    "code": "furby",
+    "maintainers": ["tesseralis"]
   }
+
 ]
