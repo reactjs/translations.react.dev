@@ -59,22 +59,21 @@ const setupRepositoryAndTeam = async () => {
   } = await github.searchRepo(remote);
   if (total_count > 0) return;
 
-  /**
-   * * figure out how to make team admin of repo
-   * * invite people to org if not in
-   */
+  // Create the new (empty) translation repo
   console.log(`${repoName} creating new repo in GitHub...`);
   await github.createRepo(remote, {
     // TODO generalize this (maybe get from the head repo?)
     description: `(Work in progress) React documentation website in ${langName}`,
   });
 
+  // Create the progress-tracking issue from the template
   const body = fs.readFileSync('./PROGRESS.template.md', 'utf8');
   await github.createIssue(remote, {
     title: `${langName} Translation Progress`,
     body,
   });
 
+  // Make the team...
   const parent_team_id = await github.getTeamId(remote, teamSlug);
   const team_id = await github.createTeam(remote, {
     name: `${repository} ${langName} translation`,
@@ -83,16 +82,19 @@ const setupRepositoryAndTeam = async () => {
     parent_team_id,
   });
   // TODO can probably do these in parallel
+  // Give it access to the repo
   await github.addRepoToTeam({
     team_id,
     owner,
     repo: repoName,
     permission: 'admin',
   });
+  // Add team members
   await github.addTeamMembers(team_id, maintainers, 'maintainer');
 
   console.log(`${repoName} Submitted issue for translation progress`);
 
+  // Duplicate the contents of the original repo
   Utility.log('I', `${repoName} Setting up mirror repo...`);
   repo.setupMirror();
   Utility.log('I', `${repoName} Finished setting up mirror repo`);
@@ -131,7 +133,7 @@ const handleNewItem = async item => {
   let issueNo = null;
   if (result.total_count === 0) {
     let body = `Update to original repo\nOriginal:${item.link}`;
-    const {data: newIssue} = await github.createIssue(remote, {
+    const newIssue = await github.createIssue(remote, {
       title: `[Merge]: ${Utility.removeHash(item.title)}`,
       body,
     });
