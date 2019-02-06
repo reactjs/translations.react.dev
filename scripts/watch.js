@@ -77,13 +77,13 @@ const handleNewItem = async item => {
   // branch names consisting of 40 hex characters are not allowed
   const shortHash = hash.substr(0, 8);
 
-  if (repo.existsCommit(shortHash)) {
-    Utility.log(
-      'W',
-      `${repoName} ${item.title}: Commit has already been merged`,
-    );
-    return;
-  }
+  // if (repo.existsCommit(shortHash)) {
+  //   Utility.log(
+  //     'W',
+  //     `${repoName} ${item.title}: Commit has already been merged`,
+  //   );
+  //   return;
+  // }
 
   if (repo.existsRemoteBranch(shortHash)) {
     Utility.log('W', `${repoName} ${item.title}: Remote branch already exists`);
