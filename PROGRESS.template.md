@@ -8,7 +8,7 @@ To translate a page:
 
 Before contributing, read the [glossary]() to understand how to translate various technical and React-specific terms.
 
-You can use the Crowdin (https://crowdin.com/project/react) as a base for your translation. Make sure to compare the content with the current React website to makes sure everything is up to date! (NOTE: delete this if the language doesn't have any Crowdin contributions)
+You can use the [Crowdin](https://crowdin.com/project/react) as a base for your translation. Make sure to compare the content with the current React website to makes sure everything is up to date! (NOTE: delete this if the language doesn't have any Crowdin contributions)
 
 Please be prompt with your translations! If you find find that you can't commit any more, let the maintainers know so they can assign the page to someone else.
 
@@ -26,31 +26,43 @@ To do before releasing as an "official" translation. **Please translate these pa
 
 * [ ] Home Page
 * [ ] Tutorial
-* [ ] Basics
-  * [ ] Hello World
-  * [ ] Introducing JSX
-  * [ ] Rendering Elements
-  * [ ] Components and Props
-  * [ ] State and Lifecycle
-  * [ ] Handling Events
-  * [ ] Conditional Rendering
-  * [ ] Lists and Keys
-  * [ ] Forms
-  * [ ] Lifting State Up
-  * [ ] Composition vs Inheritance
-  * [ ] Thinking in React
-* [ ] API Reference
-  * [ ] React
-  * [ ] React.Component
-  * [ ] ReactDOM
-  * [ ] ReactDOMServer
-  * [ ] DOM Elements
-  * [ ] SyntheticEvent
-  * [ ] Test Utilities
-  * [ ] Shallow Renderer
-  * [ ] Test Renderer
-  * [ ] JS Environment Requirements
-  * [ ] Glossary
+
+### Basics
+
+* [ ] Hello World
+* [ ] Introducing JSX
+* [ ] Rendering Elements
+* [ ] Components and Props
+* [ ] State and Lifecycle
+* [ ] Handling Events
+* [ ] Conditional Rendering
+* [ ] Lists and Keys
+* [ ] Forms
+* [ ] Lifting State Up
+* [ ] Composition vs Inheritance
+* [ ] Thinking in React
+
+### API Reference
+
+* [ ] React
+* [ ] React.Component
+* [ ] ReactDOM
+* [ ] ReactDOMServer
+* [ ] DOM Elements
+* [ ] SyntheticEvent
+* [ ] Test Utilities
+* [ ] Shallow Renderer
+* [ ] Test Renderer
+* [ ] JS Environment Requirements
+* [ ] Glossary
+
+### Navigation
+
+These are the navigation links that appears in the sidebar. Possibly wait until
+the corresponding sections are translated to do these.
+
+* [ ] tutorial/nav.yml
+* [ ] docs/nav.yml
 
 ## Next Steps
 
@@ -132,14 +144,20 @@ Priority: Low
 * [ ] Implementation Notes
 * [ ] Design Principles
 
+### Components
+
+Components in `src/components` that have some text in them.
+
+* [ ] CodeEditor
+* [ ] CodeExample
+* [ ] ErrorDecoder
+* [ ] LayoutFooter
+* [ ] LayoutHeader
+* [ ] MarkdownPage
+
 ## Additional Translations
 
 These are not the primary translation targets.
 
 * [ ] Blog
 * [ ] Community
-
-Other things to translate:
-
-* [ ] Replace "reactjs.org" in config files
-* [ ] Navigation titles

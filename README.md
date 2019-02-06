@@ -1,6 +1,8 @@
 # Translating reactjs.org
 
-## First Steps
+This repo contains resources and scripts to enable translations of https://reactjs.org.
+
+## Starting a New Translation
 
 To start a new translation project, submit a PR adding a new file `{lang-code}.json`
 to the `langs` folder with the following information:
@@ -35,7 +37,7 @@ Happy translating!
 
 As with maintaining any repository, be prompt with reviewing pull requests / responding to volunteers.
 
-### Make a glossary
+### Make a glossary and style guide
 
 Create a glossary of the translations of technical and React-specific terms. Put this in a highly visible location (the README or a pinned issue). For examples of glossaries, see:
 
