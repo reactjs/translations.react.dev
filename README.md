@@ -21,6 +21,8 @@ For example:
 }
 ```
 
+In the PR comment, please describe your experiences with translation (e.g. links to previous work).
+
 The bot will:
 
 * Create a new repository for you at `reactjs/{lang-code}.reactjs.org`
