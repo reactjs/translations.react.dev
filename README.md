@@ -23,7 +23,7 @@ For example:
 
 In the PR comment, please describe your experiences with translation (e.g. links to previous work).
 
-The bot will:
+Once the PR is accepted, the bot will:
 
 * Create a new repository for you at `reactjs/{lang-code}.reactjs.org`
 * Add/invite all maintainers listed to a "reactjs.org {language} Translation" team in the reactjs organization
