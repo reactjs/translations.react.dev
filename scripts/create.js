@@ -45,7 +45,7 @@
 const fs = require('fs');
 const shell = require('shelljs');
 const Octokit = require('@octokit/rest');
-shell.config.silent = true;
+// shell.config.silent = true;
 
 const [srcConfigFile, langConfigFile] = process.argv.slice(2);
 if (!srcConfigFile) {
@@ -143,12 +143,18 @@ async function createTeam() {
 
 function pushOriginalContents() {
   console.log(`${newRepoName} Setting up duplicate repo...`);
-  shell.cd(this.path);
-  shell.exec(`git clone ${originalUrl} ${newRepoName}`);
-  shell.cd(newRepoName);
+  shell.cd('repo');
+  // If we can't find the repo, clone it
+  if (shell.cd(repository).code !== 0) {
+    console.log(`${newRepoUrl} Can't find source repo locally. Cloning it...`);
+    shell.exec(`git clone ${originalUrl} ${repository}`);
+    console.log(`${newRepoUrl} Finished cloning.`);
+    shell.cd(repository);
+  }
   // Set the remote to the newly created repo
-  shell.exec(`git remote set-url origin ${newRepoUrl}`);
-  shell.exec(`git push -u origin ${defaultBranch}`);
+  shell.exec(`git pull origin ${defaultBranch}`);
+  shell.exec(`git remote add ${newRepoName} ${newRepoUrl}`);
+  shell.exec(`git push -u ${newRepoName} ${defaultBranch}`);
   console.log(`${newRepoName} Finished copying contents`);
 }
 
