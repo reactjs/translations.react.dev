@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from './logo.svg'
 import './App.css'
 import LangProgress from './LangProgress'
 import ExtLink from './ExtLink'
@@ -10,20 +9,51 @@ const langs = [
   { name: 'Simplified Chinese', code: 'zh-hans', issueNo: 4 },
 ]
 
-export default function App() {
+function Title() {
+  const style = {
+    fontSize: '2.5rem',
+    fontWeight: 'normal',
+    marginBottom: '2rem',
+  }
+  return <h1 style={style}>Is React Translated Yet?</h1>
+}
+
+function Description() {
+  const style = {
+    fontSize: '1.5rem',
+    marginBottom: '1rem',
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Is React Translated Yet?</h1>
-        <p>
-          Is <ExtLink href="https://reactjs.org">reactjs.org</ExtLink> available
-          in:
-        </p>
-        {langs.map(lang => (
-          <LangProgress {...lang} />
-        ))}
-      </header>
+    <p style={style}>
+      Is <ExtLink href="https://reactjs.org">reactjs.org</ExtLink> available in:
+    </p>
+  )
+}
+
+function LangList() {
+  const style = {
+    display: 'flex',
+    flexWrap: 'wrap',
+  }
+  return (
+    <div style={style}>
+      {langs.map(lang => (
+        <LangProgress {...lang} />
+      ))}
+    </div>
+  )
+}
+
+export default function App() {
+  const style = {
+    padding: '2rem',
+  }
+  return (
+    <div style={style}>
+      <Title />
+      <Description />
+      <LangList />
     </div>
   )
 }
