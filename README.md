@@ -21,7 +21,7 @@ For example:
 }
 ```
 
-In the PR comment, please describe your experiences with translation (e.g. links to previous work).
+In the PR comment, please describe your experiences with translation (e.g. links to previous work). We would prefer more than one maintainer on each repo.
 
 Once the PR is accepted, the bot will:
 
