@@ -4,8 +4,15 @@ import LangProgress from './LangProgress'
 import ExtLink from './ExtLink'
 
 const langs = [
+  { name: 'Azerbaijani', code: 'az' },
   { name: 'Spanish', code: 'es', issueNo: 4 },
+  { name: 'French', code: 'fr' },
+  { name: 'Indonesian', code: 'id' },
   { name: 'Japanese', code: 'ja', issueNo: 4 },
+  { name: 'Korean', code: 'ko' },
+  { name: 'Portuguese (Brazil)', code: 'pt-BR' },
+  { name: 'Russian', code: 'ru' },
+  { name: 'Vietnamese', code: 'vi' },
   { name: 'Simplified Chinese', code: 'zh-hans', issueNo: 4 },
 ]
 

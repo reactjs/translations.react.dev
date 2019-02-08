@@ -6,7 +6,11 @@ function Percentage({ value }) {
   const style = {
     fontSize: '2rem',
   }
-  return <span style={style}>{value ? Math.floor(value * 100) : '??'}%</span>
+  return (
+    <span style={style}>
+      {value !== undefined ? Math.floor(value * 100) : '??'}%
+    </span>
+  )
 }
 
 function IssueLink({ href }) {
@@ -20,7 +24,7 @@ function IssueLink({ href }) {
   )
 }
 
-export default function LangProgress({ name, code, issueNo }) {
+export default function LangProgress({ name, code, issueNo = 1 }) {
   const octokit = new Octokit()
   const [finished, setFinished] = useState()
   const [total, setTotal] = useState()
