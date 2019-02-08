@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import tinycolor from 'tinycolor2'
 import Octokit from '@octokit/rest'
 import ExtLink from './ExtLink'
 
@@ -20,6 +21,25 @@ function Status({ text }) {
     fontSize: '2.25rem',
   }
   return <p style={style}>{text}</p>
+}
+
+function getColor(amount) {
+  if (amount === undefined) {
+    return 'whitesmoke'
+  }
+
+  if (amount < 0.5) {
+    return tinycolor
+      .mix(tinycolor('mistyrose'), tinycolor('lemonchiffon'), amount * 100)
+      .toHexString()
+  }
+  return tinycolor
+    .mix(
+      tinycolor('lemonchiffon'),
+      tinycolor('greenyellow'),
+      (amount - 0.5) * 100,
+    )
+    .toHexString()
 }
 
 export default function LangProgress({
@@ -55,7 +75,15 @@ export default function LangProgress({
     getIssues()
   }, [code, issueNo])
 
+  // TODO add case for "yes" (the URL is available)
+  const urlValid = false
+  const status = sections['Core Pages'] === 1 && urlValid ? yes : no
+  console.log(code, sections['Core Pages'])
+  const backgroundColor = getColor(sections['Core Pages'])
+
   const style = {
+    backgroundColor,
+    transition: 'background-color 0.35s',
     display: 'flex',
     flexDirection: 'column',
     margin: '1rem',
@@ -70,10 +98,6 @@ export default function LangProgress({
       outline: '2px gray solid',
     },
   }
-  // TODO add case for "yes" (the URL is available)
-  const urlValid = false
-  const status = sections['Core Pages'] === 1 && urlValid ? yes : no
-
   return (
     <ExtLink style={style} href={issue}>
       <header style={{ marginBottom: '0.5rem' }}>
