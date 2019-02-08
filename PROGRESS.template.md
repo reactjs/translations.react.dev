@@ -6,7 +6,7 @@ To translate a page:
 2. Comment below with the name of the page you would like to translate.
 3. Submit a PR and add it to your comment!
 
-Before contributing, read the [glossary]() to understand how to translate various technical and React-specific terms.
+Before contributing, read the glossary and style guide (once they exist) to understand how to translate various technical and React-specific terms.
 
 You can use the [Crowdin](https://crowdin.com/project/react) as a base for your translation. Make sure to compare the content with the current React website to makes sure everything is up to date! (NOTE: delete this if the language doesn't have any Crowdin contributions)
 
