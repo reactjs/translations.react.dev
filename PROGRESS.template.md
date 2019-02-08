@@ -3,7 +3,7 @@
 To translate a page:
 
 1. Check that no one else has claimed your page in the checklist and comments below.
-2. Comment below with the name of the page you would like to translate.
+2. Comment below with the name of the page you would like to translate. **Take only one page at a time**.
 3. Submit a PR and add it to your comment!
 
 Before contributing, read the glossary and style guide (once they exist) to understand how to translate various technical and React-specific terms.
