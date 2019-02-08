@@ -20,7 +20,7 @@ When someone volunteers, edit this issue with the username of the volunteer, and
 
 When PRs are merged, make sure to mark that page as completed!
 
-## Minimum Viable Translation
+## Core Pages
 
 To do before releasing as an "official" translation. **Please translate these pages first.**
 
