@@ -14,6 +14,7 @@ const langs = [
   { name: 'Russian', code: 'ru' },
   { name: 'Vietnamese', code: 'vi' },
   { name: 'Simplified Chinese', code: 'zh-hans', issueNo: 4 },
+  { name: 'Traditional Chinese', code: 'zh-hant' },
 ]
 
 function Title() {
@@ -46,7 +47,7 @@ function LangList() {
   return (
     <div style={style}>
       {langs.map(lang => (
-        <LangProgress {...lang} />
+        <LangProgress key={lang.code} {...lang} />
       ))}
     </div>
   )

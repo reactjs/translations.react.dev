@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Octokit from '@octokit/rest'
 import ExtLink from './ExtLink'
 
-function Percentage({ value }) {
+function Percentage({ value, size }) {
   const style = {
-    fontSize: '2rem',
+    fontSize: size === 'lg' ? '2rem' : '1.5rem',
   }
   return (
     <span style={style}>
@@ -26,28 +26,30 @@ function IssueLink({ href }) {
 
 export default function LangProgress({ name, code, issueNo = 1 }) {
   const octokit = new Octokit()
-  const [finished, setFinished] = useState()
-  const [total, setTotal] = useState()
+  const [sections, setSections] = useState({})
   const issue = `https://github.com/reactjs/${code}.reactjs.org/issues/${issueNo}`
 
-  useEffect(() => {
-    setTimeout(async () => {
-      const issue = await octokit.issues.get({
-        owner: 'reactjs',
-        repo: `${code}.reactjs.org`,
-        number: issueNo,
-      })
-      const { body } = issue.data
-      const items = body.split('\n').filter(line => {
+  async function getIssues() {
+    const issue = await octokit.issues.get({
+      owner: 'reactjs',
+      repo: `${code}.reactjs.org`,
+      number: issueNo,
+    })
+    const { body } = issue.data
+    const _sections = {}
+    body.split(/^##\s+/gm).forEach(section => {
+      const [heading, ...content] = section.split('\n')
+      const items = content.filter(line => {
         return /\* *\[[ x]\]/.test(line)
       })
-      setTotal(items.length)
       const finishedItems = items.filter(line => /\* \[x\]/.test(line))
-      setFinished(finishedItems.length)
-    }, 0)
+      _sections[heading.trim()] = finishedItems.length / items.length
+    })
+    setSections(_sections)
+  }
+  useEffect(() => {
+    getIssues()
   }, [code, issueNo])
-  const percentage = total ? finished / total : undefined
-  const status = total === undefined ? '❓' : finished === total ? '✅' : '🚫'
 
   const style = {
     display: 'flex',
@@ -65,12 +67,11 @@ export default function LangProgress({ name, code, issueNo = 1 }) {
         <h2 style={{ marginBottom: '0.25rem', fontWeight: 'initial' }}>
           {name}
         </h2>
-        <p>
-          {code}.reactjs.org {status}
-        </p>
+        <p style={{ color: 'gray' }}>({code}.reactjs.org)</p>
       </header>
       <p style={{ marginTop: 'auto' }}>
-        <Percentage value={percentage} /> complete
+        Core: <Percentage size="lg" value={sections['Core Pages']} /> Other:{' '}
+        <Percentage size="md" value={sections['Next Steps']} />
       </p>
       <footer style={{ marginTop: '0.25rem' }}>
         <IssueLink href={issue} />
