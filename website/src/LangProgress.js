@@ -61,9 +61,9 @@ export default function LangProgress({
     margin: '1rem',
     width: '20rem',
     height: '12rem',
-    border: '1px gray solid',
     padding: '1rem',
     color: 'black',
+    outline: '1px gray solid',
 
     ':hover': {
       textDecoration: 'none',
