@@ -5,8 +5,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "watch": "env-cmd ./.env node scripts/watch.js",
-    "watch-all": "env-cmd ./.env node scripts/runAll.js watch",
+    "sync": "env-cmd ./.env node scripts/sync.js",
+    "sync-all": "env-cmd ./.env node scripts/runAll.js sync",
     "create": "env-cmd ./.env node scripts/create.js",
     "create-all": "env-cmd ./.env node scripts/runAll.js create"
   },
