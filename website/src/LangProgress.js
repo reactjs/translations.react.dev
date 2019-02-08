@@ -48,6 +48,8 @@ export default function LangProgress({
   issueNo = 1,
   yes = 'yes',
   no = 'no',
+  corePages = 'Core Pages',
+  nextSteps = 'Next Steps',
 }) {
   const octokit = new Octokit()
   const [sections, setSections] = useState({})
@@ -77,9 +79,9 @@ export default function LangProgress({
 
   // TODO add case for "yes" (the URL is available)
   const urlValid = false
-  const status = sections['Core Pages'] === 1 && urlValid ? yes : no
-  console.log(code, sections['Core Pages'])
-  const backgroundColor = getColor(sections['Core Pages'])
+  const status = sections[corePages] === 1 && urlValid ? yes : no
+  console.log(code, sections[corePages])
+  const backgroundColor = getColor(sections[corePages])
 
   const style = {
     backgroundColor,
@@ -110,8 +112,8 @@ export default function LangProgress({
       <div style={{ marginTop: 'auto' }}>
         <p>Translation progress</p>
         <p>
-          Core: <Percentage size="lg" value={sections['Core Pages']} /> Other:{' '}
-          <Percentage size="md" value={sections['Next Steps']} />
+          Core: <Percentage size="lg" value={sections[corePages]} /> Other:{' '}
+          <Percentage size="md" value={sections[nextSteps]} />
         </p>
       </div>
     </ExtLink>

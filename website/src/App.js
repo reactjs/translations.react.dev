@@ -6,7 +6,14 @@ import ExtLink from './ExtLink'
 const langs = [
   { name: 'Azerbaijani', code: 'az', yes: 'bəli', no: 'yox' },
   { name: 'Spanish', code: 'es', issueNo: 4, yes: 'sí', no: 'no' },
-  { name: 'French', code: 'fr', yes: 'oui', no: 'non' },
+  {
+    name: 'French',
+    code: 'fr',
+    yes: 'oui',
+    no: 'non',
+    corePages: 'Pages Fondamentales',
+    nextSteps: 'Étapes suivantes',
+  },
   { name: 'Indonesian', code: 'id', yes: 'iya', no: 'tidak' },
   { name: 'Japanese', code: 'ja', issueNo: 4, yes: 'はい', no: 'いいえ' },
   { name: 'Korean', code: 'ko', yes: '예', no: '아니요' },
