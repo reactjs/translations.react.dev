@@ -1,7 +1,22 @@
 import React from 'react'
-export default function ExtLink({ href, children, ...props }) {
+import { css } from 'glamor'
+
+export default function ExtLink({ style, href, children, ...props }) {
+  const rule = css({
+    color: 'blue',
+    ':hover': {
+      textDecoration: 'underline',
+    },
+    ...style,
+  })
   return (
-    <a {...props} href={href} target="_blank" rel="noopener noreferrer">
+    <a
+      {...props}
+      {...rule}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       {children}
     </a>
   )
