@@ -2,6 +2,10 @@
 
 This repo contains resources and scripts to enable translations of https://reactjs.org.
 
+## Contributing to translations
+
+Check www.isreacttranslatedyet.com to see if your language already has a translation effort in progress.
+
 ## Starting a New Translation
 
 To start a new translation project, submit a PR adding a new file `{lang-code}.json`
