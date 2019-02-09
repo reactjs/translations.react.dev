@@ -1,5 +1,8 @@
 {
   "name": "Persian",
   "code": "fa",
-  "maintainers": ["sorousht"]
+  "maintainers": [
+    "sorousht",
+    "zahrajoulaei"
+  ]
 }
