@@ -86,7 +86,9 @@ async function doesRepoExist() {
 
 async function createProgressIssue() {
   // Create the progress-tracking issue from the template
-  const body = fs.readFileSync('./PROGRESS.template.md', 'utf8');
+  const rawBody = fs.readFileSync('./PROGRESS.template.md', 'utf8');
+  const maintainerList = maintainers.map(name => `* @${name}`).join('\n');
+  const body = rawBody.replace('{MAINTAINERS}\n', maintainerList);
   await octokit.issues.create({
     owner,
     repo: newRepoName,

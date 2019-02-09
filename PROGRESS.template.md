@@ -1,18 +1,20 @@
+## Maintainer List
+
+{MAINTAINERS}
+
 ## For New Translators
 
 To translate a page:
 
 1. Check that no one else has claimed your page in the checklist and comments below.
-2. Comment below with the name of the page you would like to translate. **Take only one page at a time**.
-3. Submit a PR and add it to your comment!
+2. Comment below with the name of the page you would like to translate. **Please take only one page at a time**.
+3. Clone this repo, translate your page, and submit a pull request!
 
 Before contributing, read the glossary and style guide (once they exist) to understand how to translate various technical and React-specific terms.
 
-You can use the [Crowdin](https://crowdin.com/project/react) as a base for your translation. Make sure to compare the content with the current React website to makes sure everything is up to date! (NOTE: delete this if the language doesn't have any Crowdin contributions)
-
 Please be prompt with your translations! If you find find that you can't commit any more, let the maintainers know so they can assign the page to someone else.
 
-## For maintainers
+## For Maintainers
 
 When someone volunteers, edit this issue with the username of the volunteer, and with the PR. Ex:
 
