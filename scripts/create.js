@@ -69,7 +69,7 @@ const newRepoName = `${langCode}.${repository}`;
 const newRepoUrl = `https://github.com/${owner}/${newRepoName}.git`;
 const defaultBranch = 'master';
 
-const token = process.env.GITHUB_ACCESS_TOKEN;
+const token = process.env.GITHUB_ADMIN_ACCESS_TOKEN;
 const octokit = new Octokit({
   auth: `token ${token}`,
   previews: ['hellcat-preview'],

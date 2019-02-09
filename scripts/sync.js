@@ -28,12 +28,13 @@ const defaultBranch = 'master';
 // Set up
 shell.cd('repo');
 if (shell.cd(transRepoName).code !== 0) {
-  console.log(`${newRepoUrl} Can't find translation repo locally. Cloning...`);
+  console.log(`${transUrl} Can't find translation repo locally. Cloning...`);
   shell.exec(`git clone ${transUrl} ${transRepoName}`);
-  console.log(`${newRepoUrl} Finished cloning.`);
+  console.log(`${transUrl} Finished cloning.`);
   shell.cd(transRepoName);
   shell.exec(`git remote add ${repository} ${originalUrl}`);
 }
+shell.exec(`git remote add ${repository} ${originalUrl}`);
 
 // Pull from our own origin
 shell.exec(`git checkout ${defaultBranch}`);
@@ -81,9 +82,14 @@ The following files have conflicts and may need new translations:
 const body = `
 This PR was automatically generated.
 
+Merge changes from [reactjs.org](https://github.com/reactjs/reactjs.org/commits/master) at ${shortHash}
+
 ${conflictFiles.length > 0 ? conflictsText : 'No conflicts were found.'}
 
 ## DO NOT SQUASH MERGE THIS PULL REQUEST!
+
+Doing so will "erase" the commits from master and cause them to show
+up as conflicts the next time we merge.
 `;
 
 const token = process.env.GITHUB_ACCESS_TOKEN;

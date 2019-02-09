@@ -6,9 +6,8 @@
   "license": "MIT",
   "scripts": {
     "sync": "env-cmd ./.env node scripts/sync.js",
-    "sync-all": "env-cmd ./.env node scripts/runAll.js sync",
     "create": "env-cmd ./.env node scripts/create.js",
-    "create-all": "env-cmd ./.env node scripts/runAll.js create"
+    "run-all": "env-cmd ./.env node scripts/runAll.js"
   },
   "dependencies": {
     "@octokit/rest": "^16.15.0",
