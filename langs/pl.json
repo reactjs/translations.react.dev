@@ -1,7 +1,5 @@
 {
     "name": "Polish",
     "code": "pl",
-    "maintainers": [
-        "jakubdrozdek"
-    ]
+    "maintainers": ["jakubdrozdek", "bartlomiejzuber", "TeoTN"]
 }
