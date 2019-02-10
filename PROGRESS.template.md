@@ -97,7 +97,7 @@ These are the pages that you get when you click the links in the console (e.g. h
 * [ ] dont-call-proptypes
 * [ ] invalid-aria-prop
 * [ ] invalid-hook-call-warning
-* [ ] legacy-properties
+* [ ] legacy-factories
 * [ ] refs-must-have-owner
 * [ ] special-props
 * [ ] unknown-prop
