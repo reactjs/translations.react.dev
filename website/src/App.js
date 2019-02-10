@@ -15,6 +15,8 @@ const langs = [
     corePages: 'Pages Fondamentales',
     nextSteps: 'Étapes suivantes',
   },
+  { name: 'Hebrew', code: 'he', yes: 'כן', no: 'לא' },
+  { name: 'Hindi', code: 'hi', yes: 'हाँ', no: 'नहीं' },
   { name: 'Armenian', code: 'hy', yes: 'Այո', no: 'Ոչ' },
   { name: 'Indonesian', code: 'id', yes: 'iya', no: 'tidak ada' },
   { name: 'Japanese', code: 'ja', issueNo: 4, yes: 'はい', no: 'いいえ' },
