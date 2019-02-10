@@ -28,9 +28,11 @@ const defaultBranch = 'master';
 // Set up
 shell.cd('repo');
 if (shell.cd(transRepoName).code !== 0) {
-  console.log(`${transUrl} Can't find translation repo locally. Cloning...`);
+  console.log(
+    `${transRepoName} Can't find translation repo locally. Cloning...`,
+  );
   shell.exec(`git clone ${transUrl} ${transRepoName}`);
-  console.log(`${transUrl} Finished cloning.`);
+  console.log(`${transRepoName} Finished cloning.`);
   shell.cd(transRepoName);
   shell.exec(`git remote add ${repository} ${originalUrl}`);
 }
