@@ -45,11 +45,13 @@ As with maintaining any repository, be prompt with reviewing pull requests / res
 
 ### Make a glossary and style guide
 
-Create a glossary of the translations of technical and React-specific terms. Put this in a highly visible location (the README or a pinned issue). For examples of glossaries, see:
+Create a *glossary* of the translations of technical and React-specific terms. Put this in a highly visible location (the README or a pinned issue). For examples of glossaries, see:
 
 * Simplified Chinese: https://github.com/reactjs/zh-hans.reactjs.org/issues/2
 * Japanese: https://github.com/reactjs/ja.reactjs.org/wiki/%E8%A8%B3%E8%AA%9E%E3%81%AE%E7%B5%B1%E4%B8%80
 * Spanish: https://github.com/reactjs/es.reactjs.org/blob/master/TRANSLATION.md#common-translations
+
+Also, create a *style guide* to define additional rules to follow in translation. See the [universal style guide](/style-guide.md) for rules that should apply to *all* translations.
 
 ### Use the bot!
 
