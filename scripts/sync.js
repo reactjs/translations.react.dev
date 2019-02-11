@@ -90,8 +90,7 @@ ${conflictFiles.length > 0 ? conflictsText : 'No conflicts were found.'}
 
 ## DO NOT SQUASH MERGE THIS PULL REQUEST!
 
-Doing so will "erase" the commits from master and cause them to show
-up as conflicts the next time we merge.
+Doing so will "erase" the commits from master and cause them to show up as conflicts the next time we merge.
 `;
 
 const token = process.env.GITHUB_ACCESS_TOKEN;

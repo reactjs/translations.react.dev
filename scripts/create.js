@@ -79,7 +79,7 @@ async function doesRepoExist() {
   const {
     data: {total_count},
   } = await octokit.search.repos({
-    q: `${owner}/${newRepoName}`,
+    q: `org:${owner} ${newRepoName}`,
   });
   return total_count > 0;
 }
