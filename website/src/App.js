@@ -27,6 +27,7 @@ const langs = [
   { name: 'Dutch', code: 'nl', yes: 'ja', no: 'nee' },
   { name: 'Polish', code: 'pl', yes: 'tak', no: 'nie' },
   { name: 'Portuguese (Brazil)', code: 'pt-BR', yes: 'sim', no: 'não' },
+  { name: 'Portuguese (Portugal)', code: 'pt-PT', yes: 'sim', no: 'não' },
   { name: 'Russian', code: 'ru', yes: 'да', no: 'нет' },
   { name: 'Tamil', code: 'ta', yes: 'ஆம்', no: 'இல்லை' },
   { name: 'Ukrainian', code: 'uk', yes: 'так', no: 'ні' },
