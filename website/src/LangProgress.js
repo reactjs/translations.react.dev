@@ -30,7 +30,7 @@ function getColor(amount) {
 
   if (amount < 0.5) {
     return tinycolor
-      .mix(tinycolor('mistyrose'), tinycolor('lemonchiffon'), amount * 100)
+      .mix(tinycolor('whitesmoke'), tinycolor('lemonchiffon'), amount * 100)
       .toHexString()
   }
   return tinycolor
