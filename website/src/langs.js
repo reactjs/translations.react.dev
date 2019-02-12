@@ -2,6 +2,7 @@ export default [
   { name: 'العربية', enName: 'Arabic', code: 'ar' },
   { name: 'Azərbaycanca', enName: 'Azerbaijani', code: 'az' },
   { name: 'Български', enName: 'Bulgarian', code: 'bg' },
+  { name: 'বাংলা', enName: 'Bengali', code: 'bn' },
   { name: 'Deutsch', enName: 'German', code: 'de' },
   { name: 'Español', enName: 'Spanish', code: 'es', issueNo: 4 },
   { name: 'فارسی', enName: 'Persian', code: 'fa' },
