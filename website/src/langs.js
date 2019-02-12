@@ -7,7 +7,7 @@ export default [
   { name: 'Español', enName: 'Spanish', code: 'es', issueNo: 4 },
   { name: 'فارسی', enName: 'Persian', code: 'fa' },
   {
-    name: 'Franćais',
+    name: 'Français',
     enName: 'French',
     code: 'fr',
     corePages: 'Pages Fondamentales',
