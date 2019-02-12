@@ -5,7 +5,7 @@ import ExtLink from './ExtLink'
 
 function Percentage({ value, size }) {
   const style = {
-    fontSize: size === 'lg' ? '1.5rem' : '1.25rem',
+    fontSize: size === 'lg' ? '2rem' : '1.5rem',
   }
   return (
     <span style={style}>
@@ -14,18 +14,9 @@ function Percentage({ value, size }) {
   )
 }
 
-function Status({ text }) {
-  const style = {
-    width: '100%',
-    textAlign: 'center',
-    fontSize: '2.25rem',
-  }
-  return <p style={style}>{text}</p>
-}
-
 function getColor(amount) {
   if (amount === undefined) {
-    return 'whitesmoke'
+    return 'white'
   }
 
   if (amount < 0.5) {
@@ -44,16 +35,16 @@ function getColor(amount) {
 
 export default function LangProgress({
   name,
+  enName,
   code,
   issueNo = 1,
-  yes = 'yes',
-  no = 'no',
   corePages = 'Core Pages',
   nextSteps = 'Next Steps',
 }) {
   const octokit = new Octokit()
   const [sections, setSections] = useState({})
-  const issue = `https://github.com/reactjs/${code}.reactjs.org/issues/${issueNo}`
+  const baseUrl = `https://github.com/reactjs/${code}.reactjs.org`
+  const issueUrl = `${baseUrl}/issues/${issueNo}`
 
   async function getIssues() {
     const issue = await octokit.issues.get({
@@ -77,10 +68,6 @@ export default function LangProgress({
     getIssues()
   }, [code, issueNo])
 
-  // TODO add case for "yes" (the URL is available)
-  const urlValid = false
-  const status = sections[corePages] === 1 && urlValid ? yes : no
-  console.log(code, sections[corePages])
   const backgroundColor = getColor(sections[corePages])
 
   const style = {
@@ -90,7 +77,7 @@ export default function LangProgress({
     flexDirection: 'column',
     margin: '1rem',
     width: '20rem',
-    height: '12rem',
+    height: '16rem',
     padding: '1rem',
     color: 'black',
     outline: '1px gray solid',
@@ -101,21 +88,53 @@ export default function LangProgress({
     },
   }
   return (
-    <ExtLink style={style} href={issue}>
+    <ExtLink style={style} href={baseUrl}>
       <header style={{ marginBottom: '0.5rem' }}>
-        <h2 style={{ marginBottom: '0.25rem', fontWeight: 'initial' }}>
+        <p style={{ fontSize: '1rem' }}>{enName}</p>
+        <h2
+          style={{
+            marginBottom: '0.125rem',
+            fontWeight: 'initial',
+            fontSize: '1.75rem',
+          }}
+        >
           {name}
         </h2>
-        <p style={{ color: 'gray' }}>({code}.reactjs.org)</p>
+        <p style={{ color: 'dimgrey' }}>({code}.reactjs.org)</p>
       </header>
-      <Status text={status} />
-      <div style={{ marginTop: 'auto' }}>
-        <p>Translation progress</p>
-        <p>
-          Core: <Percentage size="lg" value={sections[corePages]} /> Other:{' '}
-          <Percentage size="md" value={sections[nextSteps]} />
-        </p>
+      <div
+        style={{
+          display: 'flex',
+          width: '100%',
+          justifyContent: 'space-around',
+          marginTop: 'auto',
+          marginBottom: 'auto',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <p style={{ fontSize: '3rem' }}>🏗</p>
+          <p style={{ fontSize: '1rem', color: 'dimgrey' }}>In progress</p>
+        </div>
+        <div style={{ width: '8rem', fontSize: '1rem' }}>
+          <p>
+            Core: <Percentage size="lg" value={sections[corePages]} />
+          </p>
+          <p>
+            Other: <Percentage size="md" value={sections[nextSteps]} />
+          </p>
+        </div>
       </div>
+      <footer style={{ marginTop: 'auto', lineHeight: 1.25 }}>
+        <p>
+          <ExtLink href={issueUrl}>Track progress</ExtLink>
+        </p>
+      </footer>
     </ExtLink>
   )
 }
