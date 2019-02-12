@@ -28,6 +28,7 @@ export default [
     enName: 'Portuguese (Portugal)',
     code: 'pt-PT',
   },
+  { name: 'Română', enName: 'Romanian', code: 'ro' },
   { name: 'Русский', enName: 'Russian', code: 'ru' },
   { name: 'தமிழ்', enName: 'Tamil', code: 'ta' },
   { name: 'Українська', enName: 'Ukrainian', code: 'uk' },
