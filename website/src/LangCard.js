@@ -76,6 +76,18 @@ function getColor(amount) {
     .toHexString()
 }
 
+function fNum(num) {
+  if (num < 10) return `0${num}`
+  return `${num}`
+}
+
+function formatDate(dateString) {
+  const date = new Date(dateString)
+  return `${date.getFullYear()}-${fNum(date.getMonth() + 1)}-${fNum(
+    date.getDate(),
+  )}`
+}
+
 export default function LangCard({
   name,
   enName,
@@ -86,6 +98,7 @@ export default function LangCard({
 }) {
   const octokit = new Octokit()
   const [sections, setSections] = useState({})
+  const [startDate, setStartDate] = useState('20??-??-??')
   const baseUrl = `https://github.com/reactjs/${code}.reactjs.org`
   const issueUrl = `${baseUrl}/issues/${issueNo}`
 
@@ -95,7 +108,7 @@ export default function LangCard({
       repo: `${code}.reactjs.org`,
       number: issueNo,
     })
-    const { body } = issue.data
+    const { body, created_at } = issue.data
     const _sections = {}
     body.split(/^##\s+/gm).forEach(section => {
       const [heading, ...content] = section.split('\n')
@@ -105,6 +118,7 @@ export default function LangCard({
       const finishedItems = items.filter(line => /\* \[x\]/.test(line))
       _sections[heading.trim()] = finishedItems.length / items.length
     })
+    setStartDate(formatDate(created_at))
     setSections(_sections)
   }
   useEffect(() => {
@@ -140,10 +154,11 @@ export default function LangCard({
         corePages={corePages}
         nextSteps={nextSteps}
       />
-      <footer style={{ marginTop: 'auto', lineHeight: 1.25 }}>
+      <footer {...css({ marginTop: 'auto', lineHeight: 1.25 })}>
         <p>
           <ExtLink href={issueUrl}>Track progress</ExtLink>
         </p>
+        <p {...css({ color: 'DimGrey' })}>Start date: {startDate}</p>
       </footer>
     </ExtLink>
   )
