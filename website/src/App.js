@@ -28,7 +28,7 @@ function Description() {
 
   return (
     <p {...style}>
-      We are translating{' '}
+      The global React community is translating{' '}
       <ExtLink href="https://reactjs.org">reactjs.org</ExtLink> into{' '}
       <strong {...css({ fontWeight: 600 })}>{langs.length}</strong> languages:
     </p>
