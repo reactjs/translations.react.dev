@@ -1,6 +1,6 @@
 # Universal Style Guide
 
-This repo describes rules that should be applied to **all** languages.
+This document describes rules that should be applied to **all** languages.
 
 NOTE TO MAINTAINERS: You may want to translate this guide so that it can be more accessible to your translators.
 
