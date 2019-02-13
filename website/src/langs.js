@@ -30,6 +30,7 @@ export default [
   },
   { name: 'Română', enName: 'Romanian', code: 'ro' },
   { name: 'Русский', enName: 'Russian', code: 'ru' },
+  { name: 'සිංහල', enName: 'Sinhala', code: 'si' },
   { name: 'தமிழ்', enName: 'Tamil', code: 'ta' },
   { name: 'Українська', enName: 'Ukrainian', code: 'uk' },
   { name: 'Oʻzbekcha', enName: 'Uzbek', code: 'uz' },
