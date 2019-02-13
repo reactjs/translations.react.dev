@@ -28,7 +28,9 @@ function Description() {
 
   return (
     <p {...style}>
-      Is <ExtLink href="https://reactjs.org">reactjs.org</ExtLink> available in:
+      We are translating{' '}
+      <ExtLink href="https://reactjs.org">reactjs.org</ExtLink> into{' '}
+      <strong {...css({ fontWeight: 600 })}>{langs.length}</strong> languages:
     </p>
   )
 }
@@ -52,16 +54,25 @@ function Footer() {
     marginTop: '2rem',
     marginBottom: '2rem',
     fontSize: '1.5rem',
+    lineHeight: 2,
   })
   return (
     <footer {...style}>
+      <p>Don't see your language?</p>
       <p>
         If you are interested in maintaining a translation, follow the
-        instructions{' '}
+        instructions at{' '}
         <ExtLink href="https://github.com/reactjs/reactjs.org-translation">
-          here
+          reactjs.org-translation
         </ExtLink>
         .
+      </p>
+      <p>
+        We also have a{' '}
+        <ExtLink href="https://rt-slack-invite.herokuapp.com">
+          Slack channel
+        </ExtLink>
+        !
       </p>
     </footer>
   )
