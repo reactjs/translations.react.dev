@@ -121,7 +121,11 @@ async function giveTeamRepoAccess(team_id) {
 
 async function createTeam() {
   // Find the parent team id
-  const {data: allTeams} = await octokit.teams.list({org: owner});
+  // TODO this may fail once we have more than *100* teams in the main org
+  const {data: allTeams} = await octokit.teams.list({
+    org: owner,
+    per_page: 100,
+  });
   const parent_team_id = allTeams.find(team => team.slug === teamSlug).id;
 
   // Make the team...
