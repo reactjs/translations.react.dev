@@ -7,6 +7,7 @@
   "scripts": {
     "sync": "env-cmd ./.env node scripts/sync.js",
     "create": "env-cmd ./.env node scripts/create.js",
+    "update": "env-cmd ./.env node scripts/update.js",
     "run-all": "env-cmd ./.env node scripts/runAll.js"
   },
   "dependencies": {
@@ -16,7 +17,6 @@
     "env-cmd": "^6.0.0",
     "queue": "^4.4.2",
     "request-promise": "^4.2.2",
-    "rss-feed-emitter": "^2.0.1",
     "shelljs": "^0.7.8"
   },
   "devDependencies": {
