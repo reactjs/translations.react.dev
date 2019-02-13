@@ -58,21 +58,18 @@ function Progress({ sections, corePages, nextSteps }) {
 }
 
 function getColor(amount) {
+  const medColor = '#FF9'
   if (amount === undefined) {
     return 'white'
   }
 
   if (amount < 0.5) {
     return tinycolor
-      .mix(tinycolor('whitesmoke'), tinycolor('lemonchiffon'), amount * 100)
+      .mix(tinycolor('whitesmoke'), tinycolor(medColor), amount * 100)
       .toHexString()
   }
   return tinycolor
-    .mix(
-      tinycolor('lemonchiffon'),
-      tinycolor('greenyellow'),
-      (amount - 0.5) * 100,
-    )
+    .mix(tinycolor(medColor), tinycolor('greenyellow'), (amount - 0.5) * 100)
     .toHexString()
 }
 
