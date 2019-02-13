@@ -33,6 +33,7 @@ export default [
   { name: 'Русский', enName: 'Russian', code: 'ru' },
   { name: 'සිංහල', enName: 'Sinhala', code: 'si' },
   { name: 'தமிழ்', enName: 'Tamil', code: 'ta' },
+  { name: 'Türkçe', enName: 'Turkish', code: 'tr' },
   { name: 'Українська', enName: 'Ukrainian', code: 'uk' },
   { name: 'Oʻzbekcha', enName: 'Uzbek', code: 'uz' },
   { name: 'Tiếng Việt', enName: 'Vietnamese', code: 'vi' },
