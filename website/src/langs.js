@@ -17,6 +17,7 @@ export default [
   { name: 'हिन्दी', enName: 'Hindi', code: 'hi' },
   { name: 'Հայերեն', enName: 'Armenian', code: 'hy' },
   { name: 'Bahasa Indonesia', enName: 'Indonesian', code: 'id' },
+  { name: 'Italiano', enName: 'Italian', code: 'it' },
   { name: '日本語', enName: 'Japanese', code: 'ja', issueNo: 4 },
   { name: '한국어', enName: 'Korean', code: 'ko' },
   { name: 'മലയാളം', enName: 'Malayalam', code: 'ml' },
