@@ -24,7 +24,9 @@ const octokit = new Octokit({
 });
 
 const {owner} = getJSON(srcConfigFile);
-const {name: langName, maintainers: jsonMaintainers} = getJSON(langConfigFile);
+const {name: langName, code: langCode, maintainers: jsonMaintainers} = getJSON(
+  langConfigFile,
+);
 
 const teamName = `reactjs.org ${langName} translation`;
 
@@ -41,11 +43,18 @@ async function getCurrentMaintainers(team_id) {
   return members.map(member => member.login);
 }
 
+async function getPendingInvites(team_id) {
+  const {data: invitees} = await octokit.teams.listPendingInvitations({
+    team_id,
+  });
+  return invitees.map(user => user.login);
+}
+
 async function updateMembers(team_id, current, toAdd, role) {
   await Promise.all(
     toAdd.map(async username => {
       if (!current.includes(username)) {
-        console.log(`Adding ${username} to the ${langName} translation`);
+        console.log(`${langCode}: Adding ${username}`);
         await octokit.teams.addOrUpdateMembership({
           team_id,
           username,
@@ -59,16 +68,22 @@ async function updateMembers(team_id, current, toAdd, role) {
 function logMissing(current, toAdd) {
   current.forEach(member => {
     if (!toAdd.includes(member)) {
-      console.log(`${member} is in the github team but missing from JSON.`);
+      console.log(
+        `${langCode}: ${member} is in the GitHub team but missing from JSON.`,
+      );
     }
   });
 }
 
 async function update() {
   const team_id = await getTeamId();
-  const maintainers = await getCurrentMaintainers(team_id);
-  logMissing(maintainers, jsonMaintainers);
-  await updateMembers(team_id, maintainers, jsonMaintainers, 'maintainer');
+  const [maintainers, invitees] = await Promise.all([
+    getCurrentMaintainers(team_id),
+    getPendingInvites(team_id),
+  ]);
+  const maybeMembers = maintainers.concat(invitees);
+  logMissing(maintainers.concat(maybeMembers), jsonMaintainers);
+  await updateMembers(team_id, maybeMembers, jsonMaintainers, 'maintainer');
 }
 
 update();
