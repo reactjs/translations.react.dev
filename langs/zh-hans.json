@@ -1,5 +1,13 @@
 {
   "name": "Simplified Chinese",
   "code": "zh-hans",
-  "maintainers": ["QC-L", "discountry", "lcxfs1991", "hijiangtao"]
+  "maintainers": [
+    "QC-L",
+    "discountry",
+    "lcxfs1991",
+    "hijiangtao",
+    "dear-lizhihua",
+    "haimengzhang",
+    "xp44mm"
+  ]
 }
