@@ -21,6 +21,7 @@ export default [
   { name: '日本語', enName: 'Japanese', code: 'ja', issueNo: 4 },
   { name: '한국어', enName: 'Korean', code: 'ko' },
   { name: 'മലയാളം', enName: 'Malayalam', code: 'ml' },
+  { name: 'नेपाली', enName: 'Nepali', code: 'ne' },
   { name: 'Nederlands', enName: 'Dutch', code: 'nl' },
   { name: 'Polski', enName: 'Polish', code: 'pl' },
   { name: 'Português do Brasil', enName: 'Portuguese (Brazil)', code: 'pt-BR' },
