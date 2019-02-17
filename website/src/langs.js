@@ -4,6 +4,7 @@ export default [
   { name: 'Български', enName: 'Bulgarian', code: 'bg' },
   { name: 'বাংলা', enName: 'Bengali', code: 'bn' },
   { name: 'Deutsch', enName: 'German', code: 'de' },
+  { name: 'ελληνικά', enName: 'Greek', code: 'el' },
   { name: 'Español', enName: 'Spanish', code: 'es', issueNo: 4 },
   { name: 'فارسی', enName: 'Persian', code: 'fa' },
   {
