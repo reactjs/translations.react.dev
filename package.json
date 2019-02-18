@@ -2,7 +2,6 @@
   "name": "reactjs.org-translations",
   "version": "0.0.1",
   "description": "Scripts and files useful for reactjs.org translators",
-  "private": true,
   "license": "MIT",
   "scripts": {
     "sync": "env-cmd ./.env node scripts/sync.js",
@@ -13,17 +12,7 @@
   "dependencies": {
     "@octokit/rest": "^16.15.0",
     "bluebird": "^3.5.0",
-    "colors": "^1.1.2",
     "env-cmd": "^6.0.0",
-    "queue": "^4.4.2",
-    "request-promise": "^4.2.2",
     "shelljs": "^0.7.8"
-  },
-  "devDependencies": {
-    "eslint": "^5.13.0",
-    "mocha": "^5.2.0"
-  },
-  "engines": {
-    "node": "8.9.3"
   }
 }
