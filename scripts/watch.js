@@ -15,12 +15,16 @@ function getMultiplier(unit) {
     case 'ms':
       return 1;
     case 's':
+    case 'seconds':
       return 1000;
     case 'm':
+    case 'minutes':
       return 60 * 1000;
     case 'h':
+    case 'hours':
       return 60 * 60 * 1000;
     case 'd':
+    case 'days':
       return 24 * 60 * 60 * 1000;
   }
 }

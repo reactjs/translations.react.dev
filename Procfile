@@ -1,1 +1,1 @@
-worker: npm run watch -- -i 10 -u m -c "node scripts/runAll.js sync config.test.json langs.test/ -d -c 2"
+worker: npm run watch -- --interval 1 --unit days --command "node scripts/runAll.js sync config.json langs/ --delete --concurrency 3"
