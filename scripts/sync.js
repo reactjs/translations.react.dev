@@ -5,8 +5,6 @@ const program = require('commander');
 const {getJSON} = require('../util');
 // shell.config.silent = true;
 
-console.log(process.env.USER_NAME, process.env.USER_EMAIL);
-
 program // options
   .option('-d, --delete', 'Delete repo when done')
   .parse(process.argv);
@@ -32,6 +30,14 @@ const token = process.env.GITHUB_ACCESS_TOKEN;
 const transRepoName = `${langCode}.${repository}`;
 const transUrl = `https://${username}:${token}@github.com/${owner}/${transRepoName}.git`;
 const defaultBranch = 'master';
+
+function teardown() {
+  if (program.delete) {
+    logger.info('Cleaning up repo...');
+    shell.cd('..');
+    shell.rm('-rf', transRepoName);
+  }
+}
 
 // Set up
 if (shell.cd('repo').code !== 0) {
@@ -72,11 +78,7 @@ const output = shell.exec(`git pull ${repository} ${defaultBranch}`).stdout;
 if (output.includes('Already up to date.')) {
   logger.info(`We are already up to date with ${repository}.`);
   // Delete repository if cleanup
-  if (program.delete) {
-    logger.info('Cleaning up repo...');
-    shell.cd('..');
-    shell.rm('-rf', transRepoName);
-  }
+  teardown();
 
   process.exit(0);
 }
@@ -129,8 +131,4 @@ octokit.pullRequests.create({
 });
 
 // Delete repository if cleanup
-if (program.delete) {
-  logger.info('Cleaning up repo...');
-  shell.cd('..');
-  shell.rm('-rf', transRepoName);
-}
+teardown();
