@@ -4,6 +4,8 @@ const Octokit = require('@octokit/rest');
 const program = require('commander');
 const {getJSON} = require('../util');
 // shell.config.silent = true;
+console.log('USER_NAME', process.env.USER_NAME);
+process.exit(0);
 
 program // options
   .option('-d, --delete', 'Delete repo when done')
@@ -43,7 +45,6 @@ if (shell.cd(transRepoName).code !== 0) {
   shell.exec(`git remote add ${repository} ${originalUrl}`);
 }
 // Set our username and email
-console.log(`Setting username to `, process.env.USER_NAME);
 shell.exec(`git config user.name "${process.env.USER_NAME}"`);
 shell.exec(`git config user.email "${process.env.USER_EMAIL}"`);
 
