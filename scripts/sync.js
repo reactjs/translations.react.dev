@@ -42,6 +42,10 @@ if (shell.cd(transRepoName).code !== 0) {
   shell.cd(transRepoName);
   shell.exec(`git remote add ${repository} ${originalUrl}`);
 }
+// Set our username and email
+shell.exec(`git config user.name "${process.env.USER_NAME}"`);
+shell.exec(`git config user.email "${process.env.USER_EMAIL}"`);
+
 shell.exec(`git remote add ${repository} ${originalUrl}`);
 
 // Pull from our own origin
