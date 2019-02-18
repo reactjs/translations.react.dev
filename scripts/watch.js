@@ -1,5 +1,8 @@
 const program = require('commander');
 const shell = require('shelljs');
+const log4js = require('log4js');
+
+const logger = log4js.getLogger('watch');
 
 program
   .option('-i, --interval <n>', 'How often to run script', parseInt)
@@ -22,6 +25,10 @@ function getMultiplier(unit) {
   }
 }
 
+logger.info('Starting watch process...');
+shell.exec(program.command);
+
 setInterval(() => {
+  logger.info(`Running ${program.command}`);
   shell.exec(program.command);
 }, program.interval * getMultiplier(program.unit));

@@ -21,7 +21,6 @@ const langFiles = fs.readdirSync(langsDir);
 // We run the script separately for each language so that the shelljs global state
 // (e.g. working directory) doesn't interfere between runs
 const opts = `${program.delete ? '-d' : ''}`;
-console.log(opts);
 
 Promise.map(
   langFiles,
