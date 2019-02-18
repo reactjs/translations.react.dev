@@ -44,7 +44,9 @@
  */
 const fs = require('fs');
 const shell = require('shelljs');
+const log4js = require('log4js');
 const Octokit = require('@octokit/rest');
+const {getJSON} = require('../util');
 // shell.config.silent = true;
 
 const [srcConfigFile, langConfigFile] = process.argv.slice(2);
@@ -55,13 +57,11 @@ if (!langConfigFile) {
   throw new Error('Language config file not provided');
 }
 
-function getJSON(file) {
-  // Get content from file
-  return JSON.parse(fs.readFileSync(file));
-}
-
 const {owner, repository, teamSlug} = getJSON(srcConfigFile);
 const {code: langCode, name: langName, maintainers} = getJSON(langConfigFile);
+
+const logger = log4js.getLogger(langCode);
+logger.level = 'info';
 
 const originalUrl = `https://github.com/${owner}/${repository}.git`;
 
@@ -95,7 +95,7 @@ async function createProgressIssue() {
     title: `${langName} Translation Progress`,
     body,
   });
-  console.log(`${newRepoName} Created in issue to track translation progress`);
+  logger.info('Created issue to track translation progress.');
 }
 
 async function addTeamMembers(team_id, members, role) {
@@ -144,42 +144,42 @@ async function createTeam() {
     addTeamMembers(team_id, maintainers, 'maintainer'),
   ]);
 
-  console.log(`${newRepoName} Set up a new team and invited maintainers!`);
+  logger.info('Set up a new team and invited maintainers!');
 }
 
 function pushOriginalContents() {
-  console.log(`${newRepoName} Setting up duplicate repo...`);
+  logger.trace('Setting up duplicate repo...');
   shell.cd('repo');
   // If we can't find the repo, clone it
   if (shell.cd(repository).code !== 0) {
-    console.log(`${newRepoUrl} Can't find source repo locally. Cloning it...`);
+    logger.debug("Can't find source repo locally. Cloning it...");
     shell.exec(`git clone ${originalUrl} ${repository}`);
-    console.log(`${newRepoUrl} Finished cloning.`);
+    logger.debug('Finished cloning.');
     shell.cd(repository);
   }
   // Set the remote to the newly created repo
   shell.exec(`git pull origin ${defaultBranch}`);
   shell.exec(`git remote add ${newRepoName} ${newRepoUrl}`);
   shell.exec(`git push -u ${newRepoName} ${defaultBranch}`);
-  console.log(`${newRepoName} Finished copying contents`);
+  logger.info('Duplicated original repo');
 }
 
 // TODO it would be nice to do this as part of an automatic process,
 // but I'm too scared not to do it manually rn
 async function setupRepositoryAndTeam() {
   if (await doesRepoExist()) {
-    console.log(`${newRepoUrl} exists already.`);
+    logger.warn('Repo exists already.');
     return;
   }
 
-  console.log(`${newRepoName} Creating new repo in GitHub...`);
+  logger.debug('Creating new repo in GitHub...');
   await octokit.repos.createInOrg({
     org: owner,
     name: newRepoName,
     // TODO generalize this (maybe get from the head repo?)
     description: `(Work in progress) React documentation website in ${langName}`,
   });
-  console.log(`${newRepoName} Finished creating repo!`);
+  logger.info('Finished creating repo!');
 
   // Create the progress-tracking issue from the template
   await Promise.all([

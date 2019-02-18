@@ -1,9 +1,15 @@
-const fs = require('fs');
 const shell = require('shelljs');
+const log4js = require('log4js');
 const Octokit = require('@octokit/rest');
+const program = require('commander');
+const {getJSON} = require('../util');
 // shell.config.silent = true;
 
-const [srcConfigFile, langConfigFile] = process.argv.slice(2);
+program // options
+  .option('-c, --cleanup', 'Delete repo when done')
+  .parse(process.argv);
+
+const [srcConfigFile, langConfigFile] = program.args;
 if (!srcConfigFile) {
   throw new Error('Source config file not provided');
 }
@@ -11,13 +17,11 @@ if (!langConfigFile) {
   throw new Error('Language config file not provided');
 }
 
-function getJSON(file) {
-  // Get content from file
-  return JSON.parse(fs.readFileSync(file));
-}
-
 const {owner, repository} = getJSON(srcConfigFile);
 const {code: langCode} = getJSON(langConfigFile);
+
+const logger = log4js.getLogger(langCode);
+logger.level = 'info';
 
 const originalUrl = `https://github.com/${owner}/${repository}.git`;
 
@@ -26,13 +30,15 @@ const transUrl = `https://github.com/${owner}/${transRepoName}.git`;
 const defaultBranch = 'master';
 
 // Set up
-shell.cd('repo');
+if (shell.cd('repo').code !== 0) {
+  shell.mkdir('repo');
+  shell.cd('repo');
+}
+
 if (shell.cd(transRepoName).code !== 0) {
-  console.log(
-    `${transRepoName} Can't find translation repo locally. Cloning...`,
-  );
+  logger.info("Can't find translation repo locally. Cloning...");
   shell.exec(`git clone ${transUrl} ${transRepoName}`);
-  console.log(`${transRepoName} Finished cloning.`);
+  logger.debug('Finished cloning.');
   shell.cd(transRepoName);
   shell.exec(`git remote add ${repository} ${originalUrl}`);
 }
@@ -56,7 +62,14 @@ if (shell.exec(`git checkout ${syncBranch}`).code !== 0) {
 // Pull from {source}/master
 const output = shell.exec(`git pull ${repository} ${defaultBranch}`).stdout;
 if (output.includes('Already up to date.')) {
-  console.log(`${transRepoName} we are already up to date with ${repository}.`);
+  logger.info(`We are already up to date with ${repository}.`);
+  // Delete repository if cleanup
+  if (program.cleanup) {
+    logger.info('Cleaning up repo...');
+    shell.cd('..');
+    shell.rm('-rf', transRepoName);
+  }
+
   process.exit(0);
 }
 const lines = output.split('\n');
@@ -67,7 +80,7 @@ const conflictFiles = conflictLines.map(line =>
   line.substr(line.lastIndexOf(' ') + 1),
 );
 
-console.log('conflict files: ', conflictFiles.join('\n'));
+logger.info('conflict files: ', conflictFiles.join('\n'));
 shell.exec(`git commit -am "merging all conflicts"`);
 
 // Create a new pull request, listing all conflicting files
@@ -107,3 +120,10 @@ octokit.pullRequests.create({
   head: syncBranch,
   base: defaultBranch,
 });
+
+// Delete repository if cleanup
+if (program.cleanup) {
+  logger.info('Cleaning up repo...');
+  shell.cd('..');
+  shell.rm('-rf', transRepoName);
+}

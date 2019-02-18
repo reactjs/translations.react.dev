@@ -1,8 +1,9 @@
 /**
  * Script to update maintainers
  */
-const fs = require('fs');
 const Octokit = require('@octokit/rest');
+const log4js = require('log4js');
+const {getJSON} = require('../util');
 
 const [srcConfigFile, langConfigFile] = process.argv.slice(2);
 if (!srcConfigFile) {
@@ -10,11 +11,6 @@ if (!srcConfigFile) {
 }
 if (!langConfigFile) {
   throw new Error('Language config file not provided');
-}
-
-function getJSON(file) {
-  // Get content from file
-  return JSON.parse(fs.readFileSync(file));
 }
 
 const token = process.env.GITHUB_ADMIN_ACCESS_TOKEN;
@@ -27,6 +23,9 @@ const {owner} = getJSON(srcConfigFile);
 const {name: langName, code: langCode, maintainers: jsonMaintainers} = getJSON(
   langConfigFile,
 );
+
+const logger = log4js.getLogger(langCode);
+logger.level = 'info';
 
 const teamName = `reactjs.org ${langName} translation`;
 
@@ -54,7 +53,7 @@ async function updateMembers(team_id, current, toAdd, role) {
   await Promise.all(
     toAdd.map(async username => {
       if (!current.includes(username)) {
-        console.log(`${langCode}: Adding ${username}`);
+        logger.info(`Inviting ${username} to the ${owner} org`);
         await octokit.teams.addOrUpdateMembership({
           team_id,
           username,
@@ -68,9 +67,7 @@ async function updateMembers(team_id, current, toAdd, role) {
 function logMissing(current, toAdd) {
   current.forEach(member => {
     if (!toAdd.includes(member)) {
-      console.log(
-        `${langCode}: ${member} is in the GitHub team but missing from JSON.`,
-      );
+      logger.warn(`${member} is in the GitHub taem but missing from JSON`);
     }
   });
 }
@@ -81,6 +78,9 @@ async function update() {
     getCurrentMaintainers(team_id),
     getPendingInvites(team_id),
   ]);
+  if (invitees.length > 0) {
+    logger.info(`Pending invitations: ${invitees.join(', ')}`);
+  }
   const maybeMembers = maintainers.concat(invitees);
   logMissing(maintainers.concat(maybeMembers), jsonMaintainers);
   await updateMembers(team_id, maybeMembers, jsonMaintainers, 'maintainer');

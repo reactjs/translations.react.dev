@@ -12,7 +12,9 @@
   "dependencies": {
     "@octokit/rest": "^16.15.0",
     "bluebird": "^3.5.0",
+    "commander": "^2.19.0",
     "env-cmd": "^6.0.0",
+    "log4js": "^4.0.2",
     "shelljs": "^0.7.8"
   }
 }
