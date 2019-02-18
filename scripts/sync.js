@@ -6,7 +6,7 @@ const {getJSON} = require('../util');
 // shell.config.silent = true;
 
 program // options
-  .option('-c, --cleanup', 'Delete repo when done')
+  .option('-d, --delete', 'Delete repo when done')
   .parse(process.argv);
 
 const [srcConfigFile, langConfigFile] = program.args;
@@ -68,7 +68,7 @@ const output = shell.exec(`git pull ${repository} ${defaultBranch}`).stdout;
 if (output.includes('Already up to date.')) {
   logger.info(`We are already up to date with ${repository}.`);
   // Delete repository if cleanup
-  if (program.cleanup) {
+  if (program.delete) {
     logger.info('Cleaning up repo...');
     shell.cd('..');
     shell.rm('-rf', transRepoName);
@@ -126,7 +126,7 @@ octokit.pullRequests.create({
 });
 
 // Delete repository if cleanup
-if (program.cleanup) {
+if (program.delete) {
   logger.info('Cleaning up repo...');
   shell.cd('..');
   shell.rm('-rf', transRepoName);
