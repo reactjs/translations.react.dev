@@ -114,7 +114,6 @@ ${conflictFiles.length > 0 ? conflictsText : 'No conflicts were found.'}
 Doing so will "erase" the commits from master and cause them to show up as conflicts the next time we merge.
 `;
 
-const token = process.env.GITHUB_ACCESS_TOKEN;
 const octokit = new Octokit({
   auth: `token ${token}`,
   previews: ['hellcat-preview'],
