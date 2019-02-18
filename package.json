@@ -7,7 +7,8 @@
     "sync": "env-cmd ./.env node scripts/sync.js",
     "create": "env-cmd ./.env node scripts/create.js",
     "update": "env-cmd ./.env node scripts/update.js",
-    "run-all": "env-cmd ./.env node scripts/runAll.js"
+    "run-all": "env-cmd ./.env node scripts/runAll.js",
+    "watch": "env-cmd ./.env node scripts/watch.js"
   },
   "dependencies": {
     "@octokit/rest": "^16.15.0",
