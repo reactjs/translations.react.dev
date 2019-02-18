@@ -27,8 +27,10 @@ logger.level = 'info';
 
 const originalUrl = `https://github.com/${owner}/${repository}.git`;
 
+const username = process.env.USER_NAME;
+const token = process.env.GITHUB_ACCESS_TOKEN;
 const transRepoName = `${langCode}.${repository}`;
-const transUrl = `https://github.com/${owner}/${transRepoName}.git`;
+const transUrl = `https://${username}:${token}@github.com/${owner}/${transRepoName}.git`;
 const defaultBranch = 'master';
 
 // Set up
