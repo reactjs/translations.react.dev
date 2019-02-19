@@ -90,7 +90,11 @@ const conflictFiles = conflictLines.map(line =>
   line.substr(line.lastIndexOf(' ') + 1),
 );
 
-logger.info('conflict files: ', conflictFiles.join('\n'));
+if (conflictFiles.length > 0) {
+  logger.warn('conflict files: ', conflictFiles.join('\n'));
+} else {
+  logger.info('No conflicts found');
+}
 shell.exec(`git commit -am "merging all conflicts"`);
 
 // Create a new pull request, listing all conflicting files
@@ -102,6 +106,8 @@ const conflictsText = `
 The following files have conflicts and may need new translations:
 
   ${conflictFiles.map(file => ` * [ ] ${file}`).join('\n')}
+
+Please fix the conflicts by pushing new commits to this pull request, either by editing the files directly on GitHub or by checking out this branch.
 `;
 
 const body = `
