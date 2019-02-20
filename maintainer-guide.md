@@ -24,7 +24,7 @@ Create a *glossary* of the translations of technical and React-specific terms. P
 
 Also, create a *style guide* to define additional rules to follow in translation. See the [universal style guide](/style-guide.md) for rules that should apply to *all* translations.
 
-### Divide and conquer
+### Collaborate on difficult pages
 
 Some pages (like the [tutorial](https://reactjs.org/tutorial)) are *very* long. Instead of assigning a long page to one translator, you can create a "Work In Progress" (WIP) branch and assign different sections to different translators.
 
