@@ -23,7 +23,7 @@ function Title() {
 function Description() {
   const style = css({
     fontSize: '1.5rem',
-    marginBottom: '1rem',
+    marginBottom: '1.5rem',
   })
 
   return (
@@ -37,8 +37,10 @@ function Description() {
 
 function LangList() {
   const style = css({
+    width: '100%',
     display: 'flex',
     flexWrap: 'wrap',
+    justifyContent: 'center',
   })
   return (
     <div {...style}>
@@ -80,8 +82,16 @@ function Footer() {
 
 export default function App() {
   const style = css({
-    padding: '2rem 4rem',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '3rem 4rem',
     width: '100vw',
+    backgroundColor: 'whitesmoke',
+
+    '@media (max-width: 48rem)': {
+      padding: '2rem 2rem',
+    },
   })
   return (
     <div {...style}>

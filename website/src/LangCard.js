@@ -25,6 +25,70 @@ function Header({ name, enName, code }) {
   )
 }
 
+function getMilestone(amount) {
+  if (amount === undefined) {
+    return { emoji: '❓', text: '???' }
+  }
+  if (amount < 0.1) {
+    return { emoji: '🌱', text: 'Just started' }
+  }
+  if (amount < 0.75) {
+    return { emoji: '🏗', text: 'In progress' }
+  }
+  if (amount < 1) {
+    return { emoji: '🎁', text: 'Wrapping up' }
+  }
+  return { emoji: '🎉', text: 'Released!' }
+}
+
+function getColor(amount) {
+  const medColor = 'yellow'
+  if (amount === undefined) {
+    return 'white'
+  }
+
+  if (amount < 0.5) {
+    return tinycolor
+      .mix(tinycolor('lightsalmon'), tinycolor(medColor), amount * 100)
+      .toHexString()
+  }
+  return tinycolor
+    .mix(tinycolor(medColor), tinycolor('lime'), (amount - 0.5) * 100)
+    .toHexString()
+}
+
+function ProgressBar({ value = 0 }) {
+  const percent = value * 100
+  const style = css({
+    width: '100%',
+    height: '1.25rem',
+    backgroundColor: 'lightgray',
+    border: '1px solid gray',
+  })
+
+  const innerStyle = css({
+    height: '100%',
+    transition: 'all 0.35s ease-in',
+  })
+  return (
+    <div
+      role="progressbar"
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={percent}
+      {...style}
+    >
+      <div
+        {...innerStyle}
+        style={{
+          width: `${percent}%`,
+          backgroundColor: getColor(value),
+        }}
+      />
+    </div>
+  )
+}
+
 function Progress({ sections, corePages, nextSteps }) {
   const style = css({
     display: 'flex',
@@ -33,6 +97,8 @@ function Progress({ sections, corePages, nextSteps }) {
     marginTop: 'auto',
     marginBottom: 'auto',
   })
+  const coreValue = sections[corePages]
+  const { emoji, text } = getMilestone(coreValue)
   return (
     <div {...style}>
       <div
@@ -42,12 +108,12 @@ function Progress({ sections, corePages, nextSteps }) {
           alignItems: 'center',
         }}
       >
-        <p style={{ fontSize: '3rem' }}>🏗</p>
-        <p style={{ fontSize: '1rem', color: 'dimgrey' }}>In progress</p>
+        <p style={{ fontSize: '2.5rem' }}>{emoji}</p>
+        <p style={{ fontSize: '1rem', color: 'dimgrey' }}>{text}</p>
       </div>
       <div style={{ width: '8rem', fontSize: '1rem' }}>
         <p>
-          Core: <Percentage size="lg" value={sections[corePages]} />
+          Core: <Percentage size="lg" value={coreValue} />
         </p>
         <p>
           Other: <Percentage size="md" value={sections[nextSteps]} />
@@ -55,22 +121,6 @@ function Progress({ sections, corePages, nextSteps }) {
       </div>
     </div>
   )
-}
-
-function getColor(amount) {
-  const medColor = '#FF9'
-  if (amount === undefined) {
-    return 'white'
-  }
-
-  if (amount < 0.5) {
-    return tinycolor
-      .mix(tinycolor('whitesmoke'), tinycolor(medColor), amount * 100)
-      .toHexString()
-  }
-  return tinycolor
-    .mix(tinycolor(medColor), tinycolor('greenyellow'), (amount - 0.5) * 100)
-    .toHexString()
 }
 
 function fNum(num) {
@@ -122,12 +172,9 @@ export default function LangCard({
     getIssues()
   }, [code, issueNo])
 
-  const backgroundColor = getColor(sections[corePages])
-
   // TODO how to combine glamor styles?
   const style = {
-    backgroundColor,
-    transition: 'background-color 0.35s',
+    backgroundColor: 'white',
     display: 'flex',
     flexDirection: 'column',
     margin: '1rem',
@@ -151,12 +198,19 @@ export default function LangCard({
         corePages={corePages}
         nextSteps={nextSteps}
       />
-      <footer {...css({ marginTop: 'auto', lineHeight: 1.25 })}>
+      <footer
+        {...css({
+          marginTop: 'auto',
+          lineHeight: 1.25,
+          marginBottom: '.5rem',
+        })}
+      >
         <p>
           <ExtLink href={issueUrl}>Track progress</ExtLink>
         </p>
         <p {...css({ color: 'DimGrey' })}>Start date: {startDate}</p>
       </footer>
+      <ProgressBar value={sections[corePages]} />
     </ExtLink>
   )
 }
