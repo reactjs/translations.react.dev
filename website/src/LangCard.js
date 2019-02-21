@@ -20,7 +20,7 @@ function Header({ name, enName, code }) {
     <header>
       <p {...css({ fontSize: '1rem' })}>{enName}</p>
       <h2 {...css({ fontWeight: 'initial', fontSize: '1.5rem' })}>{name}</h2>
-      <p {...css({ color: 'dimgrey' })}>({code}.reactjs.org)</p>
+      <p {...css({ color: 'dimgrey' })}>{code}.reactjs.org</p>
     </header>
   )
 }
