@@ -30,7 +30,6 @@ function getMultiplier(unit) {
 }
 
 logger.info('Starting watch process...');
-shell.exec(program.command);
 
 setInterval(() => {
   logger.info(`Running ${program.command}`);
