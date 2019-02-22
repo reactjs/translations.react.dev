@@ -90,12 +90,18 @@ const conflictFiles = conflictLines.map(line =>
   line.substr(line.lastIndexOf(' ') + 1),
 );
 
-if (conflictFiles.length > 0) {
-  logger.warn('conflict files: ', conflictFiles.join('\n'));
-} else {
-  logger.info('No conflicts found');
-}
 shell.exec(`git commit -am "merging all conflicts"`);
+
+// If no conflicts, merge directly into master
+if (conflictFiles.length === 0) {
+  logger.info('No conflicts found. Committing directly to master.');
+  shell.exec(`git checkout ${defaultBranch}`);
+  shell.exec(`git merge ${syncBranch}`);
+  shell.exec(`git push origin ${defaultBranch}`);
+  process.exit(0);
+}
+
+logger.warn('conflict files: ', conflictFiles.join('\n'));
 
 // Create a new pull request, listing all conflicting files
 shell.exec(`git push --set-upstream origin ${syncBranch}`);
