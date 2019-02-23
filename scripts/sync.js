@@ -111,7 +111,12 @@ const title = `Sync with ${repository} @ ${shortHash}`;
 const conflictsText = `
 The following files have conflicts and may need new translations:
 
-  ${conflictFiles.map(file => ` * [ ] ${file}`).join('\n')}
+  ${conflictFiles
+    .map(
+      file =>
+        ` * [ ] [${file}](/${owner}/${repository}/commits/master/${file})`,
+    )
+    .join('\n')}
 
 Please fix the conflicts by pushing new commits to this pull request, either by editing the files directly on GitHub or by checking out this branch.
 `;
