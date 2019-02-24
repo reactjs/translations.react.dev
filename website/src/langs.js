@@ -14,11 +14,7 @@ export default [
     corePages: 'Pages Fondamentales',
     nextSteps: 'Étapes suivantes',
   },
-  {
-    name: 'ગુજરાતી',
-    enName: 'Gujarati',
-    code: 'gu',
-  },
+  { name: 'ગુજરાતી', enName: 'Gujarati', code: 'gu' },
   { name: 'עברית', enName: 'Hebrew', code: 'he' },
   { name: 'हिन्दी', enName: 'Hindi', code: 'hi' },
   { name: 'Հայերեն', enName: 'Armenian', code: 'hy' },
