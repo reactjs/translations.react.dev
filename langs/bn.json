@@ -1,5 +1,11 @@
 {
   "name": "Bengali",
   "code": "bn",
-  "maintainers": ["nutboltu", "zahidulmcc"]
+  "maintainers": [
+    "nutboltu",
+    "zahidulmcc",
+    "sazzadsazib",
+    "ImranMH",
+    "zpbappi"
+  ]
 }
