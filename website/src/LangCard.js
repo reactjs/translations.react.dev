@@ -15,12 +15,26 @@ function Percentage({ value, size }) {
   )
 }
 
-function Header({ name, enName, code }) {
+function Header({ name, enName, code, isLink }) {
   return (
     <header>
       <p {...css({ fontSize: '1rem' })}>{enName}</p>
-      <h2 {...css({ fontWeight: 'initial', fontSize: '1.5rem' })}>{name}</h2>
-      <p {...css({ color: 'dimgrey' })}>{code}.reactjs.org</p>
+      <h2
+        {...css({
+          fontWeight: 'initial',
+          maxHeight: '2rem',
+          fontSize: '1.5rem',
+        })}
+      >
+        {name}
+      </h2>
+      {isLink ? (
+        <ExtLink href={`https://${code}.reactjs.org`}>
+          {code}.reactjs.org
+        </ExtLink>
+      ) : (
+        <p {...css({ color: 'dimgray' })}>{code}.reactjs.org</p>
+      )}
     </header>
   )
 }
@@ -192,7 +206,12 @@ export default function LangCard({
 
   return (
     <ExtLink style={style} href={baseUrl}>
-      <Header name={name} enName={enName} code={code} />
+      <Header
+        name={name}
+        enName={enName}
+        code={code}
+        isLink={sections[corePages] > 0.75}
+      />
       <Progress
         sections={sections}
         corePages={corePages}
