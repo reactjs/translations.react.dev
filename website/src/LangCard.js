@@ -33,7 +33,7 @@ function Header({ name, enName, code, isLink }) {
           {code}.reactjs.org
         </ExtLink>
       ) : (
-        <p {...css({ color: 'dimgray' })}>{code}.reactjs.org</p>
+        <p {...css({ color: 'dimgray' })}>({code}.reactjs.org)</p>
       )}
     </header>
   )
