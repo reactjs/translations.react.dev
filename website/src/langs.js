@@ -21,6 +21,7 @@ export default [
   { name: 'Bahasa Indonesia', enName: 'Indonesian', code: 'id' },
   { name: 'Italiano', enName: 'Italian', code: 'it' },
   { name: '日本語', enName: 'Japanese', code: 'ja', issueNo: 4 },
+  { name: 'ភាសាខ្មែរ', enName: 'Central Khmer', code: 'km' },
   { name: '한국어', enName: 'Korean', code: 'ko' },
   { name: 'کوردی', enName: 'Kurdish', code: 'ku' },
   { name: 'മലയാളം', enName: 'Malayalam', code: 'ml' },
