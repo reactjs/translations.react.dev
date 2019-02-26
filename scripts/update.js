@@ -67,7 +67,7 @@ async function updateMembers(team_id, current, toAdd, role) {
 function logMissing(current, toAdd) {
   current.forEach(member => {
     if (!toAdd.includes(member)) {
-      logger.warn(`${member} is in the GitHub taem but missing from JSON`);
+      logger.warn(`${member} is in the GitHub team but missing from JSON`);
     }
   });
 }
