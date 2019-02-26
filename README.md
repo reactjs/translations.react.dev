@@ -45,7 +45,9 @@ Happy translating!
 
 ## Adding a maintainer
 
-If you are interested in being a maintainer of a language, or if you're currently a maintainer and want to add another member, send a pull request to this repo updating `langs/{lang-code}.json`, where `{lang-code}` is the language code of the repo you want to be a maintainer of. Then, get one of the current maintainers to approve your pull request and an admin (@tesseralis) will run a script to add you to the maintainer list!
+If you are currently a maintainer of a translation and want to add another member, send a pull request to this repo updating `langs/{lang-code}.json`, where `{lang-code}` is the language code of the repo you want to be a maintainer of.
+
+If you are interested in becoming a maintainer for a translation, please ask one of the current maintainers if they would like to add you. While different maintainers can have different requirements, usually they look for people who have already contributed to the translation already, either by translating or reviewing.
 
 ## Before publishing
 
