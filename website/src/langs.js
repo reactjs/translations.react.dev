@@ -42,6 +42,7 @@ export default [
   { name: 'తెలుగు', enName: 'Telugu', code: 'te' },
   { name: 'Türkçe', enName: 'Turkish', code: 'tr' },
   { name: 'Українська', enName: 'Ukrainian', code: 'uk' },
+  { name: 'اردو', enName: 'Urdu', code: 'ur' },
   { name: 'Oʻzbekcha', enName: 'Uzbek', code: 'uz' },
   { name: 'Tiếng Việt', enName: 'Vietnamese', code: 'vi' },
   {
