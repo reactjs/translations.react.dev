@@ -18,7 +18,7 @@ if (!langConfigFile) {
 }
 
 const {owner, repository} = getJSON(srcConfigFile);
-const {code: langCode} = getJSON(langConfigFile);
+const {code: langCode, maintainers} = getJSON(langConfigFile);
 
 const logger = log4js.getLogger(langCode);
 logger.level = 'info';
@@ -130,19 +130,52 @@ ${conflictFiles.length > 0 ? conflictsText : 'No conflicts were found.'}
 Doing so will "erase" the commits from master and cause them to show up as conflicts the next time we merge.
 `;
 
-const octokit = new Octokit({
-  auth: `token ${token}`,
-  previews: ['hellcat-preview'],
-});
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#Getting_a_random_integer_between_two_values
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
-octokit.pullRequests.create({
-  owner,
-  repo: transRepoName,
-  title,
-  body,
-  head: syncBranch,
-  base: defaultBranch,
-});
+function getRandomSubset(array, n) {
+  if (array.length <= n) {
+    return array;
+  }
+  const copy = [...array];
+  let result = [];
+  while (result.length < n) {
+    const i = getRandomInt(0, copy.length);
+    result = result.concat(copy.splice(i, 1));
+  }
+  return result;
+}
 
-// Delete repository if cleanup
-teardown();
+async function createPullRequest() {
+  const octokit = new Octokit({
+    auth: `token ${token}`,
+    previews: ['hellcat-preview'],
+  });
+
+  const {
+    data: {number},
+  } = await octokit.pulls.create({
+    owner,
+    repo: transRepoName,
+    title,
+    body,
+    head: syncBranch,
+    base: defaultBranch,
+  });
+
+  await octokit.pulls.createReviewRequest({
+    owner,
+    repo: transRepoName,
+    number,
+    reviewers: getRandomSubset(maintainers, 3),
+  });
+
+  // Delete repository if cleanup
+  teardown();
+}
+
+createPullRequest();
