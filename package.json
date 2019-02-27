@@ -14,11 +14,16 @@
     "@octokit/rest": "^16.15.0",
     "bluebird": "^3.5.3",
     "commander": "^2.19.0",
+    "cron": "^1.6.0",
     "env-cmd": "^6.0.0",
     "log4js": "^4.0.2",
     "shelljs": "^0.7.8"
   },
   "engines": {
     "node.js": "11.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reactjs/reactjs.org-translation.git"
   }
 }
