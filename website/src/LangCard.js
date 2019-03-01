@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { css } from 'glamor'
-import tinycolor from 'tinycolor2'
-import Octokit from '@octokit/rest'
+import graphql from '@octokit/graphql'
 import ExtLink from './ExtLink'
+import ProgressBar from './ProgressBar'
 
 function Percentage({ value, size }) {
   const style = css({
@@ -53,54 +53,6 @@ function getMilestone(amount) {
     return { emoji: '🎁', text: 'Wrapping up' }
   }
   return { emoji: '🎉', text: 'Released!' }
-}
-
-function getColor(amount) {
-  const medColor = 'yellow'
-  if (amount === undefined) {
-    return 'white'
-  }
-
-  if (amount < 0.5) {
-    return tinycolor
-      .mix(tinycolor('lightsalmon'), tinycolor(medColor), amount * 100)
-      .toHexString()
-  }
-  return tinycolor
-    .mix(tinycolor(medColor), tinycolor('lime'), (amount - 0.5) * 100)
-    .toHexString()
-}
-
-function ProgressBar({ value = 0 }) {
-  const percent = value * 100
-  const style = css({
-    width: '100%',
-    height: '1.25rem',
-    backgroundColor: 'lightgray',
-    border: '1px solid gray',
-  })
-
-  const innerStyle = css({
-    height: '100%',
-    transition: 'all 0.35s ease-in',
-  })
-  return (
-    <div
-      role="progressbar"
-      aria-valuemin={0}
-      aria-valuemax={100}
-      aria-valuenow={percent}
-      {...style}
-    >
-      <div
-        {...innerStyle}
-        style={{
-          width: `${percent}%`,
-          backgroundColor: getColor(value),
-        }}
-      />
-    </div>
-  )
 }
 
 function Progress({ sections, corePages, nextSteps }) {
@@ -157,19 +109,31 @@ export default function LangCard({
   corePages = 'Core Pages',
   nextSteps = 'Next Steps',
 }) {
-  const octokit = new Octokit()
   const [sections, setSections] = useState({})
   const [startDate, setStartDate] = useState('20??-??-??')
-  const baseUrl = `https://github.com/reactjs/${code}.reactjs.org`
+  const repoName = `${code}.reactjs.org`
+  const baseUrl = `https://github.com/reactjs/${repoName}`
   const issueUrl = `${baseUrl}/issues/${issueNo}`
 
   async function getIssues() {
-    const issue = await octokit.issues.get({
-      owner: 'reactjs',
-      repo: `${code}.reactjs.org`,
-      number: issueNo,
-    })
-    const { body, created_at } = issue.data
+    const { repository } = await graphql(
+      `
+        query($repoName: String!, $issueNo: Int!) {
+          repository(owner: "reactjs", name: $repoName) {
+            issue(number: $issueNo) {
+              body
+              createdAt
+            }
+          }
+        }
+      `,
+      {
+        repoName,
+        issueNo,
+        headers: { authorization: `token ${process.env.GITHUB_AUTH_TOKEN}` },
+      },
+    )
+    const { body, createdAt } = repository.issue
     const _sections = {}
     body.split(/^##\s+/gm).forEach(section => {
       const [heading, ...content] = section.split('\n')
@@ -179,7 +143,7 @@ export default function LangCard({
       const finishedItems = items.filter(line => /\* \[x\]/.test(line))
       _sections[heading.trim()] = finishedItems.length / items.length
     })
-    setStartDate(formatDate(created_at))
+    setStartDate(formatDate(createdAt))
     setSections(_sections)
   }
   useEffect(() => {
