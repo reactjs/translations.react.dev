@@ -130,7 +130,9 @@ export default function LangCard({
       {
         repoName,
         issueNo,
-        headers: { authorization: `token ${process.env.GITHUB_AUTH_TOKEN}` },
+        headers: {
+          authorization: `token ${process.env.REACT_APP_GITHUB_AUTH_TOKEN}`,
+        },
       },
     )
     const { body, createdAt } = repository.issue
