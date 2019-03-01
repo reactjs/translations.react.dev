@@ -196,7 +196,7 @@ export default function LangCard({
     height: '16rem',
     padding: '1rem',
     color: 'black',
-    outline: '1px gray solid',
+    border: '1px gray solid',
     textDecoration: 'none',
 
     ':hover': {
