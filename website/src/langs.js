@@ -38,6 +38,7 @@ export default [
   { name: 'Română', enName: 'Romanian', code: 'ro' },
   { name: 'Русский', enName: 'Russian', code: 'ru' },
   { name: 'සිංහල', enName: 'Sinhala', code: 'si' },
+  { name: 'Svenska', enName: 'Swedish', code: 'sv' },
   { name: 'தமிழ்', enName: 'Tamil', code: 'ta' },
   { name: 'తెలుగు', enName: 'Telugu', code: 'te' },
   { name: 'Türkçe', enName: 'Turkish', code: 'tr' },
