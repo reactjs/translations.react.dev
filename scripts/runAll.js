@@ -18,10 +18,15 @@ program
 const [cmd, configFile, langsDir] = program.args;
 const langFiles = fs.readdirSync(langsDir);
 
-// We run the script separately for each language so that the shelljs global state
-// (e.g. working directory) doesn't interfere between runs
 const opts = `${program.delete ? '-d' : ''}`;
 
+// Make the repo directory now so that child processes don't error out
+if (shell.cd('repo').code !== 0) {
+  shell.mkdir('repo');
+}
+
+// We run the script separately for each language so that the shelljs global state
+// (e.g. working directory) doesn't interfere between runs
 Promise.map(
   langFiles,
   langFile => {
