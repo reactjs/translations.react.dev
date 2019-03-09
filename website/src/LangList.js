@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { css } from 'glamor'
 import graphql from '@octokit/graphql'
 import LangProgress from './LangCard'
+import SortSelector from './SortSelector'
 
 function fromEntries(entries) {
   const obj = {}
@@ -9,6 +10,12 @@ function fromEntries(entries) {
     obj[key] = value
   })
   return obj
+}
+
+function sortBy(array, fn) {
+  const duplicate = [...array]
+  duplicate.sort((a, b) => (fn(a) > fn(b) ? 1 : fn(a) < fn(b) ? -1 : 0))
+  return duplicate
 }
 
 function getLangProgress(lang, issue) {
@@ -76,7 +83,8 @@ async function getProgressList(langs) {
 }
 
 export default function LangList({ langs }) {
-  const [progressList, setProgressList] = useState([{}, {}, {}, {}, {}, {}])
+  const [progressList, setProgressList] = useState(langs)
+  const [sortKey, setSortKey] = useState('code')
   useEffect(() => {
     getProgressList(langs).then(setProgressList)
   })
@@ -86,11 +94,23 @@ export default function LangList({ langs }) {
     flexWrap: 'wrap',
     justifyContent: 'center',
   })
+
+  const sortedList = useMemo(() => {
+    const sorted = sortBy(progressList, item => item[sortKey])
+    if (sortKey === 'coreCompletion') {
+      sorted.reverse()
+    }
+    return sorted
+  }, [progressList, sortKey])
+
   return (
-    <div {...style}>
-      {progressList.map(lang => (
-        <LangProgress key={lang.code} {...lang} />
-      ))}
+    <div>
+      <SortSelector value={sortKey} onSelect={setSortKey} />
+      <div {...style}>
+        {sortedList.map(lang => (
+          <LangProgress key={lang.code} {...lang} />
+        ))}
+      </div>
     </div>
   )
 }

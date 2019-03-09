@@ -23,7 +23,7 @@ function Title() {
 function Description() {
   const style = css({
     fontSize: '1.5rem',
-    marginBottom: '1.5rem',
+    marginBottom: '2rem',
   })
 
   return (
