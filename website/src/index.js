@@ -1,7 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import 'what-input'
 import './reset.css'
 import './box-sizing.css'
+import './a11y.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 

@@ -29,6 +29,7 @@ export default function SortSelector({ value, onSelect }) {
     display: 'flex',
     justifyContent: 'center',
     color: '#333',
+    fontWeight: 500,
   })
   return (
     <div {...style}>
