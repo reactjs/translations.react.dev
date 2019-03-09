@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from 'glamor'
-import LangProgress from './LangCard'
 import ExtLink from './ExtLink'
+import LangList from './LangList'
 import langs from './langs'
 
 function Title() {
@@ -32,22 +32,6 @@ function Description() {
       <ExtLink href="https://reactjs.org">reactjs.org</ExtLink> into{' '}
       <strong {...css({ fontWeight: 600 })}>{langs.length}</strong> languages:
     </p>
-  )
-}
-
-function LangList() {
-  const style = css({
-    width: '100%',
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-  })
-  return (
-    <div {...style}>
-      {langs.map(lang => (
-        <LangProgress key={lang.code} {...lang} />
-      ))}
-    </div>
   )
 }
 
@@ -97,7 +81,7 @@ export default function App() {
     <div {...style}>
       <Title />
       <Description />
-      <LangList />
+      <LangList langs={langs} />
       <Footer />
     </div>
   )

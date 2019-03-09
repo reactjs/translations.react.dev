@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { css } from 'glamor'
-import graphql from '@octokit/graphql'
 import ExtLink from './ExtLink'
 import ProgressBar from './ProgressBar'
 
@@ -55,7 +54,7 @@ function getMilestone(amount) {
   return { emoji: '🎉', text: 'Released!' }
 }
 
-function Progress({ sections, corePages, nextSteps }) {
+function Progress({ coreCompletion, otherCompletion }) {
   const style = css({
     display: 'flex',
     width: '100%',
@@ -63,8 +62,7 @@ function Progress({ sections, corePages, nextSteps }) {
     marginTop: 'auto',
     marginBottom: 'auto',
   })
-  const coreValue = sections[corePages]
-  const { emoji, text } = getMilestone(coreValue)
+  const { emoji, text } = getMilestone(coreCompletion)
   return (
     <div {...style}>
       <div
@@ -79,10 +77,10 @@ function Progress({ sections, corePages, nextSteps }) {
       </div>
       <div style={{ width: '8rem', fontSize: '1rem' }}>
         <p>
-          Core: <Percentage size="lg" value={coreValue} />
+          Core: <Percentage size="lg" value={coreCompletion} />
         </p>
         <p>
-          Other: <Percentage size="md" value={sections[nextSteps]} />
+          Other: <Percentage size="md" value={otherCompletion} />
         </p>
       </div>
     </div>
@@ -95,6 +93,9 @@ function fNum(num) {
 }
 
 function formatDate(dateString) {
+  if (!dateString) {
+    return '??-??-????'
+  }
   const date = new Date(dateString)
   return `${date.getFullYear()}-${fNum(date.getMonth() + 1)}-${fNum(
     date.getDate(),
@@ -102,55 +103,17 @@ function formatDate(dateString) {
 }
 
 export default function LangCard({
-  name,
-  enName,
-  code,
-  issueNo = 1,
-  corePages = 'Core Pages',
-  nextSteps = 'Next Steps',
+  name = '??????',
+  enName = '??????',
+  code = '??',
+  createdAt,
+  number,
+  coreCompletion,
+  otherCompletion,
 }) {
-  const [sections, setSections] = useState({})
-  const [startDate, setStartDate] = useState('20??-??-??')
   const repoName = `${code}.reactjs.org`
   const baseUrl = `https://github.com/reactjs/${repoName}`
-  const issueUrl = `${baseUrl}/issues/${issueNo}`
-
-  async function getIssues() {
-    const { repository } = await graphql(
-      `
-        query($repoName: String!, $issueNo: Int!) {
-          repository(owner: "reactjs", name: $repoName) {
-            issue(number: $issueNo) {
-              body
-              createdAt
-            }
-          }
-        }
-      `,
-      {
-        repoName,
-        issueNo,
-        headers: {
-          authorization: `token ${process.env.REACT_APP_GITHUB_AUTH_TOKEN}`,
-        },
-      },
-    )
-    const { body, createdAt } = repository.issue
-    const _sections = {}
-    body.split(/^##\s+/gm).forEach(section => {
-      const [heading, ...content] = section.split('\n')
-      const items = content.filter(line => {
-        return /\* *\[[ x]\]/.test(line)
-      })
-      const finishedItems = items.filter(line => /\* \[x\]/.test(line))
-      _sections[heading.trim()] = finishedItems.length / items.length
-    })
-    setStartDate(formatDate(createdAt))
-    setSections(_sections)
-  }
-  useEffect(() => {
-    getIssues()
-  }, [code, issueNo])
+  const issueUrl = `${baseUrl}/issues/${number}`
 
   // TODO how to combine glamor styles?
   const style = {
@@ -176,12 +139,11 @@ export default function LangCard({
         name={name}
         enName={enName}
         code={code}
-        isLink={sections[corePages] > 0.75}
+        isLink={coreCompletion > 0.75}
       />
       <Progress
-        sections={sections}
-        corePages={corePages}
-        nextSteps={nextSteps}
+        coreCompletion={coreCompletion}
+        otherCompletion={otherCompletion}
       />
       <footer
         {...css({
@@ -193,9 +155,11 @@ export default function LangCard({
         <p>
           <ExtLink href={issueUrl}>Track progress</ExtLink>
         </p>
-        <p {...css({ color: 'DimGrey' })}>Start date: {startDate}</p>
+        <p {...css({ color: 'DimGrey' })}>
+          Start date: {formatDate(createdAt)}
+        </p>
       </footer>
-      <ProgressBar value={sections[corePages]} />
+      <ProgressBar value={coreCompletion} />
     </ExtLink>
   )
 }
