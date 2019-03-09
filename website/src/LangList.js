@@ -47,11 +47,11 @@ async function getProgressList(langs) {
   // in the title. Maybe we should replace it with something more robust.
   const { search } = await graphql(
     `
-      {
+      query($limit: Int!) {
         search(
           type: ISSUE
           query: "org:reactjs Translation Progress in:title"
-          first: 60
+          first: $limit
         ) {
           nodes {
             ... on Issue {
@@ -71,6 +71,7 @@ async function getProgressList(langs) {
       headers: {
         authorization: `token ${process.env.REACT_APP_GITHUB_AUTH_TOKEN}`,
       },
+      limit: langs.length + 5, // padding in case of extra issues
     },
   )
   const issuesMap = fromEntries(

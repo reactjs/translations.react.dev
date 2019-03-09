@@ -36,6 +36,7 @@ export default function SortSelector({ value, onSelect }) {
       Sort By:{' '}
       {filters.map(({ key, label }) => (
         <SortOption
+          key={key}
           value={key}
           label={label}
           currentValue={value}
