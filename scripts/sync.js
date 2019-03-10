@@ -31,7 +31,7 @@ const transRepoName = `${langCode}.${repository}`;
 const transUrl = `https://${username}:${token}@github.com/${owner}/${transRepoName}.git`;
 const defaultBranch = 'master';
 
-function teardown() {
+function teardownAndExit() {
   if (program.delete) {
     logger.info('Cleaning up repo...');
     shell.cd('..');
@@ -78,8 +78,7 @@ if (shell.exec(`git checkout ${syncBranch}`).code !== 0) {
 const output = shell.exec(`git pull ${repository} ${defaultBranch}`).stdout;
 if (output.includes('Already up to date.')) {
   logger.info(`We are already up to date with ${repository}.`);
-  // Delete repository if cleanup
-  teardown();
+  teardownAndExit();
 }
 const lines = output.split('\n');
 
@@ -97,7 +96,7 @@ if (conflictFiles.length === 0) {
   shell.exec(`git checkout ${defaultBranch}`);
   shell.exec(`git merge ${syncBranch}`);
   shell.exec(`git push origin ${defaultBranch}`);
-  teardown();
+  teardownAndExit();
 }
 
 logger.warn('conflict files: ', conflictFiles.join('\n'));
@@ -176,8 +175,7 @@ async function createPullRequest() {
     reviewers: getRandomSubset(maintainers, 3),
   });
 
-  // Delete repository if cleanup
-  teardown();
+  teardownAndExit();
 }
 
 createPullRequest();
