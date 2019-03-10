@@ -37,6 +37,7 @@ function teardown() {
     shell.cd('..');
     shell.rm('-rf', transRepoName);
   }
+  exit(0);
 }
 
 // Set up
@@ -79,8 +80,6 @@ if (output.includes('Already up to date.')) {
   logger.info(`We are already up to date with ${repository}.`);
   // Delete repository if cleanup
   teardown();
-
-  process.exit(0);
 }
 const lines = output.split('\n');
 
@@ -98,7 +97,7 @@ if (conflictFiles.length === 0) {
   shell.exec(`git checkout ${defaultBranch}`);
   shell.exec(`git merge ${syncBranch}`);
   shell.exec(`git push origin ${defaultBranch}`);
-  process.exit(0);
+  teardown();
 }
 
 logger.warn('conflict files: ', conflictFiles.join('\n'));
