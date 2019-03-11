@@ -37,7 +37,7 @@ function teardownAndExit() {
     shell.cd('..');
     shell.rm('-rf', transRepoName);
   }
-  exit(0);
+  process.exit(0);
 }
 
 // Set up
