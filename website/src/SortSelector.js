@@ -6,6 +6,7 @@ const filters = [
   { key: 'enName', label: 'English Name' },
   { key: 'coreCompletion', label: 'Completion' },
   { key: 'createdAt', label: 'Start Date' },
+  { key: 'lastEditedAt', label: 'Last Updated' },
 ]
 
 function SortOption({ value, currentValue, label, onSelect }) {

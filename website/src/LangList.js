@@ -24,7 +24,7 @@ function getLangProgress(lang, issue) {
     nextSteps = 'Next Steps',
     ...langProps
   } = lang
-  const { body, ...issueProps } = issue
+  const { body, createdAt, lastEditedAt = createdAt, ...issueProps } = issue
   const sections = {}
   body.split(/^##\s+/gm).forEach(section => {
     const [heading, ...content] = section.split('\n')
@@ -37,6 +37,8 @@ function getLangProgress(lang, issue) {
   return {
     ...langProps,
     ...issueProps,
+    createdAt,
+    lastEditedAt,
     coreCompletion: sections[corePages],
     otherCompletion: sections[nextSteps],
   }
@@ -58,6 +60,7 @@ async function getProgressList(langs) {
               title
               body
               createdAt
+              lastEditedAt
               number
               repository {
                 name
@@ -98,7 +101,7 @@ export default function LangList({ langs }) {
 
   const sortedList = useMemo(() => {
     const sorted = sortBy(progressList, item => item[sortKey])
-    if (sortKey === 'coreCompletion') {
+    if (sortKey === 'coreCompletion' || sortKey === 'lastEditedAt') {
       sorted.reverse()
     }
     return sorted

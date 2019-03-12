@@ -107,6 +107,7 @@ export default function LangCard({
   enName = '??????',
   code = '??',
   createdAt,
+  lastEditedAt,
   number,
   coreCompletion,
   otherCompletion,
@@ -122,7 +123,7 @@ export default function LangCard({
     flexDirection: 'column',
     margin: '1rem',
     width: '20rem',
-    height: '16rem',
+    height: '18rem',
     padding: '1rem',
     color: 'black',
     border: '1px gray solid',
@@ -152,11 +153,14 @@ export default function LangCard({
           marginBottom: '.5rem',
         })}
       >
-        <p>
+        <p {...css({ marginBottom: '.5rem' })}>
           <ExtLink href={issueUrl}>Track progress</ExtLink>
         </p>
-        <p {...css({ color: 'DimGrey' })}>
+        <p {...css({ color: 'DimGrey', fontSize: '.875rem' })}>
           Start date: {formatDate(createdAt)}
+        </p>
+        <p {...css({ color: 'DimGrey', fontSize: '.875rem' })}>
+          Last updated: {formatDate(lastEditedAt)}
         </p>
       </footer>
       <ProgressBar value={coreCompletion} />
