@@ -1,14 +1,6 @@
 import React from 'react'
 import { css } from 'glamor'
 
-const filters = [
-  { key: 'code', label: 'Lang Code' },
-  { key: 'enName', label: 'English Name' },
-  { key: 'coreCompletion', label: 'Completion' },
-  { key: 'createdAt', label: 'Start Date' },
-  { key: 'lastEditedAt', label: 'Last Updated' },
-]
-
 function SortOption({ value, currentValue, label, onSelect }) {
   const style = css({
     border: 'none',
@@ -25,7 +17,7 @@ function SortOption({ value, currentValue, label, onSelect }) {
   )
 }
 
-export default function SortSelector({ value, onSelect }) {
+export default function SortSelector({ options, value, onSelect }) {
   const style = css({
     display: 'flex',
     justifyContent: 'center',
@@ -35,7 +27,7 @@ export default function SortSelector({ value, onSelect }) {
   return (
     <div {...style}>
       Sort By:{' '}
-      {filters.map(({ key, label }) => (
+      {options.map(({ key, label }) => (
         <SortOption
           key={key}
           value={key}

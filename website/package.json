@@ -9,6 +9,7 @@
   "dependencies": {
     "@octokit/graphql": "^2.0.1",
     "glamor": "^2.20.40",
+    "lodash": "^4.17.11",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "tinycolor2": "^1.4.1",

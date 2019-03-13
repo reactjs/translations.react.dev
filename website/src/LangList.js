@@ -1,22 +1,10 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { css } from 'glamor'
+import sortBy from 'lodash/sortBy'
+import fromPairs from 'lodash/fromPairs'
 import graphql from '@octokit/graphql'
 import LangProgress from './LangCard'
 import SortSelector from './SortSelector'
-
-function fromEntries(entries) {
-  const obj = {}
-  entries.forEach(([key, value]) => {
-    obj[key] = value
-  })
-  return obj
-}
-
-function sortBy(array, fn) {
-  const duplicate = [...array]
-  duplicate.sort((a, b) => (fn(a) > fn(b) ? 1 : fn(a) < fn(b) ? -1 : 0))
-  return duplicate
-}
 
 function getLangProgress(lang, issue) {
   const {
@@ -77,7 +65,7 @@ async function getProgressList(langs) {
       limit: langs.length + 5, // padding in case of extra issues
     },
   )
-  const issuesMap = fromEntries(
+  const issuesMap = fromPairs(
     search.nodes.map(issue => [issue.repository.name, issue]),
   )
 
@@ -85,6 +73,14 @@ async function getProgressList(langs) {
     getLangProgress(lang, issuesMap[`${lang.code}.reactjs.org`]),
   )
 }
+
+const sortOptions = [
+  { key: 'code', label: 'Lang Code' },
+  { key: 'enName', label: 'English Name' },
+  { key: ['coreCompletion', 'otherCompletion'], label: 'Completion' },
+  { key: 'createdAt', label: 'Start Date' },
+  { key: 'lastEditedAt', label: 'Last Updated' },
+]
 
 export default function LangList({ langs }) {
   const [progressList, setProgressList] = useState(langs)
@@ -100,8 +96,11 @@ export default function LangList({ langs }) {
   })
 
   const sortedList = useMemo(() => {
-    const sorted = sortBy(progressList, item => item[sortKey])
-    if (sortKey === 'coreCompletion' || sortKey === 'lastEditedAt') {
+    const sorted = sortBy(progressList, sortKey)
+    if (
+      (Array.isArray(sortKey) && sortKey.includes('coreCompletion')) ||
+      sortKey === 'lastEditedAt'
+    ) {
       sorted.reverse()
     }
     return sorted
@@ -109,7 +108,11 @@ export default function LangList({ langs }) {
 
   return (
     <div>
-      <SortSelector value={sortKey} onSelect={setSortKey} />
+      <SortSelector
+        options={sortOptions}
+        value={sortKey}
+        onSelect={setSortKey}
+      />
       <div {...style}>
         {sortedList.map(lang => (
           <LangProgress key={lang.code} {...lang} />
