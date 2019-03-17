@@ -38,7 +38,7 @@ function Header({ name, enName, code, isLink }) {
   )
 }
 
-function getMilestone(amount) {
+function getMilestone(amount, otherAmount) {
   if (amount === undefined) {
     return { emoji: '❓', text: '???' }
   }
@@ -51,7 +51,10 @@ function getMilestone(amount) {
   if (amount < 1) {
     return { emoji: '🎁', text: 'Wrapping up' }
   }
-  return { emoji: '🎉', text: 'Released!' }
+  if (amount === 1 && otherAmount < 1) {
+    return { emoji: '🎉', text: 'Released!' }
+  }
+  return { emoji: '⭐️', text: 'Complete!' }
 }
 
 function Progress({ coreCompletion, otherCompletion }) {
@@ -62,7 +65,7 @@ function Progress({ coreCompletion, otherCompletion }) {
     marginTop: 'auto',
     marginBottom: 'auto',
   })
-  const { emoji, text } = getMilestone(coreCompletion)
+  const { emoji, text } = getMilestone(coreCompletion, otherCompletion)
   return (
     <div {...style}>
       <div

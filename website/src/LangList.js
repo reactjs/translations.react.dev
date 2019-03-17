@@ -87,7 +87,7 @@ export default function LangList({ langs }) {
   const [sortKey, setSortKey] = useState('code')
   useEffect(() => {
     getProgressList(langs).then(setProgressList)
-  })
+  }, [langs])
   const style = css({
     width: '100%',
     display: 'flex',
