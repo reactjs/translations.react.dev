@@ -20,6 +20,7 @@ function SortOption({ value, currentValue, label, onSelect }) {
 export default function SortSelector({ options, value, onSelect }) {
   const style = css({
     display: 'flex',
+    flexWrap: 'wrap',
     justifyContent: 'center',
     color: '#333',
     fontWeight: 500,
