@@ -23,6 +23,7 @@ export default [
   { name: '日本語', enName: 'Japanese', code: 'ja' },
   { name: 'ქართული', enName: 'Georgian', code: 'ka' },
   { name: 'ភាសាខ្មែរ', enName: 'Central Khmer', code: 'km' },
+  { name: 'ಕನ್ನಡ', enName: 'Kannada', code: 'kn' },
   { name: '한국어', enName: 'Korean', code: 'ko' },
   { name: 'کوردی', enName: 'Kurdish', code: 'ku' },
   { name: 'Lietuvių kalba', enName: 'Lithuanian', code: 'lt' },
