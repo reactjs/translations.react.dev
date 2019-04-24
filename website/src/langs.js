@@ -28,6 +28,7 @@ export default [
   { name: 'کوردی', enName: 'Kurdish', code: 'ku' },
   { name: 'Lietuvių kalba', enName: 'Lithuanian', code: 'lt' },
   { name: 'മലയാളം', enName: 'Malayalam', code: 'ml' },
+  { name: 'Монгол хэл', enName: 'Mongolian', code: 'mn' },
   { name: 'नेपाली', enName: 'Nepali', code: 'ne' },
   { name: 'Nederlands', enName: 'Dutch', code: 'nl' },
   { name: 'Polski', enName: 'Polish', code: 'pl' },
