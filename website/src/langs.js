@@ -3,6 +3,7 @@ export default [
   { name: 'Azərbaycanca', enName: 'Azerbaijani', code: 'az' },
   { name: 'Български', enName: 'Bulgarian', code: 'bg' },
   { name: 'বাংলা', enName: 'Bengali', code: 'bn' },
+  { name: 'Català', enName: 'Catalan', code: 'ca' },
   { name: 'Deutsch', enName: 'German', code: 'de' },
   { name: 'ελληνικά', enName: 'Greek', code: 'el' },
   { name: 'Español', enName: 'Spanish', code: 'es' },
