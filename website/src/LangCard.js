@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { css } from 'glamor'
 import ExtLink from './ExtLink'
 import ProgressBar from './ProgressBar'
@@ -14,7 +14,11 @@ function Percentage({ value, size }) {
   )
 }
 
-function Header({ name, enName, code, isLink }) {
+function Header({ name, enName, code, repoUrl, isLink, linkRef }) {
+  const linkStyle = css({
+    color: 'black',
+    textDecoration: 'none',
+  })
   return (
     <header>
       <p {...css({ fontSize: '1rem' })}>{enName}</p>
@@ -25,7 +29,9 @@ function Header({ name, enName, code, isLink }) {
           fontSize: '1.5rem',
         })}
       >
-        {name}
+        <ExtLink {...linkStyle} ref={linkRef} href={repoUrl}>
+          {name}
+        </ExtLink>
       </h2>
       {isLink ? (
         <ExtLink href={`https://${code}.reactjs.org`}>
@@ -115,9 +121,24 @@ export default function LangCard({
   coreCompletion,
   otherCompletion,
 }) {
+  const linkRef = useRef(null)
+  const down = useRef(0)
   const repoName = `${code}.reactjs.org`
   const baseUrl = `https://github.com/reactjs/${repoName}`
   const issueUrl = `${baseUrl}/issues/${number}`
+
+  // Allow clicking on card component accessibly
+  // Source: https://inclusive-components.design/cards/
+  const handleMouseDown = () => {
+    down.current = +new Date()
+  }
+
+  const handleMouseUp = () => {
+    const up = +new Date()
+    if (up - down.current < 200) {
+      linkRef.current.click()
+    }
+  }
 
   // TODO how to combine glamor styles?
   const style = {
@@ -128,9 +149,8 @@ export default function LangCard({
     width: '20rem',
     height: '18rem',
     padding: '1rem',
-    color: 'black',
     border: '1px gray solid',
-    textDecoration: 'none',
+    cursor: 'pointer',
 
     ':hover': {
       outline: '2px gray solid',
@@ -138,12 +158,14 @@ export default function LangCard({
   }
 
   return (
-    <ExtLink style={style} href={baseUrl}>
+    <div style={style} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
       <Header
         name={name}
         enName={enName}
         code={code}
+        repoUrl={baseUrl}
         isLink={coreCompletion > 0.75}
+        linkRef={linkRef}
       />
       <Progress
         coreCompletion={coreCompletion}
@@ -167,6 +189,6 @@ export default function LangCard({
         </p>
       </footer>
       <ProgressBar value={coreCompletion} />
-    </ExtLink>
+    </div>
   )
 }

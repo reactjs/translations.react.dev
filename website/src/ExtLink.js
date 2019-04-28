@@ -1,12 +1,10 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { css } from 'glamor'
 
-export default function ExtLink({
-  style: customStyle,
-  href,
-  children,
-  ...props
-}) {
+export default forwardRef(function ExtLink(
+  { style: customStyle, href, children, ...props },
+  ref,
+) {
   const style = css({
     color: 'blue',
     textDecoration: 'underline',
@@ -19,6 +17,7 @@ export default function ExtLink({
     <a
       {...props}
       {...style}
+      ref={ref}
       href={href}
       target="_blank"
       rel="noopener noreferrer"
@@ -26,4 +25,4 @@ export default function ExtLink({
       {children}
     </a>
   )
-}
+})
