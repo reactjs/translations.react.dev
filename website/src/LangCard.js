@@ -140,8 +140,7 @@ export default function LangCard({
     }
   }
 
-  // TODO how to combine glamor styles?
-  const style = {
+  const style = css({
     backgroundColor: 'white',
     display: 'flex',
     flexDirection: 'column',
@@ -155,10 +154,10 @@ export default function LangCard({
     ':hover': {
       outline: '2px gray solid',
     },
-  }
+  })
 
   return (
-    <div style={style} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+    <div {...style} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
       <Header
         name={name}
         enName={enName}
