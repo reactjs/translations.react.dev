@@ -133,9 +133,9 @@ export default function LangCard({
     down.current = +new Date()
   }
 
-  const handleMouseUp = () => {
+  const handleMouseUp = e => {
     const up = +new Date()
-    if (up - down.current < 200) {
+    if (up - down.current < 200 && e.target.nodeName !== 'A') {
       linkRef.current.click()
     }
   }
