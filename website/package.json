@@ -3,17 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "^3.0.0",
-    "terser": "3.14.1"
+    "react-scripts": "^3.0.0"
   },
   "dependencies": {
-    "@octokit/graphql": "^2.0.1",
+    "@octokit/graphql": "2.0.1",
     "glamor": "^2.20.40",
     "lodash": "^4.17.11",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "tinycolor2": "^1.4.1",
-    "what-input": "^5.1.4"
+    "what-input": "^5.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
