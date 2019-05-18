@@ -18,6 +18,7 @@ export default [
   { name: 'ગુજરાતી', enName: 'Gujarati', code: 'gu' },
   { name: 'עברית', enName: 'Hebrew', code: 'he' },
   { name: 'हिन्दी', enName: 'Hindi', code: 'hi' },
+  { name: 'magyar', enName: 'Hungarian', code: 'hu' },
   { name: 'Հայերեն', enName: 'Armenian', code: 'hy' },
   { name: 'Bahasa Indonesia', enName: 'Indonesian', code: 'id' },
   { name: 'Italiano', enName: 'Italian', code: 'it' },
