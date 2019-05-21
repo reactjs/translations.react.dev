@@ -12,7 +12,7 @@ To translate a page:
 
 Before contributing, read the glossary and style guide (once they exist) to understand how to translate various technical and React-specific terms.
 
-Please be prompt with your translations! If you find find that you can't commit any more, let the maintainers know so they can assign the page to someone else.
+Please be prompt with your translations! If you find that you can't commit anymore, let the maintainers know so they can assign the page to someone else.
 
 ## For Maintainers
 
@@ -60,7 +60,7 @@ To do before releasing as an "official" translation. **Please translate these pa
 
 ### Navigation
 
-These are the navigation links that appears in the sidebar. Possibly wait until
+These are the navigation links that appear in the sidebar. Possibly wait until
 the corresponding sections are translated to do these.
 
 * [ ] tutorial/nav.yml
@@ -79,7 +79,7 @@ These are the next most important translations, ordered by importance:
 
 ### Hooks
 
-Everyone is hooked on hooks! People are really excited for these and it would be great for them to be translated.
+Everyone is hooked on hooks! People are really excited about these and it would be great for them to be translated.
 
   * [ ] Introducing Hooks
   * [ ] Hooks at a Glance
