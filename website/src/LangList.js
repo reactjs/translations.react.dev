@@ -65,8 +65,11 @@ async function getProgressList(langs) {
       limit: langs.length + 5, // padding in case of extra issues
     },
   )
+  console.log(search.nodes)
   const issuesMap = fromPairs(
-    search.nodes.map(issue => [issue.repository.name, issue]),
+    search.nodes
+      .filter(issue => !!issue && issue.repository)
+      .map(issue => [issue.repository.name, issue]),
   )
 
   return langs.map(lang =>
