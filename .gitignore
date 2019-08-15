@@ -6,4 +6,3 @@ repo/*
 npm-debug.log
 yarn-error.log
 !.gitkeep
-reactjs.org-translation.iml
