@@ -178,7 +178,7 @@ export default function LangCard({
         })}
       >
         <p {...css({ marginBottom: '.5rem' })}>
-          <ExtLink href={issueUrl}>Track progress</ExtLink>
+          <ExtLink href={issueUrl}>Contribute</ExtLink>
         </p>
         <p {...css({ color: 'DimGrey', fontSize: '.875rem' })}>
           Start date: {formatDate(createdAt)}
