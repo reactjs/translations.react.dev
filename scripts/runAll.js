@@ -21,7 +21,7 @@ const langFiles = fs.readdirSync(langsDir);
 const opts = `${program.delete ? '-d' : ''}`;
 
 // Make the repo directory now so that child processes don't error out
-if (shell.cd('repo').code !== 0) {
+if (shell.ls('repo').code !== 0) {
   shell.mkdir('repo');
 }
 

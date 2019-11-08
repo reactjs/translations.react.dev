@@ -4,9 +4,7 @@
   "description": "Scripts and files useful for reactjs.org translators",
   "license": "MIT",
   "scripts": {
-    "sync": "env-cmd ./.env node scripts/sync.js",
-    "create": "env-cmd ./.env node scripts/create.js",
-    "update": "env-cmd ./.env node scripts/update.js",
+    "rotom": "env-cmd ./.env node scripts/rotom.js",
     "run-all": "env-cmd ./.env node scripts/runAll.js",
     "watch": "env-cmd ./.env node scripts/watch.js"
   },

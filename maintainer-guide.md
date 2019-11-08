@@ -48,4 +48,4 @@ Some tools used by various React translations:
 
 If you have a question that isn't addressed here, you can go to the global [ReactJS localization team](https://github.com/orgs/reactjs/teams/reactjs-org-localization) and ask your fellow translators for help! (NOTE: The link is only available to repo maintainers).
 
-You can also ask for help in the [Slack channel](rt-slack-invite.herokuapp.com).
+You can also ask for help in the [Slack channel](https://rt-slack-invite.herokuapp.com).
