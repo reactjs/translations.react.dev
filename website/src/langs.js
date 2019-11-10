@@ -45,6 +45,7 @@ export default [
   { name: 'தமிழ்', enName: 'Tamil', code: 'ta' },
   { name: 'తెలుగు', enName: 'Telugu', code: 'te' },
   { name: 'ไทย', enName: 'Thai', code: 'th' },
+  { name: 'Wikang Tagalog', enName: 'Tagalog', code: 'tl' },
   { name: 'Türkçe', enName: 'Turkish', code: 'tr' },
   { name: 'Українська', enName: 'Ukrainian', code: 'uk' },
   { name: 'اردو', enName: 'Urdu', code: 'ur' },
