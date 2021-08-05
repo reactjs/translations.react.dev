@@ -29,7 +29,7 @@ const username = process.env.USER_NAME;
 const token = process.env.GITHUB_ACCESS_TOKEN;
 const transRepoName = `${langCode}.${repository}`;
 const transUrl = `https://${username}:${token}@github.com/${owner}/${transRepoName}.git`;
-const defaultBranch = 'master';
+const defaultBranch = 'main';
 
 function teardownAndExit() {
   if (program.delete) {
@@ -74,7 +74,7 @@ if (shell.exec(`git checkout ${syncBranch}`).code !== 0) {
   shell.exec(`git checkout -b ${syncBranch}`);
 }
 
-// Pull from {source}/master
+// Pull from {source}/main
 const output = shell.exec(`git pull ${repository} ${defaultBranch}`).stdout;
 if (output.includes('Already up to date.')) {
   logger.info(`We are already up to date with ${repository}.`);
@@ -90,9 +90,9 @@ const conflictFiles = conflictLines.map(line =>
 
 shell.exec(`git commit -am "merging all conflicts"`);
 
-// If no conflicts, merge directly into master
+// If no conflicts, merge directly into main
 if (conflictFiles.length === 0) {
-  logger.info('No conflicts found. Committing directly to master.');
+  logger.info('No conflicts found. Committing directly to main.');
   shell.exec(`git checkout ${defaultBranch}`);
   shell.exec(`git merge ${syncBranch}`);
   shell.exec(`git push origin ${defaultBranch}`);
@@ -112,7 +112,7 @@ The following files have conflicts and may need new translations:
   ${conflictFiles
     .map(
       file =>
-        ` * [ ] [${file}](/${owner}/${repository}/commits/master/${file})`,
+        ` * [ ] [${file}](/${owner}/${repository}/commits/main/${file})`,
     )
     .join('\n')}
 
@@ -122,13 +122,13 @@ Please fix the conflicts by pushing new commits to this pull request, either by 
 const body = `
 This PR was automatically generated.
 
-Merge changes from [reactjs.org](https://github.com/reactjs/reactjs.org/commits/master) at ${shortHash}
+Merge changes from [reactjs.org](https://github.com/reactjs/reactjs.org/commits/main) at ${shortHash}
 
 ${conflictFiles.length > 0 ? conflictsText : 'No conflicts were found.'}
 
 ## DO NOT SQUASH MERGE THIS PULL REQUEST!
 
-Doing so will "erase" the commits from master and cause them to show up as conflicts the next time we merge.
+Doing so will "erase" the commits from main and cause them to show up as conflicts the next time we merge.
 `;
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random#Getting_a_random_integer_between_two_values
