@@ -1,7 +1,7 @@
 /**
  * Script to update maintainers
  */
-const Octokit = require('@octokit/rest');
+const { Octokit } = require('@octokit/rest');
 const log4js = require('log4js');
 const {getJSON} = require('../util');
 

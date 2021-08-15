@@ -1,6 +1,6 @@
 const shell = require('shelljs');
 const log4js = require('log4js');
-const Octokit = require('@octokit/rest');
+const { Octokit } = require('@octokit/rest');
 const program = require('commander');
 const {getJSON} = require('../util');
 // shell.config.silent = true;
