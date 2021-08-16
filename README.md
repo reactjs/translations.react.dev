@@ -4,7 +4,7 @@ This repo contains resources and scripts to enable translations of https://react
 
 ## Contributing to translations
 
-Check www.isreacttranslatedyet.com to see if your language already has a translation effort in progress. Click on "Track Progress" on the language you want to contribute to in order to receive further instructions.
+Check [translations.reactjs.org](https://translations.reactjs.org/) to see if your language already has a translation effort in progress. Click on "Track Progress" on the language you want to contribute to in order to receive further instructions.
 
 ## Starting a new translation
 
