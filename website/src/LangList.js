@@ -72,9 +72,10 @@ async function getProgressList(langs) {
       .map(issue => [issue.repository.name, issue]),
   )
 
-  return langs.map(lang =>
-    getLangProgress(lang, issuesMap[`${lang.code}.reactjs.org`]),
-  )
+  return langs.map(lang => {
+    const issue = issuesMap[`${lang.code}.reactjs.org`]
+    return issue ? getLangProgress(lang, issue) : null
+  }).filter(Boolean)
 }
 
 const sortOptions = [
