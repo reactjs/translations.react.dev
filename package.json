@@ -15,7 +15,7 @@
     "cron": "^1.6.0",
     "env-cmd": "^6.0.0",
     "log4js": "^4.0.2",
-    "shelljs": "^0.7.8"
+    "shelljs": "^0.8.5"
   },
   "engines": {
     "node.js": "11.9.0"
