@@ -14,7 +14,7 @@
     "commander": "^2.19.0",
     "cron": "^1.6.0",
     "env-cmd": "^6.0.0",
-    "log4js": "^4.0.2",
+    "log4js": "^6.4.0",
     "shelljs": "^0.7.8"
   },
   "engines": {
