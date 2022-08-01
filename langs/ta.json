@@ -1,5 +1,12 @@
 {
     "name": "Tamil",
     "code": "ta",
-    "maintainers": ["pavinthan", "ratheeps", "majus28", "GetCodePanda", "sasureshkumar"]
+    "maintainers": [
+        "pavinthan",
+        "ratheeps",
+        "majus28",
+        "GetCodePanda",
+        "sasureshkumar",
+        "sanjaiyan-dev"
+    ]
 }
