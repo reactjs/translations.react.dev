@@ -62,7 +62,7 @@ async function getProgressList(langs) {
       headers: {
         authorization: `token ${process.env.REACT_APP_GITHUB_AUTH_TOKEN}`,
       },
-      limit: langs.length + 5, // padding in case of extra issues
+      limit: langs.length + 15, // padding in case of extra issues
     },
   )
   console.log(search.nodes)
