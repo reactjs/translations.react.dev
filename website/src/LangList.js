@@ -69,11 +69,11 @@ async function getProgressList(langs) {
   const issuesMap = fromPairs(
     search.nodes
       .filter(issue => !!issue && issue.repository)
-      .map(issue => [issue.repository.name, issue]),
+      .map(issue => [issue.repository.name.toLowerCase(), issue]),
   )
 
   return langs.map(lang => {
-    const issue = issuesMap[`${lang.code}.reactjs.org`]
+    const issue = issuesMap[`${lang.code.toLowerCase()}.reactjs.org`]
     return issue ? getLangProgress(lang, issue) : null
   }).filter(Boolean)
 }
