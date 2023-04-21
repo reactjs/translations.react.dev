@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "^3.0.0"
+    "react-scripts": "^5.0.1"
   },
   "dependencies": {
     "@octokit/graphql": "2.0.1",
