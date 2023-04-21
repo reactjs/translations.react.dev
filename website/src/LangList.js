@@ -62,18 +62,18 @@ async function getProgressList(langs) {
       headers: {
         authorization: `token ${process.env.REACT_APP_GITHUB_AUTH_TOKEN}`,
       },
-      limit: langs.length + 5, // padding in case of extra issues
+      limit: langs.length + 15, // padding in case of extra issues
     },
   )
   console.log(search.nodes)
   const issuesMap = fromPairs(
     search.nodes
       .filter(issue => !!issue && issue.repository)
-      .map(issue => [issue.repository.name, issue]),
+      .map(issue => [issue.repository.name.toLowerCase(), issue]),
   )
 
   return langs.map(lang => {
-    const issue = issuesMap[`${lang.code}.reactjs.org`]
+    const issue = issuesMap[`${lang.code.toLowerCase()}.reactjs.org`]
     return issue ? getLangProgress(lang, issue) : null
   }).filter(Boolean)
 }
