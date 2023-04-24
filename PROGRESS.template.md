@@ -18,7 +18,7 @@ Please be prompt with your translations! If you find that you can't commit anymo
 
 When someone volunteers, edit this issue with the username of the volunteer, and with the PR. Ex:
 
-* [ ] Home Page (@tesseralis) #1
+- [ ] Quick Start (@tesseralis) #1
 
 When PRs are merged, make sure to mark that page as completed!
 
@@ -26,140 +26,146 @@ When PRs are merged, make sure to mark that page as completed!
 
 To do before releasing as an "official" translation. **Please translate these pages first.**
 
-* [ ] Home Page
-* [ ] Tutorial
+Note that each section has an index page, which needs to be translated too.
 
-### Basics
+### Learn React
 
-* [ ] Hello World
-* [ ] Introducing JSX
-* [ ] Rendering Elements
-* [ ] Components and Props
-* [ ] State and Lifecycle
-* [ ] Handling Events
-* [ ] Conditional Rendering
-* [ ] Lists and Keys
-* [ ] Forms
-* [ ] Lifting State Up
-* [ ] Composition vs Inheritance
-* [ ] Thinking in React
+- [ ] Quick Start
+  - [ ] Tutorial: Tic Tac Toe
+  - [ ] Thinking in React
+  
+- [ ] Installation
+  - [ ] Start a New React Project
+  - [ ] Add React to an Existing Project
+  - [ ] Editor Setup
+  - [ ] React Developer Tools
+  
+- [ ] Describing the UI
+  - [ ] Your First Component
+  - [ ] Importing and Exporting Components
+  - [ ] Writing Markup with JSX
+  - [ ] JavaScript in JSX with Curly Braces
+  - [ ] Passing Props to a Component
+  - [ ] Conditional Rendering
+  - [ ] Rendering Lists
+  - [ ] Keeping Components Pure
+  
+- [ ] Adding Interactivity
+  - [ ] Responding to Events
+  - [ ] State: A Component's Memory
+  - [ ] Render and Commit
+  - [ ] State as a Snapshot
+  - [ ] Queueing a Series of State Updates
+  - [ ] Updating Objects in State
+  - [ ] Updating Arrays in State
+  
+- [ ] Managing State
+  - [ ] Reacting to Input with State
+  - [ ] Choosing the State Structure
+  - [ ] Sharing State Between Components
+  - [ ] Preserving and Resetting State
+  - [ ] Extracting State Logic into a Reducer
+  - [ ] Passing Data Deeply with Context
+  - [ ] Scaling Up with Reducer and Context
+  
+- [ ] Escape Hatches
+  - [ ] Referencing Values with Refs
+  - [ ] Manipulating the DOM with Refs
+  - [ ] Synchronizing with Effects
+  - [ ] You Might Not Need an Effect
+  - [ ] Lifecycle of Reactive Effects
+  - [ ] Separating Events from Effects
+  - [ ] Removing Effect Dependencies
+  - [ ] Reusing Logic with Custom Hooks
 
 ### API Reference
 
-* [ ] React
-* [ ] React.Component
-* [ ] ReactDOM
-* [ ] ReactDOMServer
-* [ ] DOM Elements
-* [ ] SyntheticEvent
-* [ ] Test Utilities
-* [ ] Shallow Renderer
-* [ ] Test Renderer
-* [ ] JS Environment Requirements
-* [ ] Glossary
+- [ ] `react`: Hooks
+  - [ ] `useCallback`
+  - [ ] `useContext`
+  - [ ] `useDebugValue`
+  - [ ] `useDeferredValue`
+  - [ ] `useEffect`
+  - [ ] `useId`
+  - [ ] `useImperativeHandle`
+  - [ ] `useInsertionEffect`
+  - [ ] `useLayoutEffect`
+  - [ ] `useMemo`
+  - [ ] `useReducer`
+  - [ ] `useRef`
+  - [ ] `useState`
+  - [ ] `useSyncExternalStore`
+  - [ ] `useTransition`
 
-### Navigation
+- [ ] `react`: Components
+  - [ ] `<Fragment> (<>)`
+  - [ ] `<Profiler>`
+  - [ ] `<StrictMode>`
+  - [ ] `<Suspense>`
 
-These are the navigation links that appear in the sidebar. Possibly wait until
-the corresponding sections are translated to do these.
+- [ ] `react`: APIs
+  - [ ] `createContext`
+  - [ ] `forwardRef`
+  - [ ] `lazy`
+  - [ ] `memo`
+  - [ ] `startTransition`
 
-* [ ] tutorial/nav.yml
-* [ ] docs/nav.yml
+- [ ] `react-dom`: Components
+  - [ ] Common (e.g. `<div>`)
+  - [ ] `<input>`
+  - [ ] `<option>`
+  - [ ] `<progress>`
+  - [ ] `<select>`
+  - [ ] `<textarea>`
 
-## Next Steps
+- [ ] `react-dom`: APIs
+  - [ ] `createPortal`
+  - [ ] `flushSync`
+  - [ ] `findDOMNode`
+  - [ ] `hydrate`
+  - [ ] `render`
+  - [ ] `unmountComponentAtNode`
 
-These are the next most important translations, ordered by importance:
+- [ ] `react-dom/client`: Client APIs
+  - [ ] `createRoot`
+  - [ ] `hydrateRoot`
 
-### Installation
+- [ ] `react-dom/server`: Server APIs
+  - [ ] `renderToNodeStream`
+  - [ ] `renderToPipeableStream`
+  - [ ] `renderToReadableStream`
+  - [ ] `renderToStaticMarkup`
+  - [ ] `renderToStaticNodeStream`
+  - [ ] `renderToString`
 
-* [ ] Getting Started
-* [ ] Add React to a Website
-* [ ] Create a New React App
-* [ ] CDN Links
+### Navigation and UI
 
-### Hooks
+We suggest to leave *most* of the UI translation until the end. We plan to do some invasive changes to the website folder layout and components, so postponing this until your translation is almost complete would make it easier to merge the changes from our side later. It might make sense to translate the homepage above the fold early, but leave the rest for later. As individual pages get translated, you can change the page titles in the corresponding sidebar files. Finally, when you're translating the navigation, make sure to test both desktop and mobile layouts.
 
-Everyone is hooked on hooks! People are really excited about these and it would be great for them to be translated.
+- [ ] Homepage (currently in `HomeContent.js`)
+- [ ] Sidebars (currently in `src/sidebar*.json`)
+- [ ] Top-level navigation (currently in `TopNav.tsx`)
 
-  * [ ] Introducing Hooks
-  * [ ] Hooks at a Glance
-  * [ ] Using the State Hook
-  * [ ] Using the Effect Hook
-  * [ ] Rules of Hooks
-  * [ ] Building Your Own Hooks
-  * [ ] Hooks API Reference
-  * [ ] Hooks FAQ
+### When You're Ready...
 
-### Warnings
+When everything above is translated, add your language to `deployedLanguages` in `Seo.tsx` of the original [reactjs/react.dev](https://github.com/reactjs/react.dev) repository.
 
-These are the pages that you get when you click the links in the console (e.g. https://reactjs.org/warnings/dont-call-proptypes.html). People tend to search these, so **please don't translate the error message itself**.
- 
-* [ ] dont-call-proptypes
-* [ ] invalid-aria-prop
-* [ ] invalid-hook-call-warning
-* [ ] legacy-factories
-* [ ] refs-must-have-owner
-* [ ] special-props
-* [ ] unknown-prop
+## Additional Pages
 
-### Advanced Guides
+These API pages should ideally be translated too, but they're less urgent and should be done after the others:
 
-* [ ] Accessibility
-* [ ] Code-Splitting
-* [ ] Context
-* [ ] Error Boundaries
-* [ ] Forwarding Refs
-* [ ] Fragments
-* [ ] Higher-Order Components
-* [ ] Integrating with Other Libraries
-* [ ] JSX In Depth
-* [ ] Optimizing Performance
-* [ ] Portals
-* [ ] React Without ES6
-* [ ] React Without JSX
-* [ ] Reconciliation
-* [ ] Refs and the DOM
-* [ ] Render Props
-* [ ] Static Type Checking
-* [ ] Strict Mode
-* [ ] Typechecking With PropTypes
-* [ ] Uncontrolled Components
-* [ ] Web Components
+- [ ] Legacy React APIs
+  - [ ] `Children`
+  - [ ] `cloneElement`
+  - [ ] `Component`
+  - [ ] `createElement`
+  - [ ] `createFactory`
+  - [ ] `createRef`
+  - [ ] `isValidElement`
+  - [ ] `PureComponent`
 
-### FAQ
+These aren't the main translation targets, but if you'd like to do them, feel free to expand the list to include their subpages:
 
-* [ ] APIs and AJAX
-* [ ] Babel, JSX, and Build Steps
-* [ ] Passing Functions to Components
-* [ ] Component State
-* [ ] Styling and CSS
-* [ ] File Structure
-* [ ] Versioning Policy
-* [ ] Virtual DOM and Internals
-
-### Contributing
-
-Priority: Low
-
-* [ ] How to Contribute
-* [ ] Codebase Overview
-* [ ] Implementation Notes
-* [ ] Design Principles
-
-### Components
-
-Components in `src/components` that have some text in them.
-
-* [ ] CodeEditor
-* [ ] CodeExample
-* [ ] ErrorDecoder
-* [ ] LayoutFooter
-* [ ] LayoutHeader
-* [ ] MarkdownPage
-
-## Additional Translations
-
-These are not the primary translation targets.
-
-* [ ] Blog
-* [ ] Community
+- [ ] Blog
+- [ ] Community
+- [ ] Warnings
