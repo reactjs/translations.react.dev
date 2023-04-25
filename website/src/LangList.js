@@ -7,28 +7,28 @@ import LangProgress from './LangCard'
 import SortSelector from './SortSelector'
 
 function getLangProgress(lang, issue) {
-  const {
-    corePages = 'Core Pages',
-    nextSteps = 'Next Steps',
-    ...langProps
-  } = lang
   const { body, createdAt, lastEditedAt = createdAt, ...issueProps } = issue
-  const sections = {}
+  let coreCompletion = 0;
+  let otherCompletion = 0;
   body.split(/^##\s+/gm).forEach(section => {
     const [heading, ...content] = section.split('\n')
     const items = content.filter(line => {
-      return /\* *\[[ x]\]/.test(line)
+      return /[-*] *\[[ x]\]/.test(line)
     })
-    const finishedItems = items.filter(line => /\* \[x\]/.test(line))
-    sections[heading.trim()] = finishedItems.length / items.length
-  })
+    const finishedItems = items.filter(line => /[-*] \[x\]/.test(line));
+    if (/MAIN_CONTENT/.test(heading)) {
+      coreCompletion = finishedItems.length / items.length;
+    } else if (/SECONDARY_CONTENT/.test(heading)) {
+      otherCompletion = finishedItems.length / items.length;
+    }
+  });
   return {
-    ...langProps,
+    ...lang,
     ...issueProps,
     createdAt,
     lastEditedAt,
-    coreCompletion: sections[corePages],
-    otherCompletion: sections[nextSteps],
+    coreCompletion,
+    otherCompletion,
   }
 }
 
@@ -40,7 +40,7 @@ async function getProgressList(langs) {
       query($limit: Int!) {
         search(
           type: ISSUE
-          query: "org:reactjs Translation Progress in:title"
+          query: "org:reactjs Translation Progress in:title is:open"
           first: $limit
         ) {
           nodes {
@@ -73,7 +73,7 @@ async function getProgressList(langs) {
   )
 
   return langs.map(lang => {
-    const issue = issuesMap[`${lang.code.toLowerCase()}.reactjs.org`]
+    const issue = issuesMap[`${lang.code.toLowerCase()}.react.dev`]
     return issue ? getLangProgress(lang, issue) : null
   }).filter(Boolean)
 }

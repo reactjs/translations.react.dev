@@ -18,11 +18,11 @@ Please be prompt with your translations! If you find that you can't commit anymo
 
 When someone volunteers, edit this issue with the username of the volunteer, and with the PR. Ex:
 
-- [ ] Quick Start (@tesseralis) #1
+- [ ] Quick Start (@tesseralis) #12345
 
 When PRs are merged, make sure to mark that page as completed!
 
-## Core Pages
+## Main Content <!-- MAIN_CONTENT -->
 
 To do before releasing as an "official" translation. **Please translate these pages first.**
 
@@ -148,11 +148,11 @@ We suggest to leave *most* of the UI translation until the end. We plan to do so
 
 ### When You're Ready...
 
-When everything above is translated, add your language to `deployedLanguages` in `Seo.tsx` of the original [reactjs/react.dev](https://github.com/reactjs/react.dev) repository.
+After everything above is translated, add your language to `deployedLanguages` in `Seo.tsx` of the original [reactjs/react.dev](https://github.com/reactjs/react.dev) repository.
 
-## Additional Pages
+## Secondary Content <!-- SECONDARY_CONTENT -->
 
-These API pages should ideally be translated too, but they're less urgent and should be done after the others:
+These API pages should ideally be translated too, but they're less urgent and can be done after the others:
 
 - [ ] Legacy React APIs
   - [ ] `Children`
@@ -164,8 +164,10 @@ These API pages should ideally be translated too, but they're less urgent and sh
   - [ ] `isValidElement`
   - [ ] `PureComponent`
 
+## Optional Content <!-- OPTIONAL_CONTENT -->
+
 These aren't the main translation targets, but if you'd like to do them, feel free to expand the list to include their subpages:
 
-- [ ] Blog
 - [ ] Community
+- [ ] Blog
 - [ ] Warnings
