@@ -34,11 +34,11 @@ function Header({ name, enName, code, repoUrl, isLink, linkRef }) {
         </ExtLink>
       </h2>
       {isLink ? (
-        <ExtLink href={`https://${code}.reactjs.org`}>
-          {code}.reactjs.org
+        <ExtLink href={`https://${code}.react.dev`}>
+          {code}.react.dev
         </ExtLink>
       ) : (
-        <p {...css({ color: 'dimgray' })}>({code}.reactjs.org)</p>
+        <p {...css({ color: 'dimgray' })}>({code}.react.dev)</p>
       )}
     </header>
   )
@@ -123,7 +123,7 @@ export default function LangCard({
 }) {
   const linkRef = useRef(null)
   const down = useRef(0)
-  const repoName = `${code}.reactjs.org`
+  const repoName = `${code}.react.dev`
   const baseUrl = `https://github.com/reactjs/${repoName}`
   const issueUrl = `${baseUrl}/issues/${number}`
 

@@ -29,7 +29,7 @@ function Description() {
   return (
     <p {...style}>
       The global React community is translating{' '}
-      <ExtLink href="https://reactjs.org">reactjs.org</ExtLink> into{' '}
+      <ExtLink href="https://react.dev">react.dev</ExtLink> into{' '}
       <strong {...css({ fontWeight: 600 })}>{langs.length}</strong> languages:
     </p>
   )
@@ -48,17 +48,10 @@ function Footer() {
       <p>
         If you are interested in maintaining a translation, follow the
         instructions at{' '}
-        <ExtLink href="https://github.com/reactjs/reactjs.org-translation">
-          reactjs.org-translation
+        <ExtLink href="https://github.com/reactjs/translations.react.dev">
+          translations.react.dev
         </ExtLink>
         .
-      </p>
-      <p>
-        We also have a{' '}
-        <ExtLink href="https://rt-slack-invite.herokuapp.com">
-          Slack channel
-        </ExtLink>
-        !
       </p>
     </footer>
   )
