@@ -18,9 +18,17 @@ Please be prompt with your translations! If you find that you can't commit anymo
 
 When someone volunteers, edit this issue with the username of the volunteer, and with the PR. Ex:
 
+```
 - [ ] Quick Start (@tesseralis) #12345
+```
 
-When PRs are merged, make sure to mark that page as completed!
+When PRs are merged, make sure to mark that page as completed like this:
+
+```
+- [x] Quick Start (@tesseralis) #12345
+```
+
+This ensures your translation's progress is tracked correctly at https://translations.react.dev/.
 
 ## Main Content <!-- MAIN_CONTENT -->
 

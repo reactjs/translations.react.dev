@@ -1,10 +1,10 @@
-# reactjs.org Translation
+# react.dev Translation
 
-This repo contains resources and scripts to enable translations of https://reactjs.org.
+This repo contains resources and scripts to enable translations of https://react.dev.
 
 ## Contributing to translations
 
-Check [translations.reactjs.org](https://translations.reactjs.org/) to see if your language already has a translation effort in progress. Click on "Track Progress" on the language you want to contribute to in order to receive further instructions.
+Check [translations.react.dev](https://translations.react.dev/) to see if your language already has a translation effort in progress. Click on "Track Progress" on the language you want to contribute to in order to receive further instructions.
 
 ## Starting a new translation
 
@@ -31,8 +31,8 @@ Also, please read the [Maintainer Responsibilities](/maintainer-guide.md#maintai
 
 Once the PR is accepted, the bot will:
 
-* Create a new repository for you at `reactjs/{lang-code}.reactjs.org`
-* Add/invite all maintainers listed to a "reactjs.org {language} Translation" team in the reactjs organization
+* Create a new repository for you at `reactjs/{lang-code}.react.dev`
+* Add/invite all maintainers listed to a "react.dev {language} Translation" team in the reactjs organization
 * Create an issue from [PROGRESS.template.md](/PROGRESS.template.md) in the new repository to track your translation progress
 
 If you are not a member of the reactjs organization, you should receive an email invite to join. Please accept this invite so you can get admin access to your repository!
@@ -51,10 +51,9 @@ If you are interested in becoming a maintainer for a translation, please ask one
 
 ## Before publishing
 
-1. Review your translations and make sure that the pages listed in "Core Pages" are fully translated. Run the site yourself locally to make sure there are no bugs or missing translations.
-2. ask {TBD} to add {lang-code}.reactjs.org as a subdomain.
-3. submit a PR to [reactjs/reactjs.org](https://github.com/reactjs/reactjs.org) adding the language in the dropdown (once we make it).
-4. Celebrate! 🎉🌐
+1. Review your translations and make sure that the pages listed in "Main Content" are fully translated. Run the site yourself locally to make sure there are no bugs or missing translations.
+2. Raise an issue in this repository so that your translation is added to the list of completed ones
+3. Celebrate! 🎉🌐
 
 ## Acknowledgements
 
