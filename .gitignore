@@ -6,5 +6,6 @@ npm-debug.log
 yarn-error.log
 !.gitkeep
 
+.temp
 .env*
 !.env.sample

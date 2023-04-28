@@ -2,7 +2,7 @@ import React from 'react'
 import { css } from 'glamor'
 import ExtLink from './ExtLink'
 import LangList from './LangList'
-import langs from './langs'
+import langs from './langs.json'
 
 function Title() {
   const style = css({
