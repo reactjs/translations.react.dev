@@ -1,0 +1,34 @@
+name: Sync CI (batch 2)
+
+on:
+  schedule:
+    # Run this job every Monday at 1am
+    - cron: "0 1 * * 1"
+
+env:
+  ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+  USER_NAME: ${{ secrets.USER_NAME }}
+  USER_EMAIL: ${{ secrets.USER_EMAIL }}
+
+defaults:
+  run:
+    working-directory: ./scripts
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'yarn'
+    - run: yarn install
+    - run: ACTIONS_BATCH_PATTERN=6:2 yarn sync-translations
