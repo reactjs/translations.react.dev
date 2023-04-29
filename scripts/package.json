@@ -4,18 +4,23 @@
   "description": "Scripts and files useful for reactjs.org translators",
   "license": "MIT",
   "scripts": {
-    "rotom": "env-cmd ./.env node scripts/rotom.js",
-    "run-all": "env-cmd ./.env node scripts/runAll.js",
-    "watch": "env-cmd ./.env node scripts/watch.js"
+    "prettier": "prettier --write *.js",
+    "create-translation": "node create-translation.js",
+    "sync-translations": "node sync-translations.js"
   },
   "dependencies": {
     "@octokit/rest": "^16.15.0",
     "bluebird": "^3.5.3",
+    "child-process-promise": "^2.2.1",
     "commander": "^2.19.0",
     "cron": "^1.6.0",
-    "env-cmd": "^6.0.0",
+    "dotenv": "^10.0.0",
+    "fs-extra": "^10.0.0",
+    "js-yaml": "^4.1.0",
     "log4js": "^4.0.2",
-    "shelljs": "^0.7.8"
+    "progress-estimator": "^0.3.0",
+    "shelljs": "^0.7.8",
+    "vercel": "^29.0.0"
   },
   "engines": {
     "node.js": "11.9.0"
