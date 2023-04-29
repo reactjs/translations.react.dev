@@ -22,8 +22,8 @@
     "shelljs": "^0.7.8",
     "vercel": "^29.0.0"
   },
-  "engines": {
-    "node.js": "11.9.0"
+  "devEngines": {
+    "node": "16.x || 18.x || 19.x"
   },
   "repository": {
     "type": "git",
