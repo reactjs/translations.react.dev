@@ -1,6 +1,7 @@
 name: Sync CI (batch 3)
 
 on:
+  workflow_dispatch:
   schedule:
     # Run this job every Monday at 2am
     - cron: "0 2 * * 1"
