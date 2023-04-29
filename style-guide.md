@@ -9,7 +9,7 @@ NOTE TO MAINTAINERS: You may want to translate this guide so that it can be more
 All headings have explicit IDs like this:
 
 ```md
-## Try React {#try-react}
+## Try React {/*try-react*/}
 ```
 
 Do **not** translate these IDs! They are used for navigation and will break if the document is referred to externally, i.e.:
@@ -21,13 +21,13 @@ See the [beginning section](/getting-started#try-react) for more information.
 ✅ DO:
 
 ```md
-## Prueba React {#try-react}
+## Prueba React {/*try-react*/}
 ```
 
 ❌ DON'T:
 
 ```md
-## Prueba React {#prueba-react}
+## Prueba React {/*prueba-react*/}
 ```
 
 This will break the link above.
