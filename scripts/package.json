@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "prettier": "prettier --write *.js",
-    "sync-forks": "node sync-forks.js"
+    "create-translation": "node create-translation.js",
+    "sync-translations": "node sync-translations.js"
   },
   "dependencies": {
     "@octokit/rest": "^16.15.0",
@@ -15,9 +16,11 @@
     "cron": "^1.6.0",
     "dotenv": "^10.0.0",
     "fs-extra": "^10.0.0",
+    "js-yaml": "^4.1.0",
     "log4js": "^4.0.2",
     "progress-estimator": "^0.3.0",
-    "shelljs": "^0.7.8"
+    "shelljs": "^0.7.8",
+    "vercel": "^29.0.0"
   },
   "engines": {
     "node.js": "11.9.0"

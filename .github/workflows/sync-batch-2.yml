@@ -31,4 +31,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
     - run: yarn install
-    - run: ACTIONS_BATCH_PATTERN=6:2 yarn sync-forks
+    - run: ACTIONS_BATCH_PATTERN=6:2 yarn sync-translations

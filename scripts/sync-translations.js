@@ -1,6 +1,6 @@
 /**
  *
- * Manual usage: yarn sync-forks --langs=es,zh-hans
+ * Manual usage: yarn sync-translations --langs=es,zh-hans
  * This script is usually called by .github/workflows/*.
  *
  */
@@ -228,6 +228,8 @@ async function syncContentWithUpstream(languageCode) {
   const mainRepoUrl = `https://github.com/${GITHUB_ORG}/${MAIN_REPOSITORY_NAME}`;
   const options = { cwd: repoPath };
 
+  // Avoid storing these in Keychain.
+  await exec('git config credential.helper ""', options);
   await exec(`git config user.name ${GITHUB_USER_NAME}`, options);
   await exec(`git config user.email ${GITHUB_USER_EMAIL}`, options);
   await exec(`git remote set-url origin ${repoURL}`, options);
