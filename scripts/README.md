@@ -32,11 +32,11 @@ If you're a member of React team, here's what you need to do:
 2. Run `npx vercel login` and ensure you have permissions to create projects in Meta Open Source org
 3. Ensure you have permissions to create projects in the `reactjs` GitHub org
 
-Take a look at the pull request associated with the translation. It should be adding it to the `langs/langs.json` file. Suppose we're adding the `foo` language code with `@bar` and `@baz` GitHub users as maintainers. Merge the pull request and run in this folder:
+Review the pull request associated with the translation. It should be adding it to the `langs/langs.json` file. Suppose we're adding the `foo` language code with `@bar` and `@baz` GitHub users as maintainers. Merge the pull request and run in this folder:
 
 ```sh
 yarn
-yarn create-translations --lang=foo --maintainers=bar,baz
+yarn create-translation --lang=foo --maintainers=bar,baz
 ```
 
 This should create the GitHub repo, create a Vercel project, link them, and deploy them. This won't by itself set up the domain--that can wait until the translation is mature.
