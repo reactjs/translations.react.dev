@@ -31,5 +31,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
+        cache-dependency-path: ./scripts/yarn.lock
     - run: yarn install
     - run: ACTIONS_BATCH_PATTERN=6:4 yarn sync-translations
