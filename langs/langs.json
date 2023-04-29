@@ -16,6 +16,7 @@
   { "code": "ja", "name": "日本語", "enName": "Japanese" },
   { "code": "lo", "name": "ພາສາລາວ", "enName": "Lao" },
   { "code": "ko", "name": "한국어", "enName": "Korean" },
+  { "code": "mk", "name": "Македонски", "enName": "Macedonian" },
   { "code": "mn", "name": "Монгол хэл", "enName": "Mongolian" },
   { "code": "pl", "name": "Polski", "enName": "Polish" },
   { "code": "pt-br", "name": "Português do Brasil", "enName": "Portuguese (Brazil)" },
