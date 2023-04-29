@@ -204,14 +204,22 @@ async function createPullRequest({
     auth: GITHUB_ACCESS_TOKEN,
     previews: ["hellcat-preview"],
   });
-  await octokit.pulls.create({
-    owner: GITHUB_ORG,
-    repo: repoName,
-    title,
-    body,
-    head: syncBranch,
-    base: DEFAULT_BRANCH,
-  });
+  try {
+    await octokit.pulls.create({
+      owner: GITHUB_ORG,
+      repo: repoName,
+      title,
+      body,
+      head: syncBranch,
+      base: DEFAULT_BRANCH,
+    });
+  } catch (e) {
+    if (typeof e.message === 'string' && e.message.includes('already exists')) {
+      // That's OK -- we already sent a PR for this hash.
+      return;
+    }
+    throw e;
+  }
 }
 
 async function execRead(command, options) {
