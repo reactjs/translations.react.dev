@@ -1,7 +1,3 @@
-## Maintainer List
-
-{MAINTAINERS}
-
 ## For New Translators
 
 To translate a page:
@@ -19,13 +15,13 @@ Please be prompt with your translations! If you find that you can't commit anymo
 When someone volunteers, edit this issue with the username of the volunteer, and with the PR. Ex:
 
 ```
-- [ ] Quick Start (@tesseralis) #12345
+- [ ] Some Page (@exampleusername) #12345
 ```
 
 When PRs are merged, make sure to mark that page as completed like this:
 
 ```
-- [x] Quick Start (@tesseralis) #12345
+- [x] Some Page (@exampleusername) #12345
 ```
 
 This ensures your translation's progress is tracked correctly at https://translations.react.dev/.
@@ -179,3 +175,11 @@ These aren't the main translation targets, but if you'd like to do them, feel fr
 - [ ] Community
 - [ ] Blog
 - [ ] Warnings
+
+## Maintainer List
+
+This translation is maintained by:
+
+{MAINTAINERS}
+
+If you want to become a maintainer, ask them to add you. If the original maintainers are no longer responsive, raise an issue in the [main translations repository](https://github.com/reactjs/translations.react.dev).

@@ -13,3 +13,6 @@
 
 # misc
 .DS_Store
+
+# Copied on build
+src/langs.json
