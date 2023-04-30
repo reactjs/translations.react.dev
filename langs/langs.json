@@ -24,6 +24,7 @@
   { "code": "tr", "name": "Türkçe", "enName": "Turkish" },
   { "code": "uk", "name": "Українська", "enName": "Ukrainian" },
   { "code": "vi", "name": "Tiếng Việt", "enName": "Vietnamese" },
+  { "code": "yo", "name": "Yorùbá", "enName": "Yoruba" },
   { "code": "zh-hans", "name": "简体中文", "enName": "Simplified Chinese" },
   { "code": "zh-hant", "name": "繁體中文", "enName": "Traditional Chinese" }
 ]
