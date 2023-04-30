@@ -14,6 +14,7 @@
   { "code": "it", "name": "Italiano", "enName": "Italian" },
   { "code": "is", "name": "Íslenska", "enName": "Icelandic" },
   { "code": "ja", "name": "日本語", "enName": "Japanese" },
+  { "code": "kk", "name": "Қазақша", "enName": "Kazakh" },
   { "code": "lo", "name": "ພາສາລາວ", "enName": "Lao" },
   { "code": "ko", "name": "한국어", "enName": "Korean" },
   { "code": "mn", "name": "Монгол хэл", "enName": "Mongolian" },
