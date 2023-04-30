@@ -25,5 +25,6 @@
   { "code": "uk", "name": "Українська", "enName": "Ukrainian" },
   { "code": "vi", "name": "Tiếng Việt", "enName": "Vietnamese" },
   { "code": "zh-hans", "name": "简体中文", "enName": "Simplified Chinese" },
-  { "code": "zh-hant", "name": "繁體中文", "enName": "Traditional Chinese" }
+  { "code": "zh-hant", "name": "繁體中文", "enName": "Traditional Chinese" },
+  {"code": "tl", "name": "Filipino", "enName": "Filipino"}
 ]
