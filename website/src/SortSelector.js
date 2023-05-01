@@ -5,6 +5,7 @@ function SortOption({ value, currentValue, label, onSelect }) {
   const style = css({
     border: 'none',
     background: 'none',
+    cursor: 'pointer',
     width: '8rem',
     fontSize: '1rem',
     fontWeight: currentValue === value ? 700 : 500,
