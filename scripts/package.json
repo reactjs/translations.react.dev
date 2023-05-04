@@ -1,0 +1,32 @@
+{
+  "name": "reactjs.org-translations",
+  "version": "0.0.1",
+  "description": "Scripts and files useful for reactjs.org translators",
+  "license": "MIT",
+  "scripts": {
+    "prettier": "prettier --write *.js",
+    "create-translation": "node create-translation.js",
+    "sync-translations": "node sync-translations.js"
+  },
+  "dependencies": {
+    "@octokit/rest": "^16.15.0",
+    "bluebird": "^3.5.3",
+    "child-process-promise": "^2.2.1",
+    "commander": "^2.19.0",
+    "cron": "^1.6.0",
+    "dotenv": "^10.0.0",
+    "fs-extra": "^10.0.0",
+    "js-yaml": "^4.1.0",
+    "log4js": "^4.0.2",
+    "progress-estimator": "^0.3.0",
+    "shelljs": "^0.7.8",
+    "vercel": "^29.0.0"
+  },
+  "devEngines": {
+    "node": "16.x || 18.x || 19.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reactjs/reactjs.org-translation.git"
+  }
+}
