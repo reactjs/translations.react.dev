@@ -1,6 +1,7 @@
 [
   { "code": "ar", "name": "العربية", "enName": "Arabic" },
   { "code": "az", "name": "Azərbaycanca", "enName": "Azerbaijani" },
+  { "code": "be", "name": "Беларуская", "enName": "Belarusian" },
   { "code": "bn", "name": "বাংলা", "enName": "Bengali" },
   { "code": "de", "name": "Deutsch", "enName": "German" },
   { "code": "es", "name": "Español", "enName": "Spanish" },
