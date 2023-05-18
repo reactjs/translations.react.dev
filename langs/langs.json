@@ -26,6 +26,7 @@
   { "code": "ru", "name": "Русский", "enName": "Russian" },
   { "code": "sw", "name": "Kiswahili", "enName": "Swahili" },
   { "code": "ta", "name": "தமிழ்", "enName": "Tamil" },
+  { "code": "te", "name": "తెలుగు", "enName": "Telugu" },
   { "code": "tr", "name": "Türkçe", "enName": "Turkish" },
   { "code": "uk", "name": "Українська", "enName": "Ukrainian" },
   { "code": "vi", "name": "Tiếng Việt", "enName": "Vietnamese" },
