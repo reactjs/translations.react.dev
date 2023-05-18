@@ -23,6 +23,7 @@
   { "code": "pl", "name": "Polski", "enName": "Polish" },
   { "code": "pt-br", "name": "Português do Brasil", "enName": "Portuguese (Brazil)" },
   { "code": "ru", "name": "Русский", "enName": "Russian" },
+  { "code": "sq", "name": "Shqip", "enName": "Albanian" },
   { "code": "sw", "name": "Kiswahili", "enName": "Swahili" },
   { "code": "ta", "name": "தமிழ்", "enName": "Tamil" },
   { "code": "tr", "name": "Türkçe", "enName": "Turkish" },
