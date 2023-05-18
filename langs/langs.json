@@ -24,6 +24,7 @@
   { "code": "pl", "name": "Polski", "enName": "Polish" },
   { "code": "pt-br", "name": "Português do Brasil", "enName": "Portuguese (Brazil)" },
   { "code": "ru", "name": "Русский", "enName": "Russian" },
+  { "code": "sr", "name": "Srpski", "enName": "Serbian" },
   { "code": "sw", "name": "Kiswahili", "enName": "Swahili" },
   { "code": "ta", "name": "தமிழ்", "enName": "Tamil" },
   { "code": "te", "name": "తెలుగు", "enName": "Telugu" },
