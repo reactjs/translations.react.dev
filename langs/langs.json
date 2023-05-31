@@ -31,10 +31,10 @@
   { "code": "sw", "name": "Kiswahili", "enName": "Swahili" },
   { "code": "ta", "name": "தமிழ்", "enName": "Tamil" },
   { "code": "te", "name": "తెలుగు", "enName": "Telugu" },
+  {"code": "tl", "name": "Filipino", "enName": "Filipino"},
   { "code": "tr", "name": "Türkçe", "enName": "Turkish" },
   { "code": "uk", "name": "Українська", "enName": "Ukrainian" },
   { "code": "vi", "name": "Tiếng Việt", "enName": "Vietnamese" },
   { "code": "zh-hans", "name": "简体中文", "enName": "Simplified Chinese" },
-  { "code": "zh-hant", "name": "繁體中文", "enName": "Traditional Chinese" },
-  {"code": "tl", "name": "Filipino", "enName": "Filipino"}
+  { "code": "zh-hant", "name": "繁體中文", "enName": "Traditional Chinese" }
 ]
