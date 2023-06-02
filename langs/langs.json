@@ -35,6 +35,7 @@
   { "code": "uk", "name": "Українська", "enName": "Ukrainian" },
   { "code": "ur", "name": "اردو", "enName": "Urdu" },
   { "code": "vi", "name": "Tiếng Việt", "enName": "Vietnamese" },
+  { "code": "yo", "name": "Yorùbá", "enName": "Yoruba" },
   { "code": "zh-hans", "name": "简体中文", "enName": "Simplified Chinese" },
   { "code": "zh-hant", "name": "繁體中文", "enName": "Traditional Chinese" }
 ]
