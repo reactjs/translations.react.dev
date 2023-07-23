@@ -1,4 +1,5 @@
 [
+  { "code": "ku", "name": "کوردی", "enName": "Kurdish" },
   { "code": "ar", "name": "العربية", "enName": "Arabic" },
   { "code": "az", "name": "Azərbaycanca", "enName": "Azerbaijani" },
   { "code": "be", "name": "Беларуская", "enName": "Belarusian" },
