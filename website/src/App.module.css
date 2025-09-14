@@ -4,33 +4,52 @@
   align-items: center;
   padding: 3rem 4rem;
   width: 100vw;
-  background-color: whitesmoke;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
 }
 
 @media (max-width: 48rem) {
   .app {
-    padding: 2rem 2rem;
+    padding: 2rem 1rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .description {
+    font-size: 1.25rem;
   }
 }
 
 .title {
-  font-size: 2.5rem;
-  font-weight: normal;
+  font-size: 3rem;
+  font-weight: 700;
   margin-bottom: 2rem;
+  color: #404756;
+  text-align: center;
 }
 
 .description {
   font-size: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  color: #404756;
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.6;
 }
 
 .strongText {
-  font-weight: 600;
+  font-weight: 700;
+  color: #087ea4;
 }
 
 .footer {
-  margin-top: 2rem;
+  margin-top: 3rem;
   margin-bottom: 2rem;
-  font-size: 1.5rem;
-  line-height: 2;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #404756;
+  text-align: center;
+  max-width: 600px;
 }

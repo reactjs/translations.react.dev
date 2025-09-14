@@ -131,16 +131,20 @@ export default function LangCard({
         coreCompletion={coreCompletion}
         otherCompletion={otherCompletion}
       />
+      <div className={styles.progressBarWrapper}>
+        <ProgressBar value={coreCompletion} />
+      </div>
+      <div className={styles.cardActions}>
+        <ExtLink className={styles.contributeButton} href={issueUrl}>
+          Contribute
+        </ExtLink>
+      </div>
       <footer className={styles.footer}>
-        <p className={styles.contributeLink}>
-          <ExtLink href={issueUrl}>Contribute</ExtLink>
-        </p>
-        <p className={styles.dateText}>Start date: {formatDate(createdAt)}</p>
+        <p className={styles.dateText}>Started: {formatDate(createdAt)}</p>
         <p className={styles.dateText}>
-          Last updated: {formatDate(lastEditedAt)}
+          Updated: {formatDate(lastEditedAt)}
         </p>
       </footer>
-      <ProgressBar value={coreCompletion} />
     </div>
   )
 }

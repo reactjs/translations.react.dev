@@ -1,44 +1,63 @@
 .card {
-  background-color: white;
+  background: white;
   display: flex;
   flex-direction: column;
-  margin: 1rem;
-  width: 20rem;
-  height: 18rem;
-  padding: 1rem;
-  border: 1px gray solid;
+  margin: 0;
+  width: 100%;
+  height: 20rem;
+  padding: 1.5rem;
+  border: 1px solid #e1e8ed;
+  border-radius: 8px;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(32, 35, 42, 0.08);
+  transition: all 0.2s ease;
 }
 
 .card:hover {
-  outline: 2px gray solid;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(32, 35, 42, 0.12);
+  border-color: #087ea4;
 }
 
 .percentage {
   font-size: 1.5rem;
+  font-weight: 600;
+  color: #087ea4;
 }
 
 .percentageLarge {
   font-size: 2rem;
+  font-weight: 700;
+  color: #087ea4;
 }
 
 .linkStyle {
-  color: black;
+  color: #20232a;
   text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.linkStyle:hover {
+  color: #087ea4;
 }
 
 .enName {
-  font-size: 1rem;
+  font-size: 0.875rem;
+  color: #404756;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
 }
 
 .langName {
-  font-weight: initial;
+  font-weight: 600;
   max-height: 2rem;
   font-size: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .repoCode {
-  color: dimgray;
+  color: #404756;
+  font-size: 0.875rem;
 }
 
 .progress {
@@ -46,7 +65,7 @@
   width: 100%;
   justify-content: space-around;
   margin-top: auto;
-  margin-bottom: auto;
+  margin-bottom: 0.5rem;
 }
 
 .milestoneContainer {
@@ -56,12 +75,15 @@
 }
 
 .milestoneEmoji {
-  font-size: 2.5rem;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
 }
 
 .milestoneText {
-  font-size: 1rem;
-  color: dimgrey;
+  font-size: 0.875rem;
+  color: #404756;
+  font-weight: 500;
+  text-align: center;
 }
 
 .progressStats {
@@ -69,17 +91,57 @@
   font-size: 1rem;
 }
 
+.progressBarWrapper {
+  margin: 0.75rem 0;
+}
+
+.cardActions {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.contributeButton {
+  display: inline-block;
+  background: #087ea4;
+  color: white !important;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none !important;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(8, 126, 164, 0.2);
+}
+
+.contributeButton:hover {
+  background: #045a73;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(8, 126, 164, 0.3);
+}
+
 .footer {
   margin-top: auto;
   line-height: 1.25;
-  margin-bottom: 0.5rem;
-}
-
-.contributeLink {
-  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .dateText {
-  color: DimGrey;
-  font-size: 0.875rem;
+  color: #404756;
+  font-size: 0.75rem;
+  font-weight: 400;
+  flex: 1;
+  text-align: center;
+}
+
+@media (max-width: 48rem) {
+  .footer {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .dateText {
+    text-align: left;
+  }
 }

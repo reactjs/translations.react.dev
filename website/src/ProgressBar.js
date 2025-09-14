@@ -2,18 +2,17 @@ import styles from './ProgressBar.module.css'
 import tinycolor from 'tinycolor2'
 
 function getColor(amount) {
-  const medColor = 'yellow'
   if (amount === undefined) {
-    return 'white'
+    return '#e1e8ed'
   }
 
   if (amount < 0.5) {
     return tinycolor
-      .mix(tinycolor('lightsalmon'), tinycolor(medColor), amount * 100)
+      .mix(tinycolor('lightsalmon'), tinycolor('yellow'), amount * 333)
       .toHexString()
   }
   return tinycolor
-    .mix(tinycolor(medColor), tinycolor('lime'), (amount - 0.5) * 100)
+    .mix(tinycolor('yellow'), tinycolor('lime'), (amount - 0.7) * 333)
     .toHexString()
 }
 
