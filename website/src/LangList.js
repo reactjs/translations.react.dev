@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState, useMemo } from 'react'
 import { css } from 'glamor'
 import sortBy from 'lodash/sortBy'

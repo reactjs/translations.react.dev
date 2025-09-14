@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { css } from 'glamor'
 import tinycolor from 'tinycolor2'

@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { css } from 'glamor'
 import ExtLink from './ExtLink'
@@ -44,7 +45,7 @@ function Footer() {
   })
   return (
     <footer {...style}>
-      <p>Don't see your language?</p>
+      <p>Don&apos;t see your language?</p>
       <p>
         If you are interested in maintaining a translation, follow the
         instructions at{' '}
