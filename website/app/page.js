@@ -1,6 +1,6 @@
 import App from '../src/App'
 import langs from '../src/langs.json'
-import graphql from '@octokit/graphql'
+import { graphql } from '@octokit/graphql'
 import fromPairs from 'lodash/fromPairs'
 
 function getLangProgress(lang, issue) {

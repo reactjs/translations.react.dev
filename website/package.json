@@ -3,16 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "eslint": "^8.57.0",
-    "eslint-config-next": "15.5.3"
+    "@eslint/eslintrc": "^3",
+    "eslint": "^9.35.0",
+    "eslint-config-next": "15.5.3",
+    "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@octokit/graphql": "2.0.1",
-    "lodash": "^4.17.11",
+    "@octokit/graphql": "9.0.1",
+    "lodash": "^4.17.21",
     "next": "^15.5.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "tinycolor2": "^1.4.1",
+    "tinycolor2": "^1.6.0",
     "what-input": "^5.2.1"
   },
   "scripts": {
@@ -21,10 +23,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "eslintConfig": {
-    "extends": "next/core-web-vitals"
+    "extends": [
+      "eslint:recommended",
+      "next/babel"
+    ]
   },
   "browserslist": [
     ">0.2%",
