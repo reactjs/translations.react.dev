@@ -1,0 +1,36 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 4rem;
+  width: 100vw;
+  background-color: whitesmoke;
+}
+
+@media (max-width: 48rem) {
+  .app {
+    padding: 2rem 2rem;
+  }
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: normal;
+  margin-bottom: 2rem;
+}
+
+.description {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.strongText {
+  font-weight: 600;
+}
+
+.footer {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  line-height: 2;
+}

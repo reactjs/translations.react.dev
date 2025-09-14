@@ -1,0 +1,22 @@
+.sortSelector {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  color: #333;
+  font-weight: 500;
+}
+
+.sortOption {
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 8rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.sortOption.active {
+  font-weight: 700;
+  color: black;
+}

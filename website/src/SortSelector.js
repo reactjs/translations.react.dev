@@ -1,34 +1,20 @@
-'use client'
-import React from 'react'
-import { css } from 'glamor'
+import styles from './SortSelector.module.css'
 
 function SortOption({ value, currentValue, label, onSelect }) {
-  const style = css({
-    border: 'none',
-    background: 'none',
-    cursor: 'pointer',
-    width: '8rem',
-    fontSize: '1rem',
-    fontWeight: currentValue === value ? 700 : 500,
-    color: currentValue === value ? 'black' : '#333',
-  })
+  const isActive = currentValue === value
+  const className = isActive
+    ? `${styles.sortOption} ${styles.active}`
+    : styles.sortOption
   return (
-    <button {...style} onClick={() => onSelect(value)}>
+    <button className={className} onClick={() => onSelect(value)}>
       {label}
     </button>
   )
 }
 
 export default function SortSelector({ options, value, onSelect }) {
-  const style = css({
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    color: '#333',
-    fontWeight: 500,
-  })
   return (
-    <div {...style}>
+    <div className={styles.sortSelector}>
       Sort By:{' '}
       {options.map(({ key, label }) => (
         <SortOption

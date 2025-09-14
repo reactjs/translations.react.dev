@@ -1,23 +1,17 @@
-'use client'
-import React, { forwardRef } from 'react'
-import { css } from 'glamor'
+import { forwardRef } from 'react'
+import styles from './ExtLink.module.css'
 
 export default forwardRef(function ExtLink(
-  { style: customStyle, href, children, ...props },
+  { className, href, children, ...props },
   ref,
 ) {
-  const style = css({
-    color: 'blue',
-    textDecoration: 'underline',
-    ':hover': {
-      textDecoration: 'none',
-    },
-    ...customStyle,
-  })
+  const combinedClassName = className
+    ? `${styles.link} ${className}`
+    : styles.link
   return (
     <a
       {...props}
-      {...style}
+      className={combinedClassName}
       ref={ref}
       href={href}
       target="_blank"

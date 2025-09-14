@@ -1,0 +1,85 @@
+.card {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  width: 20rem;
+  height: 18rem;
+  padding: 1rem;
+  border: 1px gray solid;
+  cursor: pointer;
+}
+
+.card:hover {
+  outline: 2px gray solid;
+}
+
+.percentage {
+  font-size: 1.5rem;
+}
+
+.percentageLarge {
+  font-size: 2rem;
+}
+
+.linkStyle {
+  color: black;
+  text-decoration: none;
+}
+
+.enName {
+  font-size: 1rem;
+}
+
+.langName {
+  font-weight: initial;
+  max-height: 2rem;
+  font-size: 1.5rem;
+}
+
+.repoCode {
+  color: dimgray;
+}
+
+.progress {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.milestoneContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.milestoneEmoji {
+  font-size: 2.5rem;
+}
+
+.milestoneText {
+  font-size: 1rem;
+  color: dimgrey;
+}
+
+.progressStats {
+  width: 8rem;
+  font-size: 1rem;
+}
+
+.footer {
+  margin-top: auto;
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+}
+
+.contributeLink {
+  margin-bottom: 0.5rem;
+}
+
+.dateText {
+  color: DimGrey;
+  font-size: 0.875rem;
+}
