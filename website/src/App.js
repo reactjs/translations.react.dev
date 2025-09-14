@@ -40,12 +40,12 @@ function Footer() {
   )
 }
 
-export default function App() {
+export default function App({ progressList }) {
   return (
     <div className={styles.app}>
       <Title />
       <Description />
-      <LangList langs={langs} />
+      <LangList progressList={progressList} />
       <Footer />
     </div>
   )
