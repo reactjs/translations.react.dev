@@ -76,6 +76,17 @@ async function getProgressList(langs) {
 }
 
 export default async function HomePage() {
-  const progressList = await getProgressList(langs)
+  let progressList
+  try {
+    progressList = await getProgressList(langs)
+  } catch (e) {
+    progressList = langs.map(lang => ({
+      ...lang,
+      coreCompletion: undefined,
+      otherCompletion: undefined,
+      createdAt: undefined,
+      lastEditedAt: undefined,
+    }))
+  }
   return <App progressList={progressList} />
 }
