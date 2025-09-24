@@ -3,27 +3,33 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "^3.0.0"
+    "@eslint/eslintrc": "^3",
+    "eslint": "^9.35.0",
+    "eslint-config-next": "15.5.3",
+    "typescript": "^5.9.2"
   },
   "dependencies": {
-    "@octokit/graphql": "2.0.1",
-    "glamor": "^2.20.40",
-    "lodash": "^4.17.11",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "tinycolor2": "^1.4.1",
+    "@octokit/graphql": "9.0.1",
+    "lodash": "^4.17.21",
+    "next": "^15.5.3",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "tinycolor2": "^1.6.0",
     "what-input": "^5.2.1"
   },
   "scripts": {
-    "prestart": "ln -sf ../../langs/langs.json ../website/src/langs.json",
+    "predev": "ln -sf ../../langs/langs.json ../website/src/langs.json",
     "prebuild": "ln -sf ../../langs/langs.json ../website/src/langs.json",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint ."
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "eslint:recommended",
+      "next/babel"
+    ]
   },
   "browserslist": [
     ">0.2%",
