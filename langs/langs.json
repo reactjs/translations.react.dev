@@ -3,6 +3,7 @@
   { "code": "az", "name": "Azərbaycanca", "enName": "Azerbaijani" },
   { "code": "be", "name": "Беларуская", "enName": "Belarusian" },
   { "code": "bn", "name": "বাংলা", "enName": "Bengali" },
+  { "code": "ckb", "name": "کوردیی ناوەندی (سۆرانی)", "enName": "Central Kurdish (Sorani)" },
   { "code": "cs", "name": "Čeština", "enName": "Czech" },
   { "code": "de", "name": "Deutsch", "enName": "German" },
   { "code": "es", "name": "Español", "enName": "Spanish" },
