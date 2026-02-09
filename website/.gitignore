@@ -16,3 +16,6 @@
 
 # Copied on build
 src/langs.json
+
+.next/
+out/

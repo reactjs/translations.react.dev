@@ -1,44 +1,30 @@
-import React, { useRef } from 'react'
-import { css } from 'glamor'
+import { useRef } from 'react'
+import styles from './LangCard.module.css'
 import ExtLink from './ExtLink'
 import ProgressBar from './ProgressBar'
 
 function Percentage({ value, size }) {
-  const style = css({
-    fontSize: size === 'lg' ? '2rem' : '1.5rem',
-  })
+  const className = size === 'lg' ? styles.percentageLarge : styles.percentage
   return (
-    <span {...style}>
+    <span className={className}>
       {value !== undefined ? Math.floor(value * 100) : '??'}%
     </span>
   )
 }
 
 function Header({ name, enName, code, repoUrl, isLink, linkRef }) {
-  const linkStyle = css({
-    color: 'black',
-    textDecoration: 'none',
-  })
   return (
     <header>
-      <p {...css({ fontSize: '1rem' })}>{enName}</p>
-      <h2
-        {...css({
-          fontWeight: 'initial',
-          maxHeight: '2rem',
-          fontSize: '1.5rem',
-        })}
-      >
-        <ExtLink {...linkStyle} ref={linkRef} href={repoUrl}>
+      <p className={styles.enName}>{enName}</p>
+      <h2 className={styles.langName}>
+        <ExtLink className={styles.linkStyle} ref={linkRef} href={repoUrl}>
           {name}
         </ExtLink>
       </h2>
       {isLink ? (
-        <ExtLink href={`https://${code}.react.dev`}>
-          {code}.react.dev
-        </ExtLink>
+        <ExtLink href={`https://${code}.react.dev`}>{code}.react.dev</ExtLink>
       ) : (
-        <p {...css({ color: 'dimgray' })}>({code}.react.dev)</p>
+        <p className={styles.repoCode}>({code}.react.dev)</p>
       )}
     </header>
   )
@@ -64,27 +50,14 @@ function getMilestone(amount, otherAmount) {
 }
 
 function Progress({ coreCompletion, otherCompletion }) {
-  const style = css({
-    display: 'flex',
-    width: '100%',
-    justifyContent: 'space-around',
-    marginTop: 'auto',
-    marginBottom: 'auto',
-  })
   const { emoji, text } = getMilestone(coreCompletion, otherCompletion)
   return (
-    <div {...style}>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <p style={{ fontSize: '2.5rem' }}>{emoji}</p>
-        <p style={{ fontSize: '1rem', color: 'dimgrey' }}>{text}</p>
+    <div className={styles.progress}>
+      <div className={styles.milestoneContainer}>
+        <p className={styles.milestoneEmoji}>{emoji}</p>
+        <p className={styles.milestoneText}>{text}</p>
       </div>
-      <div style={{ width: '8rem', fontSize: '1rem' }}>
+      <div className={styles.progressStats}>
         <p>
           Core: <Percentage size="lg" value={coreCompletion} />
         </p>
@@ -133,31 +106,19 @@ export default function LangCard({
     down.current = +new Date()
   }
 
-  const handleMouseUp = e => {
+  const handleMouseUp = (e) => {
     const up = +new Date()
     if (up - down.current < 200 && e.target.nodeName !== 'A') {
       linkRef.current.click()
     }
   }
 
-  const style = css({
-    backgroundColor: 'white',
-    display: 'flex',
-    flexDirection: 'column',
-    margin: '1rem',
-    width: '20rem',
-    height: '18rem',
-    padding: '1rem',
-    border: '1px gray solid',
-    cursor: 'pointer',
-
-    ':hover': {
-      outline: '2px gray solid',
-    },
-  })
-
   return (
-    <div {...style} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+    <div
+      className={styles.card}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+    >
       <Header
         name={name}
         enName={enName}
@@ -170,24 +131,20 @@ export default function LangCard({
         coreCompletion={coreCompletion}
         otherCompletion={otherCompletion}
       />
-      <footer
-        {...css({
-          marginTop: 'auto',
-          lineHeight: 1.25,
-          marginBottom: '.5rem',
-        })}
-      >
-        <p {...css({ marginBottom: '.5rem' })}>
-          <ExtLink href={issueUrl}>Contribute</ExtLink>
-        </p>
-        <p {...css({ color: 'DimGrey', fontSize: '.875rem' })}>
-          Start date: {formatDate(createdAt)}
-        </p>
-        <p {...css({ color: 'DimGrey', fontSize: '.875rem' })}>
-          Last updated: {formatDate(lastEditedAt)}
+      <div className={styles.progressBarWrapper}>
+        <ProgressBar value={coreCompletion} />
+      </div>
+      <div className={styles.cardActions}>
+        <ExtLink className={styles.contributeButton} href={issueUrl}>
+          Contribute
+        </ExtLink>
+      </div>
+      <footer className={styles.footer}>
+        <p className={styles.dateText}>Started: {formatDate(createdAt)}</p>
+        <p className={styles.dateText}>
+          Updated: {formatDate(lastEditedAt)}
         </p>
       </footer>
-      <ProgressBar value={coreCompletion} />
     </div>
   )
 }

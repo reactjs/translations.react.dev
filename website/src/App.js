@@ -1,17 +1,11 @@
-import React from 'react'
-import { css } from 'glamor'
+import styles from './App.module.css'
 import ExtLink from './ExtLink'
 import LangList from './LangList'
 import langs from './langs.json'
 
 function Title() {
-  const style = css({
-    fontSize: '2.5rem',
-    fontWeight: 'normal',
-    marginBottom: '2rem',
-  })
   return (
-    <h1 {...style}>
+    <h1 className={styles.title}>
       <span role="img" aria-label="globe">
         🌏
       </span>{' '}
@@ -21,30 +15,19 @@ function Title() {
 }
 
 function Description() {
-  const style = css({
-    fontSize: '1.5rem',
-    marginBottom: '2rem',
-  })
-
   return (
-    <p {...style}>
+    <p className={styles.description}>
       The global React community is translating{' '}
       <ExtLink href="https://react.dev">react.dev</ExtLink> into{' '}
-      <strong {...css({ fontWeight: 600 })}>{langs.length}</strong> languages:
+      <strong className={styles.strongText}>{langs.length}</strong> languages:
     </p>
   )
 }
 
 function Footer() {
-  const style = css({
-    marginTop: '2rem',
-    marginBottom: '2rem',
-    fontSize: '1.5rem',
-    lineHeight: 2,
-  })
   return (
-    <footer {...style}>
-      <p>Don't see your language?</p>
+    <footer className={styles.footer}>
+      <p>Don&apos;t see your language?</p>
       <p>
         If you are interested in maintaining a translation, follow the
         instructions at{' '}
@@ -57,24 +40,12 @@ function Footer() {
   )
 }
 
-export default function App() {
-  const style = css({
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: '3rem 4rem',
-    width: '100vw',
-    backgroundColor: 'whitesmoke',
-
-    '@media (max-width: 48rem)': {
-      padding: '2rem 2rem',
-    },
-  })
+export default function App({ progressList }) {
   return (
-    <div {...style}>
+    <div className={styles.app}>
       <Title />
       <Description />
-      <LangList langs={langs} />
+      <LangList progressList={progressList} />
       <Footer />
     </div>
   )
