@@ -1,5 +1,6 @@
 [
   { "code": "ar", "name": "العربية", "enName": "Arabic" },
+  { "code": "hy", "name": "Հայերեն", "enName": "Armenian" },
   { "code": "az", "name": "Azərbaycanca", "enName": "Azerbaijani" },
   { "code": "be", "name": "Беларуская", "enName": "Belarusian" },
   { "code": "bn", "name": "বাংলা", "enName": "Bengali" },
