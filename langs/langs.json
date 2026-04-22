@@ -29,6 +29,7 @@
     "name": "Português do Brasil",
     "enName": "Portuguese (Brazil)"
   },
+  { "code": "ro", "name": "Română", "enName": "Romanian" },
   { "code": "ru", "name": "Русский", "enName": "Russian" },
   { "code": "si", "name": "සිංහල", "enName": "Sinhala" },
   { "code": "sr", "name": "Srpski", "enName": "Serbian" },
