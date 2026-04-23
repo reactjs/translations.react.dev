@@ -30,9 +30,9 @@ function Footer() {
       <p>Don&apos;t see your language?</p>
       <p>
         If you are interested in maintaining a translation, follow the
-        instructions at{' '}
+        instructions in the{' '}
         <ExtLink href="https://github.com/reactjs/translations.react.dev">
-          translations.react.dev
+          translations.react.dev repository
         </ExtLink>
         .
       </p>
