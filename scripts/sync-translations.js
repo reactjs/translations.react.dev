@@ -304,9 +304,19 @@ async function syncContentWithUpstream(languageCode) {
       await exec(`git commit -am "merging all conflicts"`, options);
     }
 
-    // Create a new pull request, listing all conflicting files
-    await exec(`git push --set-upstream --force origin ${syncBranch}`, options);
+    try {
+      await exec(`git push --set-upstream origin ${syncBranch}`, options);
+    } catch (error) {
+      // If push fails, it is likely because the remote has been already
+      // updated by a human contributor.
+      console.log(
+        `Push to origin/${syncBranch} failed (likely due to remote updates by human contributors).\n` +
+        `Error: ${error.message}`
+      );
+      return;
+    }
 
+    // Create a new pull request, listing all conflicting files
     const title = `Sync with ${MAIN_REPOSITORY_NAME} @ ${shortHash}`;
 
     let conflictsText = '';
